@@ -1,17 +1,8 @@
-/*
-Simon Stores Code v1.1
-
-This is the main file for Simon Stores Code
-
-*/
-
 #include <bits/stdc++.h>
 #define pb push_back
 #define endl std::cout << '\n'
 #include "modualRuleset.cpp" //<-includes "localMath.cpp"
 
-
-//print array functions
 //print int
 void printInt (int s, int array[]) {
     std::cout << "{ ";

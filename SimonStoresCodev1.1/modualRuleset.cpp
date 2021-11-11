@@ -1,10 +1,3 @@
-/*
-Simon Stores Code v1.1
-
-This file contains all the functions corrisponing to ruleset calculations
-and equations
-*/
-
 #include "localMath.cpp"
 
 //function for re-ordering color list for input

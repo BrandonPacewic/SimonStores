@@ -1,14 +1,3 @@
-/*
-Simon Stores Code v1.1
-
-
-This File contains all the math functions needed to run the simon stores code.
-This includes a new mod (%) function as well as the balenced ternary converter.
-
-*/
-
-#include <bits/stdc++.h>
-
 //fixed modulo value 0-y
 int local_mod (int x, const int y) {
     if (x >= y) {
