@@ -1,15 +1,13 @@
 # Simon Stores Code v1.1
 
-This is the "Final" version of my Simon Stores Code. This is the code I am planning on submiting for class.
+Simon Stores is a complex math problem in the game Keeptalking and Nobody explodes
 
-This code should also be in a finished state to the point where it has no bugs and is properly orginised 
-
-It's almost embarrassing how long it took me to finish this
-
+----
+#### Link to instrustions
 <https://ktane.timwi.de/HTML/Simon%20Stores.html>
 
-Stage 1 works
+----
 
-Stage 2 is broken
+The main feature of this puzzle being a balanced ternary conversion 
 
-Stage 3 is not finished
+More details can be found in this [repository](https://github.com/BrandonPacewic/BalancedTernaryConverter)
