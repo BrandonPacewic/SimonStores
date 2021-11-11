@@ -98,9 +98,8 @@ std::string local_ternaryConverter (int x) {
         for (int i = 0; i < 6; i++) {
             if (ternaryArr[i] == 1) {
                 ternaryArr[i] = -1;
-            } else if(ternaryArr[i] == -1) {
+            } else if(ternaryArr[i] == -1) 
                 ternaryArr[i] = 1;
-            }
         }
     }
 
@@ -108,9 +107,8 @@ std::string local_ternaryConverter (int x) {
     for (int i = 0; i < 6; i++) {
         if (ternaryArr[i] == 1) {
             y[i] = 'w';
-        } else if(ternaryArr[i] == -1) {
+        } else if(ternaryArr[i] == -1) 
             y[i] = 'k';
-        }
     }
     return(y);
 }
@@ -135,7 +133,6 @@ int local_pow (int base, const int exponent) {
     int x = base;
     for (int i = 0; i < exponent - 1; i++) 
         base *= x;
-    
     return(base);
 }
 
@@ -145,8 +142,6 @@ int local_max (std::vector<int> x, const int size) {
     for (int i = 0; i < size; i++) 
         if (x[i] > y) 
             y = x[i];
-        
-    
     return(y);
 }
 
@@ -156,8 +151,6 @@ int local_min (std::vector<int> x, const int size) {
     for (int i = 0; i < size; i++) 
         if (x[i] < y) 
             y = x[i];
-        
-    
     return(y);
 }
 
@@ -165,6 +158,5 @@ int local_min (std::vector<int> x, const int size) {
 int local_abs (int x) {
     if (x < 0) 
         x = x * -1;
-    
     return(x);
 }
