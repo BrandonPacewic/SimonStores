@@ -227,6 +227,7 @@ int main(){
                     for (int i = 0; i < 3; i++) {
                         if (flash[i] == 'r' || flash[i] == 'g' || flash[i] == 'b') {
                             temp[i] = local_stageTwo(flash[i], b[s-1], s, d, a);
+                            std::cout << temp[0] << ' ' << temp[1] << ' ' << temp[2]; endl;
                         } else {
                             temp[4] = local_stageTwo(flash[i], a[s-1], s, d, a);
                         }
