@@ -1,6 +1,6 @@
 # Simon Stores Code v1.1
 
-Simon Stores is a complex math problem in the game Keeptalking and Nobody explodes
+Simon Stores is a complex math problem in the game Keep Talking and Nobody Explodes
 
 ----
 #### Link to instrustions
