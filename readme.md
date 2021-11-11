@@ -6,7 +6,7 @@ Simon Stores is a complex math problem in the game Keep Talking and Nobody Explo
 #### Link to instrustions
 <https://ktane.timwi.de/HTML/Simon%20Stores.html>
 
-This is a c++ script that I wrote that is capabal of sloveing it
+This is a c++ script that I wrote that is capable of sloving it
 
 The main feature of this puzzle being a balanced ternary conversion 
 
