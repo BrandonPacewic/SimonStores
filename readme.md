@@ -1,8 +1,15 @@
-# Simon Stores
+# Simon Stores Code v1.1
 
-Simon Sores is a very complex math puzzle, here is the link to the instructions
+This is the "Final" version of my Simon Stores Code. This is the code I am planning on submiting for class.
+
+This code should also be in a finished state to the point where it has no bugs and is properly orginised 
+
+It's almost embarrassing how long it took me to finish this
+
 <https://ktane.timwi.de/HTML/Simon%20Stores.html>
 
-At this point it is in working order and is almost to the point where it can reliably compleat stage 3.
-However there are some problems where mod% funcions in cpp dont work as expected and create a value of 
-(k,k) insted of (0.k) 
+Stage 1 works
+
+Stage 2 is broken
+
+Stage 3 is not finished
