@@ -307,7 +307,7 @@ int local_addColorMix (string flash, vector<int> temp) {
 }
 
 //function for detmining what color of two did not flash
-auto local_missingColor (string flash) {
+char local_missingColor (string flash) {
     int x = 0, primary = 0;
     for (int i = 0; i < 2; i++) {
         switch (flash[i]) {
@@ -360,4 +360,5 @@ auto local_missingColor (string flash) {
                 break;
         }
     }
+    return 'h';
 }
