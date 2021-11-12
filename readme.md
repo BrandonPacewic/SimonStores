@@ -14,4 +14,4 @@ More details can be found in this [repository](https://github.com/BrandonPacewic
 
 ----
 
-![pic](https://github.com/BrandonPacewic/SimonStores/blob/New-code/simonStores.jpeg)
+![pic](https://github.com/BrandonPacewic/SimonStores/blob/main/simonStores.jpeg)
