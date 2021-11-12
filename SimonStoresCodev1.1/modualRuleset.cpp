@@ -150,7 +150,7 @@ void local_colorSumbitingOrder (std::string colorOrder, std::string colorStage) 
 }
 
 //function for a0 b0 and c0 inital calculations
-void local_initalCalculations (int serialBase36[], int numOrChar[], int a[], int b[], int c[], std::vector<int> temp) {
+void local_initalCalculations (int serialBase36[],const int numOrChar[], int a[], int b[], int c[], std::vector<int> temp) {
     //a0
     if (numOrChar[2] == 0) {
         temp[0] = serialBase36[2] * 36;
@@ -214,7 +214,7 @@ int local_dCalculation (int serialBase36[], int numOrChar[]) {
 }
 
 //stage 1 color calculations
-int local_stageOne (char color, int x, int s, int d) {
+int local_stageOne (const char color, int x, int s, int d) {
     int y;
     switch (tolower(color)) {
         case 'r':
@@ -241,10 +241,11 @@ int local_stageOne (char color, int x, int s, int d) {
 }
 
 //stage 2 color calculations
-int local_stageTwo (char color, int x, int s, int d, int a[]) {
+int local_stageTwo (const char color, int x, int s, int d, int a[]) {
     int y;
     switch (tolower(color)) {
         case 'r':
+            std::cout << "break"; endl;
             y = x + a[s-1] + local_pow(s, 2);
             break;
         case 'g':
@@ -263,12 +264,14 @@ int local_stageTwo (char color, int x, int s, int d, int a[]) {
             y = x + a[3] - a[s-1];
             break;
     }
+    std::cout << y; endl;
     y = local_moduloRule(y);
+    std::cout << y; endl;
     return(y);
 }
 
 //stage 3 color calculations
-int local_stageThr (char color, int x, int s, int d, int a[], int b[]) {
+int local_stageThr (const char color, int x, int s, int d, int a[], int b[]) {
     int y;
     a[4] = 0;//a4 is marked as 0 because we only have 4 A values
     switch (tolower(color)) {
