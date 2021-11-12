@@ -156,7 +156,6 @@ int main(){
 
         std::string prs = local_ternaryConverter(a[3]);
         local_colorSumbitingOrder(colorOrder, colorStageOne);
-        std::cout << "\n";
         printReverse(prs, 6);
 
         //*********//
@@ -253,7 +252,16 @@ int main(){
         // std::cout << "Fith Color Flash: ";
         // std::cin >> stageFlash[4];
 
+        for (int s = 1; s <= 5; s++) {
+            flash = stageFlash[s];
 
+            if (flash.length() == 1) {
+                c[s] = local_stageThr(flash[0], c[s-1], s, d, a, b);
+            } else if (flash.length() == 2) {
+                
+            }
+
+        }
 
 
         //end of loop
