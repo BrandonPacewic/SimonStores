@@ -265,13 +265,27 @@ int main() {
                     }
                     c[s] = temp[0] + temp[1] + temp[2] - temp[3] - temp[4];
                 } else if (temp[5] == 5) {
-
+                    for (int i = 0; i < 3; i++) {
+                        if (flash[i] == 'c' || flash[i] == 'm' || flash[i] == 'y') {
+                            temp[i] = local_stageThr(flash[i], c[s-1], s, d, a, b);
+                        } else {
+                            temp[3] = local_stageThr(flash[i], b[s-1], s, d, a, b);
+                            temp[4] = local_stageThr(flash[i], a[s-1], s, d, a, b);
+                        }
+                    }
+                    c[s] = temp[0] + temp[1] + temp[2] - temp[3] - temp[4];
+                } else if (temp[5] == 6) {
+                    c[s] = c[s-1] + (local_mod(c[0], 3) * c[s-1]) - (local_mod(b[0], 3) * b[s-1]) + (local_mod(a[0], 3) * a[s-1]);
                 }
             }
 
         }
 
+        intDbg(c);
 
+        prs = local_ternaryConverter(c[5]);
+        local_colorSumbitingOrder(colorOrder, colorStageThree);
+        printReverse(prs, 6);
 
     } while (userMenu);
 }
