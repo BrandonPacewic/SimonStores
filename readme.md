@@ -1,8 +1,17 @@
-# Simon Stores
+# Simon Stores Code v1.1
 
-Simon Sores is a very complex math puzzle, here is the link to the instructions
+Simon Stores is a complex math problem in the game Keep Talking and Nobody Explodes
+
+----
+#### Link to instrustions
 <https://ktane.timwi.de/HTML/Simon%20Stores.html>
 
-At this point it is in working order and is almost to the point where it can reliably compleat stage 3.
-However there are some problems where mod% funcions in cpp does not work as expected and create a value of 
-(k,k) insted of (0.k) 
+This is a c++ script that I wrote that is capable of sloving it
+
+The main feature of this puzzle being a balanced ternary conversion 
+
+More details can be found in this [repository](https://github.com/BrandonPacewic/BalancedTernaryConverter)
+
+----
+
+![pic](https://github.com/BrandonPacewic/SimonStores/blob/New-code/simonStores.jpeg)
