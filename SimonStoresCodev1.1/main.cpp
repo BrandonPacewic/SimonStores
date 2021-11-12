@@ -5,9 +5,9 @@
 using namespace std;
 #include "modualRuleset.cpp" //<-includes "localMath.cpp"
 
-template <typename T> T printList(T in) { for (auto i: in) cout << i << ' '; return in; }
+template <typename T> T printList(T in, const int si) { for (int i = 0; i < si; i++) { cout << in[i] << ' '; } return in; }
 template <typename T> T printReverse(T in, const int si) { for (int i = si - 1; i >= 0; i--) { cout << in[i]; } endl; return in; }
-template <typename funfun> funfun intDbg(funfun test) { cout << "{ "; printList(test); cout << " } \n"; return test; }
+template <typename funfun> funfun intDbg(funfun test, const int si) { cout << "{ "; printList(test, si); cout << " } \n"; return test; }
 
 //user menu
 int userMenu() {
@@ -130,7 +130,7 @@ int main() {
         }
 
         cout << "d = " << d; endl;
-        intDbg(a);
+        intDbg(a, 4);
 
         string prs = local_ternaryConverter(a[3]);
         local_colorSumbitingOrder(colorOrder, colorStageOne);
@@ -214,7 +214,7 @@ int main() {
             }
         } 
 
-        intDbg(b);
+        intDbg(b, 5);
 
         prs = local_ternaryConverter(b[4]);
         local_colorSumbitingOrder(colorOrder, colorStageTwo);
@@ -229,7 +229,7 @@ int main() {
         cin >> stageFlash[4];
 
         for (int s = 1; s <= 5; s++) {
-            flash = stageFlash[s]; 
+            flash = stageFlash[s-1]; 
 
             if (flash.length() == 1) {
                 c[s] = local_stageThr(flash[0], c[s-1], s, d, a, b);
@@ -245,13 +245,14 @@ int main() {
                         temp[i] = local_stageThr(flash[i], c[s-1], s, d, a, b); 
                     temp[2] = -1 * local_abs(local_stageThr(flash[0], c[s-1], s, d, a, b) - local_stageThr(flash[1], c[s-1], s, d, a, b));
                     c[s] = local_min(temp, 3);
+
                 } else if (temp[4] == 4) {
                     c[s] = local_stageThr(local_missingColor(flash), c[s-1], s, d, a, b) - local_stageThr(flash[0], c[s-1], s, d, a, b) - local_stageThr(flash[1], c[s-1], s, d, a, b);
                 }
-            } else if (flash.length() == 3) {
-                vector<int> temp(6, 0);
-                temp[5] = local_addColorMix(flash, temp);
 
+            } else if (flash.length() == 3) {
+                vector<int> temp(6, 0); 
+                temp[5] = local_addColorMix(flash, temp);
                 if (temp[5] == 3) {
                     c[s] = c[s-1] + (local_mod(c[s-1], 3) * c[0]) - (local_mod(b[s-1], 3) * b[0]) + (local_mod(a[s-1], 3) * a[0]);
                 } else if (temp[5] == 4) {
@@ -264,6 +265,7 @@ int main() {
                         }
                     }
                     c[s] = temp[0] + temp[1] + temp[2] - temp[3] - temp[4];
+
                 } else if (temp[5] == 5) {
                     for (int i = 0; i < 3; i++) {
                         if (flash[i] == 'c' || flash[i] == 'm' || flash[i] == 'y') {
@@ -274,14 +276,14 @@ int main() {
                         }
                     }
                     c[s] = temp[0] + temp[1] + temp[2] - temp[3] - temp[4];
+                    
                 } else if (temp[5] == 6) {
                     c[s] = c[s-1] + (local_mod(c[0], 3) * c[s-1]) - (local_mod(b[0], 3) * b[s-1]) + (local_mod(a[0], 3) * a[s-1]);
                 }
             }
-
         }
 
-        intDbg(c);
+        intDbg(c, 6);
 
         prs = local_ternaryConverter(c[5]);
         local_colorSumbitingOrder(colorOrder, colorStageThree);
