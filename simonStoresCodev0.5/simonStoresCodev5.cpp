@@ -13,8 +13,6 @@ Not to mention with the number of calculations that are required it becomes very
 Fortunately computers are much better at math than we are and with the help of Fred here I can slove a puzzle that used to take me over half an hour
 in just under 10 seconds.
 
-Lets see if it takes this edit to github
-
 */
 
 #include <iostream>
