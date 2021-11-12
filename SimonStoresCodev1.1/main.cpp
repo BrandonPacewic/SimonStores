@@ -234,10 +234,20 @@ int main(){
             if (flash.length() == 1) {
                 c[s] = local_stageThr(flash[0], c[s-1], s, d, a, b);
             } else if (flash.length() == 2) {
-                char cl = local_missingColor(flash);
-                c[s] = local_stageThr(cl, c[s-1], s, d, a, b) + local_stageThr(cl, b[s-1], s, d, a, b) + local_stageThr(cl, a[s-1], s, d, a, b);
+                vector<int> temp(6, 0);
+                temp[4] = local_addColorMix(flash, temp);
+
+                if (temp[4] == 2) {
+                    char cl = local_missingColor(flash);
+                    c[s] = local_stageThr(cl, c[s-1], s, d, a, b) + local_stageThr(cl, b[s-1], s, d, a, b) + local_stageThr(cl, a[s-1], s, d, a, b);
+                } else if (temp[4] == 3) {
+                    
+
+                }
+
+
             } else if (flash.length() == 3) {
-                
+
             }
 
         }
