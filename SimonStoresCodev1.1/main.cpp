@@ -10,7 +10,7 @@ template <typename T> T printReverse(T in, const int si) { for (int i = si - 1; 
 template <typename funfun> funfun intDbg(funfun test) { cout << "{ "; printList(test); cout << " } \n"; return test; }
 
 //user menu
-int userMenu () {
+int userMenu() {
     char x;
     cout << "What would you like to do? \n Continue or Quit (c,q): ";
     cin >> x;
@@ -24,7 +24,7 @@ int userMenu () {
     return 0;
 }
 
-int main(){
+int main() {
     //vars
     int numOrChar[6];//used for base 36 convertion
     int serialBase36[6];//the base 36 value of the serial number
@@ -241,7 +241,7 @@ int main(){
                     char cl = local_missingColor(flash);
                     c[s] = local_stageThr(cl, c[s-1], s, d, a, b) + local_stageThr(cl, b[s-1], s, d, a, b) + local_stageThr(cl, a[s-1], s, d, a, b);
                 } else if (temp[4] == 3) {
-                    
+
 
                 }
 
