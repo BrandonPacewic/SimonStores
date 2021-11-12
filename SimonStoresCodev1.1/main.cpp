@@ -234,13 +234,15 @@ int main(){
             if (flash.length() == 1) {
                 c[s] = local_stageThr(flash[0], c[s-1], s, d, a, b);
             } else if (flash.length() == 2) {
-
+                char cl = local_missingColor(flash);
+                c[s] = local_stageThr(cl, c[s-1], s, d, a, b) + local_stageThr(cl, b[s-1], s, d, a, b) + local_stageThr(cl, a[s-1], s, d, a, b);
+            } else if (flash.length() == 3) {
+                
             }
 
         }
 
 
-        //end of loop
-        //loopControl = userMenu();
+
     } while (userMenu);
 }
