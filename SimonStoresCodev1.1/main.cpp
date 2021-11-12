@@ -41,20 +41,20 @@ int main() {
     const string colorStageThree = "bmrygc";
 
     //intro
-    //     cout << "\n Welcome to F3m4s's Script for sloving Simon Stores! \n";
-    //     cout << "Lets get started! \n";
+    cout << "\n Welcome to F3m4s's Script for sloving Simon Stores! \n";
+    cout << "Lets get started! \n";
 
     do {
         //user input
-        //cout << "Enter the Serial#: ";
+        cout << "Enter the Serial#: ";
         cin >> serial;
-        //cout << "Order of Colors: ";
+        cout << "Order of Colors: ";
         cin >> colorOrder;
-        //cout << "First Color Flash: ";
+        cout << "First Color Flash: ";
         cin >> stageFlash[0];
-        //cout << "Second Color Flash: ";
+        cout << "Second Color Flash: ";
         cin >> stageFlash[1];
-        //cout << "Third Color Flash: ";
+        cout << "Third Color Flash: ";
         cin >> stageFlash[2]; 
 
         //base 36 convertion
@@ -128,9 +128,6 @@ int main() {
                 }
             }
         }
-
-        cout << "d = " << d; endl;
-        intDbg(a, 4);
 
         string prs = local_ternaryConverter(a[3]);
         local_colorSumbitingOrder(colorOrder, colorStageOne);
@@ -214,18 +211,15 @@ int main() {
             }
         } 
 
-        intDbg(b, 5);
-
         prs = local_ternaryConverter(b[4]);
         local_colorSumbitingOrder(colorOrder, colorStageTwo);
         printReverse(prs, 6);
         
-
         //***********//
         //Stage Three//
         //***********//
 
-        // cout << "Fith Color Flash: ";
+        cout << "Fith Color Flash: ";
         cin >> stageFlash[4];
 
         for (int s = 1; s <= 5; s++) {
@@ -276,15 +270,12 @@ int main() {
                         }
                     }
                     c[s] = temp[0] + temp[1] + temp[2] - temp[3] - temp[4];
-                    
+
                 } else if (temp[5] == 6) {
                     c[s] = c[s-1] + (local_mod(c[0], 3) * c[s-1]) - (local_mod(b[0], 3) * b[s-1]) + (local_mod(a[0], 3) * a[s-1]);
                 }
             }
         }
-
-        intDbg(c, 6);
-
         prs = local_ternaryConverter(c[5]);
         local_colorSumbitingOrder(colorOrder, colorStageThree);
         printReverse(prs, 6);
