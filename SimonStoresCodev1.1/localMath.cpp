@@ -12,7 +12,6 @@ int local_mod (int x, const int y) {
 int local_moduloRule (int x) {
     if (x >= 365 || x <= -365) 
         x = x % 365;
-    
     return(x);
 }
 
@@ -130,6 +129,9 @@ void local_baseConverter (std::string str, int numOrChar[], int base36[]) {
 
 //exponent function
 int local_pow (int base, const int exponent) {
+    if (exponent == 0)
+        return 1;
+
     int x = base;
     for (int i = 0; i < exponent - 1; i++) 
         base *= x;

@@ -57,26 +57,26 @@ int main(){
     const std::string colorStageThree = "bmrygc";
 
     //first instance of the user menu
-    char loopControl = userMenu();
+    //char loopControl = userMenu();
 
-    if (loopControl == 'c') {
-        //intro
-        std::cout << "\n Welcome to F3m4s's Script for sloving Simon Stores! \n";
-        std::cout << "Lets get started! \n";
-    }
+    // if (loopControl == 'c') {
+    //     //intro
+    //     std::cout << "\n Welcome to F3m4s's Script for sloving Simon Stores! \n";
+    //     std::cout << "Lets get started! \n";
+    // }
 
     //user menu loop
-    while (loopControl == 'c') {
+    while (1) { //should be if loop control
         //user input
-        std::cout << "Enter the Serial#: ";
+        //std::cout << "Enter the Serial#: ";
         std::cin >> serial;
-        std::cout << "Order of Colors: ";
+        //std::cout << "Order of Colors: ";
         std::cin >> colorOrder;
-        std::cout << "First Color Flash: ";
+        //std::cout << "First Color Flash: ";
         std::cin >> stageFlash[0];
-        std::cout << "Second Color Flash: ";
+        //std::cout << "Second Color Flash: ";
         std::cin >> stageFlash[1];
-        std::cout << "Third Color Flash: ";
+        //std::cout << "Third Color Flash: ";
         std::cin >> stageFlash[2]; 
 
         //base 36 convertion
@@ -163,7 +163,7 @@ int main(){
         //stage two//
         //*********//
 
-        std::cout << "Forth Color Flash: ";
+        //std::cout << "Forth Color Flash: ";
         std::cin >> stageFlash[3];
 
         for (int s = 1; s <= 4; s++) { 
@@ -225,11 +225,11 @@ int main(){
                     }
                 } else if (temp[3] == 5) {
                     for (int i = 0; i < 3; i++) {
-                        if (flash[i] == 'r' || flash[i] == 'g' || flash[i] == 'b') {
-                            temp[i] = local_stageTwo(flash[i], b[s-1], s, d, a);
-                            std::cout << temp[0] << ' ' << temp[1] << ' ' << temp[2] << temp[3] << ' ' << temp[4]; endl;
+                        std::cout << i << ' ' << flash[i]; endl;
+                        if (flash[i] == 'm' || flash[i] == 'c' || flash[i] == 'y') {
+                            temp[i] = local_stageTwo(flash[i], a[s-1], s, d, a);
                         } else {
-                            temp[4] = local_stageTwo(flash[i], a[s-1], s, d, a);
+                            temp[4] = local_stageTwo(flash[i], b[s-1], s, d, a);
                         }
                     }
                     b[s] = local_moduloRule(b[s-1] + temp[0] + temp[1] + temp[2] - temp[4]);
@@ -250,13 +250,13 @@ int main(){
         //Stage Three//
         //***********//
 
-        std::cout << "Fith Color Flash: ";
-        std::cin >> stageFlash[4];
+        // std::cout << "Fith Color Flash: ";
+        // std::cin >> stageFlash[4];
 
 
 
 
         //end of loop
-        loopControl = userMenu();
+        //loopControl = userMenu();
     }
 }

@@ -245,6 +245,7 @@ int local_stageTwo (const char color, int x, int s, int d, int a[]) {
     int y;
     switch (tolower(color)) {
         case 'r':
+            std::cout << "break"; endl;
             y = x + a[s-1] + local_pow(s, 2);
             break;
         case 'g':
@@ -263,7 +264,9 @@ int local_stageTwo (const char color, int x, int s, int d, int a[]) {
             y = x + a[3] - a[s-1];
             break;
     }
+    std::cout << y; endl;
     y = local_moduloRule(y);
+    std::cout << y; endl;
     return(y);
 }
 
