@@ -249,14 +249,22 @@ int main() {
                     c[s] = local_stageThr(local_missingColor(flash), c[s-1], s, d, a, b) - local_stageThr(flash[0], c[s-1], s, d, a, b) - local_stageThr(flash[1], c[s-1], s, d, a, b);
                 }
             } else if (flash.length() == 3) {
-                vector<int> temp(6,0);
-                temp[4] = local_addColorMix(flash, temp);
+                vector<int> temp(6, 0);
+                temp[5] = local_addColorMix(flash, temp);
 
-                if (temp[4] == 3) {
+                if (temp[5] == 3) {
                     c[s] = c[s-1] + (local_mod(c[s-1], 3) * c[0]) - (local_mod(b[s-1], 3) * b[0]) + (local_mod(a[s-1], 3) * a[0]);
-                } else if (temp[4] == 4) {
-                    
-
+                } else if (temp[5] == 4) {
+                    for (int i = 0; i < 3; i++) {
+                        if (flash[i] == 'r' || flash[i] == 'g' || flash[i] == 'b') {
+                            temp[i] = local_stageThr(flash[i], c[s-1], s, d, a, b);
+                        } else {
+                            temp[3] = local_stageThr(flash[i], b[s-1], s, d, a, b);
+                            temp[4] = local_stageThr(flash[i], a[s-1], s, d, a, b);
+                        }
+                    }
+                    c[s] = temp[0] + temp[1] + temp[2] - temp[3] - temp[4];
+                } else if (temp[5] == 5) {
 
                 }
             }
