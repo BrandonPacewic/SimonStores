@@ -226,10 +226,10 @@ int main() {
         //***********//
 
         // cout << "Fith Color Flash: ";
-        // cin >> stageFlash[4];
+        cin >> stageFlash[4];
 
         for (int s = 1; s <= 5; s++) {
-            flash = stageFlash[s];
+            flash = stageFlash[s]; 
 
             if (flash.length() == 1) {
                 c[s] = local_stageThr(flash[0], c[s-1], s, d, a, b);
@@ -241,13 +241,24 @@ int main() {
                     char cl = local_missingColor(flash);
                     c[s] = local_stageThr(cl, c[s-1], s, d, a, b) + local_stageThr(cl, b[s-1], s, d, a, b) + local_stageThr(cl, a[s-1], s, d, a, b);
                 } else if (temp[4] == 3) {
+                    for (int i = 0; i < 2; i++)
+                        temp[i] = local_stageThr(flash[i], c[s-1], s, d, a, b); 
+                    temp[2] = -1 * local_abs(local_stageThr(flash[0], c[s-1], s, d, a, b) - local_stageThr(flash[1], c[s-1], s, d, a, b));
+                    c[s] = local_min(temp, 3);
+                } else if (temp[4] == 4) {
+                    c[s] = local_stageThr(local_missingColor(flash), c[s-1], s, d, a, b) - local_stageThr(flash[0], c[s-1], s, d, a, b) - local_stageThr(flash[1], c[s-1], s, d, a, b);
+                }
+            } else if (flash.length() == 3) {
+                vector<int> temp(6,0);
+                temp[4] = local_addColorMix(flash, temp);
+
+                if (temp[4] == 3) {
+                    c[s] = c[s-1] + (local_mod(c[s-1], 3) * c[0]) - (local_mod(b[s-1], 3) * b[0]) + (local_mod(a[s-1], 3) * a[0]);
+                } else if (temp[4] == 4) {
+                    
 
 
                 }
-
-
-            } else if (flash.length() == 3) {
-
             }
 
         }
