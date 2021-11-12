@@ -1,12 +1,12 @@
 #include "localMath.cpp"
 
 //function for re-ordering color list for input
-void local_colorSumbitingOrder (std::string colorOrder, std::string colorStage) {
+void local_colorSumbitingOrder (string colorOrder, string colorStage) {
 
     //if y is on the top right
     if (colorOrder[0] == 'y') {
         //each color gets shifted 1 right
-        std::vector<char> temp(6, '-');
+        vector<char> temp(6, '-');
         for (int i = 0; i < 6; i++) 
             temp[i] = colorStage[i];
         
@@ -146,11 +146,11 @@ void local_colorSumbitingOrder (std::string colorOrder, std::string colorStage) 
         }
     }
 
-    std::cout << colorStage << '\n';
+    cout << colorStage << '\n';
 }
 
 //function for a0 b0 and c0 inital calculations
-void local_initalCalculations (int serialBase36[],const int numOrChar[], int a[], int b[], int c[], std::vector<int> temp) {
+void local_initalCalculations (int serialBase36[],const int numOrChar[], int a[], int b[], int c[], vector<int> temp) {
     //a0
     if (numOrChar[2] == 0) {
         temp[0] = serialBase36[2] * 36;
@@ -236,8 +236,7 @@ int local_stageOne (const char color, int x, int s, int d) {
             y = x + d - (s * 6);
             break;
     }
-    y = local_moduloRule(y);
-    return(y);
+    return local_moduloRule(y);
 }
 
 //stage 2 color calculations
@@ -245,7 +244,7 @@ int local_stageTwo (const char color, int x, int s, int d, int a[]) {
     int y;
     switch (tolower(color)) {
         case 'r':
-            std::cout << "break"; endl;
+            cout << "break"; endl;
             y = x + a[s-1] + local_pow(s, 2);
             break;
         case 'g':
@@ -264,10 +263,7 @@ int local_stageTwo (const char color, int x, int s, int d, int a[]) {
             y = x + a[3] - a[s-1];
             break;
     }
-    std::cout << y; endl;
-    y = local_moduloRule(y);
-    std::cout << y; endl;
-    return(y);
+    return local_moduloRule(y);
 }
 
 //stage 3 color calculations
@@ -294,12 +290,11 @@ int local_stageThr (const char color, int x, int s, int d, int a[], int b[]) {
             y = x + b[4] - a[0];
             break;
     }
-    y = local_moduloRule(y);
-    return(y);
+    return local_moduloRule(y);
 }
     
 //function for determining the number of primary or seconday color flashes in a muit color flash sequence
-int local_addColorMix (std::string flash, std::vector<int> temp) {
+int local_addColorMix (string flash, vector<int> temp) {
     
     for (int i = flash.length(); i > 0; i--) {
         if (flash[i-1] == 'r' || flash[i-1] == 'g' || flash[i-1] == 'b') {
@@ -312,7 +307,7 @@ int local_addColorMix (std::string flash, std::vector<int> temp) {
 }
 
 //function for detmining what color of two did not flash
-auto local_missingColor (std::string flash) {
+auto local_missingColor (string flash) {
     int x = 0, primary = 0;
     for (int i = 0; i < 2; i++) {
         switch (flash[i]) {
