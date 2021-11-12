@@ -191,13 +191,11 @@ int main(){
                     b[s] = local_moduloRule(b[s-1] + (local_mod(b[s-1], 4) * b[0]) - a[3]);
                 } else if (temp[3] == 4) {
                     for (int i = 0; i < 3; i++) {
-                        cout << "i = " << i; endl; //error
                         if (flash[i] == 'r' || flash[i] == 'g' || flash[i] == 'b') {
                             temp[i] = local_stageTwo(flash[i], b[s-1], s, d, a);
                         } else {
                             temp[4] = local_stageTwo(flash[i], a[s-1], s, d, a);
                         }
-                        cout << temp[0] << temp[1] << temp[2] << temp[4]; endl; //error
                         b[s] = local_moduloRule(b[s-1] + temp[0] + temp[1] + temp[2] - temp[4]);
                     }
                 } else if (temp[3] == 5) {
