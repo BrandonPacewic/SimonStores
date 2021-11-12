@@ -16,11 +16,11 @@ int local_moduloRule (int x) {
 }
 
 //function for balenced ternary convertion
-std::string local_ternaryConverter (int x) {
+string local_ternaryConverter (int x) {
     //x is the value to be converted
     //y is the value to be returned
-    std::vector<int> ternaryArr(6, 0);
-    std::string y = "------";
+    vector<int> ternaryArr(6, 0);
+    string y = "------";
     bool neg = false;
 
     if (x < 0) neg = true;
@@ -113,7 +113,7 @@ std::string local_ternaryConverter (int x) {
 }
 
 //base 36 convertion
-void local_baseConverter (std::string str, int numOrChar[], int base36[]) {
+void local_baseConverter (string str, int numOrChar[], int base36[]) {
     for (int i = 0; i < 6; i++) 
         base36[i] = str[i] - 96;
     
@@ -139,7 +139,7 @@ int local_pow (int base, const int exponent) {
 }
 
 //max function
-int local_max (std::vector<int> x, const int size) {
+int local_max (vector<int> x, const int size) {
     int y = -999;
     for (int i = 0; i < size; i++) 
         if (x[i] > y) 
@@ -148,7 +148,7 @@ int local_max (std::vector<int> x, const int size) {
 }
 
 //min function
-int local_min (std::vector<int> x, const int size) {
+int local_min (vector<int> x, const int size) {
     int y = 999;
     for (int i = 0; i < size; i++) 
         if (x[i] < y) 
