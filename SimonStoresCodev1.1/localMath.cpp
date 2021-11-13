@@ -18,7 +18,7 @@ int local_moduloRule (int x) {
 //base 36 convertion
 void local_baseConverter (string str, int numOrChar[], int base36[]) {
     for (int i = 0; i < 6; i++) 
-        base36[i] = str[i] - 96;
+        base36[i] = tolower(str[i]) - 96;
     
     for (int i = 0; i < 6; i++) {
         if (base36[i] < 0) {

@@ -3,6 +3,9 @@
 //function for re-ordering color list for input
 void local_colorSumbitingOrder (const string colorOrder, string colorStage) {
 
+    for (auto &i: colorStage)
+        i = tolower(i);
+
     //if y is on the top right
     if (colorOrder[0] == 'y') {
         //each color gets shifted 1 right
@@ -296,6 +299,9 @@ int local_stageThr (const char color, int x, int s, int d, vector<int> a, int b[
 //function for determining the number of primary or seconday color flashes in a muit color flash sequence
 int local_addColorMix (string flash) {
     vector<int> temp(3, 0);
+
+    for (auto &i: flash)
+        i = tolower(i);
     
     for (int i = flash.length(); i > 0; i--) {
         if (flash[i-1] == 'r' || flash[i-1] == 'g' || flash[i-1] == 'b') {
@@ -311,7 +317,7 @@ int local_addColorMix (string flash) {
 char local_missingColor (string flash) {
     int x = 0, primary = 0;
     for (int i = 0; i < 2; i++) {
-        switch (flash[i]) {
+        switch (tolower(flash[i])) {
             case 'r':
                 x = x + 1;
                 primary = 1;
