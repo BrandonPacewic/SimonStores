@@ -4,6 +4,7 @@
 
 using namespace std;
 #include "modualRuleset.cpp" //<-includes "localMath.cpp"
+#include "balancedConverter.hpp"
 
 template <typename T> T printList(T in, const int si) { for (int i = 0; i < si; i++) { cout << in[i] << ' '; } return in; }
 template <typename T> T printReverse(T in, const int si) { for (int i = si - 1; i >= 0; i--) { cout << in[i]; } endl; return in; }
@@ -129,9 +130,8 @@ int main() {
             }
         }
 
-        string prs = local_ternaryConverter(a[3]);
         local_colorSumbitingOrder(colorOrder, colorStageOne);
-        printReverse(prs, 6);
+        local_ternaryConverter(a[3]);
 
         //*********//
         //stage two//
@@ -211,9 +211,9 @@ int main() {
             }
         } 
 
-        prs = local_ternaryConverter(b[4]);
+
         local_colorSumbitingOrder(colorOrder, colorStageTwo);
-        printReverse(prs, 6);
+        local_ternaryConverter(b[4]);
         
         //***********//
         //Stage Three//
@@ -276,9 +276,9 @@ int main() {
                 }
             }
         }
-        prs = local_ternaryConverter(c[5]);
+
         local_colorSumbitingOrder(colorOrder, colorStageThree);
-        printReverse(prs, 6);
+        local_ternaryConverter(c[5]);
 
     } while (userMenu);
 }
