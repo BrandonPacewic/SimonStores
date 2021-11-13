@@ -69,7 +69,7 @@ int main() {
     const string colorStageThree = "bmrygc";
 
     //intro
-    cout << "\n Welcome to a c++ Script for sloving Simon Stores! \n";
+    cout << "\nWelcome to a c++ Script for sloving Simon Stores! \n";
     cout << "Lets get started! \n";
 
     do {
@@ -159,6 +159,9 @@ int main() {
                 }
             }
         }
+
+        cout << d << '\n';
+        intDbg(a, 4);
 
         local_colorSumbitingOrder(colorOrder, colorStageOne);
         local_ternaryConverter(a[3]);

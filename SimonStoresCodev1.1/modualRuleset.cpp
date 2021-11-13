@@ -149,8 +149,8 @@ void local_colorSumbitingOrder (const string colorOrder, string colorStage) {
 }
 
 //function for a0 b0 and c0 inital calculations
-void local_initalCalculations (int serialBase36[], const int numOrChar[], vector<int> a, int b[], int c[]) {
-    vector<int> temp(2, 0);
+void local_initalCalculations (int serialBase36[], const int numOrChar[], vector<int> &a, int b[], int c[]) {
+    vector<int> temp(2);
 
     //a0
     if (numOrChar[2] == 0) {
