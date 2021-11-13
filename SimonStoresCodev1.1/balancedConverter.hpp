@@ -7,6 +7,7 @@ template<typename T> T local_ternaryConverter(T conVal) {
     vals.pb(int64_t(pow(3, vals.size())));
     sort(vals.begin(), vals.end(), greater<int64_t>());
 
+    vector<char> outPut(vals.size(), '0');
     vector<int> balTer(vals.size(), 0);
     for (int i = 0; i < vals.size(); i++) 
         for (int j = 0; j < 2; j++) 
@@ -19,15 +20,15 @@ template<typename T> T local_ternaryConverter(T conVal) {
         if (balTer[i] == 3) {
             balTer[i] = 0;
             balTer[i-1]++;
-        } else {
-            if (balTer[i] == 2) {
-                balTer[i] = -1;
-                balTer[i-1]++;
-            }
+        } else if (balTer[i] == 2) {
+                balTer[i-1]++; outPut[i] = '-';
+        } else if (balTer[i] == 1) {
+            outPut[i] = '+';
         }
     }
-
+    
     for (auto i: balTer)
-        cout << i << ' ';
+        cout << i;
+
     return conVal;
 }

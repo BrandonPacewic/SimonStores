@@ -6,6 +6,7 @@ using namespace std;
 #include "modualRuleset.cpp" //<-includes "localMath.cpp"
 #include "balancedConverter.hpp"
 
+//dbg
 template <typename T> T printList(T in, const int si) { for (int i = 0; i < si; i++) { cout << in[i] << ' '; } return in; }
 template <typename T> T printReverse(T in, const int si) { for (int i = si - 1; i >= 0; i--) { cout << in[i]; } endl; return in; }
 template <typename funfun> funfun intDbg(funfun test, const int si) { cout << "{ "; printList(test, si); cout << " } \n"; return test; }
@@ -47,16 +48,17 @@ int main() {
 
     do {
         //user input
-        cout << "Enter the Serial#: ";
+        //cout << "Enter the Serial#: ";
         cin >> serial;
-        cout << "Order of Colors: ";
+        //cout << "Order of Colors: ";
         cin >> colorOrder;
-        cout << "First Color Flash: ";
+        //cout << "First Color Flash: ";
         cin >> stageFlash[0];
-        cout << "Second Color Flash: ";
+        //cout << "Second Color Flash: ";
         cin >> stageFlash[1];
-        cout << "Third Color Flash: ";
+        //cout << "Third Color Flash: ";
         cin >> stageFlash[2]; 
+        endl;
 
         //base 36 convertion
         local_baseConverter(serial, numOrChar, serialBase36);
@@ -139,6 +141,7 @@ int main() {
 
         //cout << "Forth Color Flash: ";
         cin >> stageFlash[3];
+        endl;
 
         for (int s = 1; s <= 4; s++) { 
              flash = stageFlash[s-1];
@@ -219,8 +222,9 @@ int main() {
         //Stage Three//
         //***********//
 
-        cout << "Fith Color Flash: ";
+        //cout << "Fith Color Flash: ";
         cin >> stageFlash[4];
+        endl;
 
         for (int s = 1; s <= 5; s++) {
             flash = stageFlash[s-1]; 
