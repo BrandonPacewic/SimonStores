@@ -7,12 +7,36 @@ using namespace std;
 #include "balancedConverter.cpp"
 
 //dbg
-template <typename T> T printList(T in, const int si) { for (int i = 0; i < si; i++) { cout << in[i] << ' '; } return in; }
-template <typename T> T printReverse(T in, const int si) { for (int i = si - 1; i >= 0; i--) { cout << in[i]; } endl; return in; }
-template <typename funfun> funfun intDbg(funfun test, const int si) { cout << "{ "; printList(test, si); cout << " } \n"; return test; }
+template<typename T> T printList(T in, const int si) { for (int i = 0; i < si; i++) { cout << in[i] << ' '; } return in; }
+template<typename T> T printReverse(T in, const int si) { for (int i = si - 1; i >= 0; i--) { cout << in[i]; } endl; return in; }
+template<typename funfun> funfun intDbg(funfun test, const int si) { cout << "{ "; printList(test, si); cout << " } \n"; return test; }
+
+//user error catch
+template<typename N> N errorCatch(N testVal, const int maxSize, const char type) {
+    string dataType = typeid(val).name();
+    string string_type = "NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE";
+
+    assert (dataType == string_type && (type == 'm' || type == 'r'));
+    string test = testVal;
+
+    if (type == 'm') {
+        while (test.length() > maxSize) {
+            cout << "You exceeded the maximum size for this value \nThe max size is " << maxSize << ". \nPlease try again: ";
+            cin >> test;
+        }
+        return test;
+        
+    } else if (type == 'r') {
+        while (test.length() != maxSize) {
+            cout << "You did not meet the required size for this value \nThe required size is " << maxSize << ". \nPlease try again: ";
+            cin >> test;
+        }
+        return test;
+    }
+}
 
 //user menu
-int userMenu() {
+bool userMenu() {
     char x;
     cout << "What would you like to do? \n Continue or Quit (c,q): ";
     cin >> x;
@@ -22,18 +46,19 @@ int userMenu() {
         cin >> x;
     }
     if (tolower(x) == 'c')
-        return 1;
-    return 0;
+        return true;
+    return false;
 }
 
 int main() {
     //vars
     int numOrChar[6];//used for base 36 convertion
     int serialBase36[6];//the base 36 value of the serial number
-    int a[5];//each arr only has pos for the numbers we need
+    vector<int> a(5, 0);//each arr only has pos for the numbers we need
     int b[6];//a,b and c values specifyed from the manual page
     int c[7];
     int d = 0;//sum of base 36 in serial#
+    bool loopControl = false;
     string stageFlash[6];
     string serial, colorOrder, stageColorOrder, flash;
 
@@ -43,20 +68,20 @@ int main() {
     const string colorStageThree = "bmrygc";
 
     //intro
-    cout << "\n Welcome to F3m4s's Script for sloving Simon Stores! \n";
+    cout << "\n Welcome to a c++ Script for sloving Simon Stores! \n";
     cout << "Lets get started! \n";
 
     do {
         //user input
-        //cout << "Enter the Serial#: ";
+        cout << "Enter the Serial#: ";
         cin >> serial;
-        //cout << "Order of Colors: ";
+        cout << "Order of Colors: ";
         cin >> colorOrder;
-        //cout << "First Color Flash: ";
+        cout << "First Color Flash: ";
         cin >> stageFlash[0];
-        //cout << "Second Color Flash: ";
+        cout << "Second Color Flash: ";
         cin >> stageFlash[1];
-        //cout << "Third Color Flash: ";
+        cout << "Third Color Flash: ";
         cin >> stageFlash[2]; 
         endl;
 
@@ -64,11 +89,8 @@ int main() {
         local_baseConverter(serial, numOrChar, serialBase36);
 
         //inital calculations
-        if (1) {
-            vector<int> temp(6, 0);
-            local_initalCalculations(serialBase36, numOrChar, a, b, c, temp);
-        }
-
+        local_initalCalculations(serialBase36, numOrChar, a, b, c);
+        
         //calculating d
         d = local_dCalculation(serialBase36, numOrChar);
 
@@ -83,7 +105,7 @@ int main() {
             } else if (flash.length() == 2) {
                 vector<int> temp(6, 0);
 
-                temp[2] = local_addColorMix(flash, temp);
+                temp[2] = local_addColorMix(flash);
                 cout << "temp[2]" << temp[2]; endl; 
 
                 temp[0] = local_stageOne(flash[0], a[s-1], s, d);
@@ -107,7 +129,7 @@ int main() {
             } else if (flash.length() == 3) {
                 vector<int> temp(6, 0);
 
-                temp[5] = local_addColorMix(flash, temp);
+                temp[5] = local_addColorMix(flash);
 
                 if (temp[5] == 3) {
                     a[s] = local_moduloRule(a[s-1] + a[0]);
@@ -136,7 +158,7 @@ int main() {
         //stage two//
         //*********//
 
-        //cout << "Forth Color Flash: ";
+        cout << "Forth Color Flash: ";
         cin >> stageFlash[3];
         endl;
 
@@ -150,7 +172,7 @@ int main() {
                  vector<int> temp(6, 0);
 
                  //two color flashes
-                 temp[2] = local_addColorMix(flash, temp);
+                 temp[2] = local_addColorMix(flash);
 
                  if (temp[2] == 2 || temp[2] == 3) {
                      for (int i = 0; i < 2; i++) {
@@ -182,7 +204,7 @@ int main() {
                 //three color flashes
                 vector<int> temp(6, 0);
 
-                temp[3] = local_addColorMix(flash, temp);
+                temp[3] = local_addColorMix(flash);
 
                 if (temp[3] == 3) {
                     b[s] = local_moduloRule(b[s-1] + (local_mod(b[s-1], 4) * b[0]) - a[3]);
@@ -219,7 +241,7 @@ int main() {
         //Stage Three//
         //***********//
 
-        //cout << "Fith Color Flash: ";
+        cout << "Fith Color Flash: ";
         cin >> stageFlash[4];
         endl;
 
@@ -230,7 +252,7 @@ int main() {
                 c[s] = local_stageThr(flash[0], c[s-1], s, d, a, b);
             } else if (flash.length() == 2) {
                 vector<int> temp(6, 0);
-                temp[4] = local_addColorMix(flash, temp);
+                temp[4] = local_addColorMix(flash);
 
                 if (temp[4] == 2) {
                     char cl = local_missingColor(flash);
@@ -247,9 +269,11 @@ int main() {
 
             } else if (flash.length() == 3) {
                 vector<int> temp(6, 0); 
-                temp[5] = local_addColorMix(flash, temp);
+                temp[5] = local_addColorMix(flash);
+
                 if (temp[5] == 3) {
                     c[s] = c[s-1] + (local_mod(c[s-1], 3) * c[0]) - (local_mod(b[s-1], 3) * b[0]) + (local_mod(a[s-1], 3) * a[0]);
+                    
                 } else if (temp[5] == 4) {
                     for (int i = 0; i < 3; i++) {
                         if (flash[i] == 'r' || flash[i] == 'g' || flash[i] == 'b') {
@@ -281,5 +305,6 @@ int main() {
         local_colorSumbitingOrder(colorOrder, colorStageThree);
         local_ternaryConverter(c[5]);
 
-    } while (userMenu);
+    loopControl = userMenu();
+    } while (loopControl);
 }
