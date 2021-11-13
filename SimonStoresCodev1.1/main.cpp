@@ -4,7 +4,9 @@
 
 using namespace std;
 #include "modualRuleset.cpp" //<-includes "localMath.cpp"
+#include "balancedConverter.cpp"
 
+//dbg
 template <typename T> T printList(T in, const int si) { for (int i = 0; i < si; i++) { cout << in[i] << ' '; } return in; }
 template <typename T> T printReverse(T in, const int si) { for (int i = si - 1; i >= 0; i--) { cout << in[i]; } endl; return in; }
 template <typename funfun> funfun intDbg(funfun test, const int si) { cout << "{ "; printList(test, si); cout << " } \n"; return test; }
@@ -46,16 +48,17 @@ int main() {
 
     do {
         //user input
-        cout << "Enter the Serial#: ";
+        //cout << "Enter the Serial#: ";
         cin >> serial;
-        cout << "Order of Colors: ";
+        //cout << "Order of Colors: ";
         cin >> colorOrder;
-        cout << "First Color Flash: ";
+        //cout << "First Color Flash: ";
         cin >> stageFlash[0];
-        cout << "Second Color Flash: ";
+        //cout << "Second Color Flash: ";
         cin >> stageFlash[1];
-        cout << "Third Color Flash: ";
+        //cout << "Third Color Flash: ";
         cin >> stageFlash[2]; 
+        endl;
 
         //base 36 convertion
         local_baseConverter(serial, numOrChar, serialBase36);
@@ -75,20 +78,15 @@ int main() {
         for (int s = 1; s <= 3; s++) {//s being the step in the stage (starts at 1)
             flash = stageFlash[s-1];
 
-            //one color flash
             if (flash.length() == 1) {
                 a[s] = local_stageOne(flash[0], a[s-1], s, d);
             } else if (flash.length() == 2) {
                 vector<int> temp(6, 0);
 
-                //two color flashes
                 temp[2] = local_addColorMix(flash, temp);
                 cout << "temp[2]" << temp[2]; endl; 
 
-                //ans 1
                 temp[0] = local_stageOne(flash[0], a[s-1], s, d);
-
-                //ans 2
                 temp[1] = local_stageOne(flash[1], a[s-1], s, d);
 
                 switch (temp[2]) {
@@ -109,29 +107,30 @@ int main() {
             } else if (flash.length() == 3) {
                 vector<int> temp(6, 0);
 
-                //three color flashes
-                temp[3] = local_addColorMix(flash, temp);
+                temp[5] = local_addColorMix(flash, temp);
 
-                if (temp[3] == 3) {
+                if (temp[5] == 3) {
                     a[s] = local_moduloRule(a[s-1] + a[0]);
-                } else if (temp[3] == 4 || temp[3] == 5) {
-                    for (int  i = 0; i < 3; i++) {
+                } else if (temp[5] == 4 || temp[5] == 5) {
+
+                    for (int  i = 0; i < 3; i++) 
                         temp[i] = local_stageOne(flash[i], a[s-1], s, d);
-                    }
-                    if (temp[3] == 4) {
+
+                    if (temp[5] == 4) {
                         a[s] = local_max(temp, 3);
+
                     } else { 
                         a[s] = local_min(temp, 3);
                     }
+
                 } else {
                     a[s] = local_moduloRule(a[s-1] - a[0]);
                 }
             }
         }
 
-        string prs = local_ternaryConverter(a[3]);
         local_colorSumbitingOrder(colorOrder, colorStageOne);
-        printReverse(prs, 6);
+        local_ternaryConverter(a[3]);
 
         //*********//
         //stage two//
@@ -139,6 +138,7 @@ int main() {
 
         //cout << "Forth Color Flash: ";
         cin >> stageFlash[3];
+        endl;
 
         for (int s = 1; s <= 4; s++) { 
              flash = stageFlash[s-1];
@@ -211,16 +211,17 @@ int main() {
             }
         } 
 
-        prs = local_ternaryConverter(b[4]);
+
         local_colorSumbitingOrder(colorOrder, colorStageTwo);
-        printReverse(prs, 6);
+        local_ternaryConverter(b[4]);
         
         //***********//
         //Stage Three//
         //***********//
 
-        cout << "Fith Color Flash: ";
+        //cout << "Fith Color Flash: ";
         cin >> stageFlash[4];
+        endl;
 
         for (int s = 1; s <= 5; s++) {
             flash = stageFlash[s-1]; 
@@ -276,9 +277,9 @@ int main() {
                 }
             }
         }
-        prs = local_ternaryConverter(c[5]);
+
         local_colorSumbitingOrder(colorOrder, colorStageThree);
-        printReverse(prs, 6);
+        local_ternaryConverter(c[5]);
 
     } while (userMenu);
 }
