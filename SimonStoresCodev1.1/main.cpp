@@ -113,15 +113,15 @@ int main() {
                 vector<int> temp(6, 0);
 
                 //three color flashes
-                temp[3] = local_addColorMix(flash, temp);
+                temp[5] = local_addColorMix(flash, temp);
 
-                if (temp[3] == 3) {
+                if (temp[5] == 3) {
                     a[s] = local_moduloRule(a[s-1] + a[0]);
-                } else if (temp[3] == 4 || temp[3] == 5) {
-                    for (int  i = 0; i < 3; i++) {
+                } else if (temp[5] == 4 || temp[5] == 5) {
+                    for (int  i = 0; i < 3; i++) 
                         temp[i] = local_stageOne(flash[i], a[s-1], s, d);
-                    }
-                    if (temp[3] == 4) {
+
+                    if (temp[5] == 4) {
                         a[s] = local_max(temp, 3);
                     } else { 
                         a[s] = local_min(temp, 3);
@@ -131,6 +131,10 @@ int main() {
                 }
             }
         }
+
+
+        cout << "d = " << d; endl;
+        intDbg(a, 4);
 
         local_colorSumbitingOrder(colorOrder, colorStageOne);
         local_ternaryConverter(a[3]);
