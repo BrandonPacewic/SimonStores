@@ -1,5 +1,5 @@
 //fixed modulo value 0-y
-int local_mod (int x, const int y) {
+int local_mod(int x, const int y) {
     if (x >= y) {
         x = x % y;
     } else if(x < 0) {
@@ -9,14 +9,14 @@ int local_mod (int x, const int y) {
 }
 
 //modual rule range = -364/364
-int local_moduloRule (int x) {
+int local_moduloRule(int x) {
     if (x >= 365 || x <= -365) 
         x = x % 365;
     return(x);
 }
 
 //base 36 convertion
-void local_baseConverter (string str, int numOrChar[], int base36[]) {
+void local_baseConverter(string str, int numOrChar[], int base36[]) {
     for (int i = 0; i < 6; i++) 
         base36[i] = tolower(str[i]) - 96;
     
@@ -31,7 +31,7 @@ void local_baseConverter (string str, int numOrChar[], int base36[]) {
 }
 
 //exponent function
-int local_pow (int base, const int exponent) {
+int local_pow(int base, const int exponent) {
     if (exponent == 0)
         return 1;
 
@@ -42,7 +42,7 @@ int local_pow (int base, const int exponent) {
 }
 
 //max function
-int local_max (vector<int> x, const int size) {
+int local_max(vector<int> x, const int size) {
     int y = -999;
     for (int i = 0; i < size; i++) 
         if (x[i] > y) 
@@ -51,7 +51,7 @@ int local_max (vector<int> x, const int size) {
 }
 
 //min function
-int local_min (vector<int> x, const int size) {
+int local_min(vector<int> x, const int size) {
     int y = 999;
     for (int i = 0; i < size; i++) 
         if (x[i] < y) 
@@ -60,7 +60,7 @@ int local_min (vector<int> x, const int size) {
 }
 
 //absolute value function
-int local_abs (int x) {
+int local_abs(int x) {
     if (x < 0) 
         x = x * -1;
     return(x);

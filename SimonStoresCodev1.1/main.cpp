@@ -12,7 +12,7 @@ template<typename T> T printList(T in, const int si) { for (int i = 0; i < si; i
 template<typename T> T printReverse(T in, const int si) { for (int i = si - 1; i >= 0; i--) { cout << in[i]; } endl; return in; }
 template<typename funfun> funfun intDbg(funfun test, const int si) { cout << "{ "; printList(test, si); cout << " } \n"; return test; }
 
-//user error catch, m for max value r for required value
+//error catch, m for max value r for required value
 template<typename N> N errorCatch(N testVal, const int maxSize, const char type) {
     string dataType = typeid(testVal).name();
     string string_type = "NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE";
@@ -59,7 +59,6 @@ int main() {
     int b[6];//a,b and c values specifyed from the manual page
     int c[7];
     int d = 0;//sum of base 36 in serial#
-    bool loopControl = false;
     string stageFlash[6];
     string serial, colorOrder, stageColorOrder, flash;
 
@@ -322,6 +321,6 @@ int main() {
         local_ternaryConverter(c[5]);
         endl;
 
-        loopControl = userMenu();
-    } while (loopControl);
+
+    } while (userMenu());
 }
