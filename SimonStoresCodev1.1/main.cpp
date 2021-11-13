@@ -165,6 +165,7 @@ int main() {
 
         local_colorSumbitingOrder(colorOrder, colorStageOne);
         local_ternaryConverter(a[3]);
+        endl;
 
         //*********//
         //stage two//
@@ -249,6 +250,7 @@ int main() {
 
         local_colorSumbitingOrder(colorOrder, colorStageTwo);
         local_ternaryConverter(b[4]);
+        endl;
         
         //***********//
         //Stage Three//
@@ -318,6 +320,7 @@ int main() {
 
         local_colorSumbitingOrder(colorOrder, colorStageThree);
         local_ternaryConverter(c[5]);
+        endl;
 
         loopControl = userMenu();
     } while (loopControl);
