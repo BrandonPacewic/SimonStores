@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #define pb push_back
 #define endl cout << '\n'
+#define endl2 cout << "\n\n"
 
 using namespace std;
 #include "modualRuleset.cpp" //<-includes "localMath.cpp"
@@ -11,9 +12,9 @@ template<typename T> T printList(T in, const int si) { for (int i = 0; i < si; i
 template<typename T> T printReverse(T in, const int si) { for (int i = si - 1; i >= 0; i--) { cout << in[i]; } endl; return in; }
 template<typename funfun> funfun intDbg(funfun test, const int si) { cout << "{ "; printList(test, si); cout << " } \n"; return test; }
 
-//user error catch
+//user error catch, m for max value r for required value
 template<typename N> N errorCatch(N testVal, const int maxSize, const char type) {
-    string dataType = typeid(val).name();
+    string dataType = typeid(testVal).name();
     string string_type = "NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE";
 
     assert (dataType == string_type && (type == 'm' || type == 'r'));
@@ -21,18 +22,18 @@ template<typename N> N errorCatch(N testVal, const int maxSize, const char type)
 
     if (type == 'm') {
         while (test.length() > maxSize) {
+            endl2;
             cout << "You exceeded the maximum size for this value \nThe max size is " << maxSize << ". \nPlease try again: ";
             cin >> test;
         }
-        return test;
-        
-    } else if (type == 'r') {
+    } else if (type == 'r') 
         while (test.length() != maxSize) {
+            endl2;
             cout << "You did not meet the required size for this value \nThe required size is " << maxSize << ". \nPlease try again: ";
             cin >> test;
         }
-        return test;
-    }
+    
+    return test;
 }
 
 //user menu
@@ -72,17 +73,26 @@ int main() {
     cout << "Lets get started! \n";
 
     do {
-        //user input
+        //user input + valid input check
         cout << "Enter the Serial#: ";
         cin >> serial;
+        serial = errorCatch(serial, 6, 'r');
+
         cout << "Order of Colors: ";
         cin >> colorOrder;
+        colorOrder = errorCatch(colorOrder, 6, 'r');
+
         cout << "First Color Flash: ";
         cin >> stageFlash[0];
+        stageFlash[0] = errorCatch(stageFlash[0], 3, 'm');
+
         cout << "Second Color Flash: ";
         cin >> stageFlash[1];
+        stageFlash[1] = errorCatch(stageFlash[1], 3, 'm');
+
         cout << "Third Color Flash: ";
         cin >> stageFlash[2]; 
+        stageFlash[2] = errorCatch(stageFlash[2], 3, 'm');
         endl;
 
         //base 36 convertion
@@ -106,7 +116,6 @@ int main() {
                 vector<int> temp(6, 0);
 
                 temp[2] = local_addColorMix(flash);
-                cout << "temp[2]" << temp[2]; endl; 
 
                 temp[0] = local_stageOne(flash[0], a[s-1], s, d);
                 temp[1] = local_stageOne(flash[1], a[s-1], s, d);
@@ -160,7 +169,8 @@ int main() {
 
         cout << "Forth Color Flash: ";
         cin >> stageFlash[3];
-        endl;
+        stageFlash[3] = errorCatch(stageFlash[3], 3, 'm');
+        endl2;
 
         for (int s = 1; s <= 4; s++) { 
              flash = stageFlash[s-1];
@@ -243,7 +253,8 @@ int main() {
 
         cout << "Fith Color Flash: ";
         cin >> stageFlash[4];
-        endl;
+        stageFlash[4] = errorCatch(stageFlash[4], 3, 'm');  
+        endl2;
 
         for (int s = 1; s <= 5; s++) {
             flash = stageFlash[s-1]; 
@@ -305,6 +316,6 @@ int main() {
         local_colorSumbitingOrder(colorOrder, colorStageThree);
         local_ternaryConverter(c[5]);
 
-    loopControl = userMenu();
+        loopControl = userMenu();
     } while (loopControl);
 }
