@@ -1,7 +1,7 @@
 #include "localMath.cpp"
 
 //function for re-ordering color list for input
-void local_colorSumbitingOrder (string colorOrder, string colorStage) {
+void local_colorSumbitingOrder (const string colorOrder, string colorStage) {
 
     //if y is on the top right
     if (colorOrder[0] == 'y') {
@@ -24,7 +24,6 @@ void local_colorSumbitingOrder (string colorOrder, string colorStage) {
         
         if (colorOrder[i] == 'c') 
             c = i;
-        
     }
 
     //swap complementary
@@ -150,7 +149,9 @@ void local_colorSumbitingOrder (string colorOrder, string colorStage) {
 }
 
 //function for a0 b0 and c0 inital calculations
-void local_initalCalculations (int serialBase36[],const int numOrChar[], int a[], int b[], int c[], vector<int> temp) {
+void local_initalCalculations (int serialBase36[], const int numOrChar[], vector<int> a, int b[], int c[]) {
+    vector<int> temp(2, 0);
+
     //a0
     if (numOrChar[2] == 0) {
         temp[0] = serialBase36[2] * 36;
@@ -240,7 +241,7 @@ int local_stageOne (const char color, int x, int s, int d) {
 }
 
 //stage 2 color calculations
-int local_stageTwo (const char color, int x, int s, int d, int a[]) {
+int local_stageTwo (const char color, int x, int s, int d, vector<int> a) {
     int y;
     switch (tolower(color)) {
         case 'r':
@@ -267,9 +268,8 @@ int local_stageTwo (const char color, int x, int s, int d, int a[]) {
 }
 
 //stage 3 color calculations
-int local_stageThr (const char color, int x, int s, int d, int a[], int b[]) {
+int local_stageThr (const char color, int x, int s, int d, vector<int> a, int b[]) {
     int y;
-    a[4] = 0;//a4 is marked as 0 because we only have 4 A values
     switch (tolower(color)) {
         case 'r':
             y = x + b[s-1] - a[s-1];
@@ -294,7 +294,8 @@ int local_stageThr (const char color, int x, int s, int d, int a[], int b[]) {
 }
     
 //function for determining the number of primary or seconday color flashes in a muit color flash sequence
-int local_addColorMix (string flash, vector<int> temp) {
+int local_addColorMix (string flash) {
+    vector<int> temp(3, 0);
     
     for (int i = flash.length(); i > 0; i--) {
         if (flash[i-1] == 'r' || flash[i-1] == 'g' || flash[i-1] == 'b') {
