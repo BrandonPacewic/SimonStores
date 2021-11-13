@@ -4,7 +4,7 @@
 
 using namespace std;
 #include "modualRuleset.cpp" //<-includes "localMath.cpp"
-#include "balancedConverter.hpp"
+#include "balancedConverter.cpp"
 
 //dbg
 template <typename T> T printList(T in, const int si) { for (int i = 0; i < si; i++) { cout << in[i] << ' '; } return in; }
