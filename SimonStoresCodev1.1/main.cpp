@@ -78,20 +78,15 @@ int main() {
         for (int s = 1; s <= 3; s++) {//s being the step in the stage (starts at 1)
             flash = stageFlash[s-1];
 
-            //one color flash
             if (flash.length() == 1) {
                 a[s] = local_stageOne(flash[0], a[s-1], s, d);
             } else if (flash.length() == 2) {
                 vector<int> temp(6, 0);
 
-                //two color flashes
                 temp[2] = local_addColorMix(flash, temp);
                 cout << "temp[2]" << temp[2]; endl; 
 
-                //ans 1
                 temp[0] = local_stageOne(flash[0], a[s-1], s, d);
-
-                //ans 2
                 temp[1] = local_stageOne(flash[1], a[s-1], s, d);
 
                 switch (temp[2]) {
@@ -112,29 +107,27 @@ int main() {
             } else if (flash.length() == 3) {
                 vector<int> temp(6, 0);
 
-                //three color flashes
                 temp[5] = local_addColorMix(flash, temp);
 
                 if (temp[5] == 3) {
                     a[s] = local_moduloRule(a[s-1] + a[0]);
                 } else if (temp[5] == 4 || temp[5] == 5) {
+
                     for (int  i = 0; i < 3; i++) 
                         temp[i] = local_stageOne(flash[i], a[s-1], s, d);
 
                     if (temp[5] == 4) {
                         a[s] = local_max(temp, 3);
+
                     } else { 
                         a[s] = local_min(temp, 3);
                     }
+
                 } else {
                     a[s] = local_moduloRule(a[s-1] - a[0]);
                 }
             }
         }
-
-
-        cout << "d = " << d; endl;
-        intDbg(a, 4);
 
         local_colorSumbitingOrder(colorOrder, colorStageOne);
         local_ternaryConverter(a[3]);

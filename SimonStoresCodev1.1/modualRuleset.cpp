@@ -233,7 +233,7 @@ int local_stageOne (const char color, int x, int s, int d) {
             y = (3 * local_pow(s, 3)) - (2 * x);
             break;
         case 'y':
-            y = x + d - (s * 6);
+            y = (x + d) - (s * 6);
             break;
     }
     return local_moduloRule(y);
