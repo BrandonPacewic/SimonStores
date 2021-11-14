@@ -15,7 +15,7 @@ template<typename funfun> funfun intDbg(funfun test, const int si) { cout << "{ 
 //error catch, m for max value r for required value
 template<typename N> N errorCatch(N testVal, const int maxSize, const char type) {
     string dataType = typeid(testVal).name();
-    string string_type = "NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE";
+    const string string_type = "NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE";
 
     assert (dataType == string_type && (type == 'm' || type == 'r'));
     string test = testVal;
