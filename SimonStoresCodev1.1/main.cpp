@@ -270,16 +270,16 @@ int main() {
                 temp[4] = local_addColorMix(flash);
 
                 if (temp[4] == 2) {
-                    char cl = local_missingColor(flash);
-                    c[s] = local_stageThr(cl, c[s-1], s, d, a, b) + local_stageThr(cl, b[s-1], s, d, a, b) + local_stageThr(cl, a[s-1], s, d, a, b);
+                    c[s] = local_moduloRule(local_stageThr(local_missingColor(flash), c[s-1], s, d, a, b) + local_stageThr(local_missingColor(flash), b[s-1], s, d, a, b) + local_stageThr(local_missingColor(flash), a[s-1], s, d, a, b));
+                
                 } else if (temp[4] == 3) {
                     for (int i = 0; i < 2; i++)
                         temp[i] = local_stageThr(flash[i], c[s-1], s, d, a, b); 
-                    temp[2] = -1 * local_abs(local_stageThr(flash[0], c[s-1], s, d, a, b) - local_stageThr(flash[1], c[s-1], s, d, a, b));
+                    temp[2] = local_moduloRule(-1 * local_abs(local_stageThr(flash[0], c[s-1], s, d, a, b) - local_stageThr(flash[1], c[s-1], s, d, a, b)));
                     c[s] = local_min(temp, 3);
 
                 } else if (temp[4] == 4) {
-                    c[s] = local_stageThr(local_missingColor(flash), c[s-1], s, d, a, b) - local_stageThr(flash[0], c[s-1], s, d, a, b) - local_stageThr(flash[1], c[s-1], s, d, a, b);
+                    c[s] = local_moduloRule(local_stageThr(local_missingColor(flash), c[s-1], s, d, a, b) - local_stageThr(flash[0], c[s-1], s, d, a, b) - local_stageThr(flash[1], c[s-1], s, d, a, b));
                 }
 
             } else if (flash.length() == 3) {
@@ -287,7 +287,7 @@ int main() {
                 temp[5] = local_addColorMix(flash);
 
                 if (temp[5] == 3) {
-                    c[s] = c[s-1] + (local_mod(c[s-1], 3) * c[0]) - (local_mod(b[s-1], 3) * b[0]) + (local_mod(a[s-1], 3) * a[0]);
+                    c[s] = local_moduloRule(c[s-1] + (local_mod(c[s-1], 3) * c[0]) - (local_mod(b[s-1], 3) * b[0]) + (local_mod(a[s-1], 3) * a[0]));
                     
                 } else if (temp[5] == 4) {
                     for (int i = 0; i < 3; i++) {
@@ -309,10 +309,10 @@ int main() {
                             temp[4] = local_stageThr(flash[i], a[s-1], s, d, a, b);
                         }
                     }
-                    c[s] = temp[0] + temp[1] + temp[2] - temp[3] - temp[4];
+                    c[s] = local_moduloRule(temp[0] + temp[1] + temp[2] - temp[3] - temp[4]);
 
                 } else if (temp[5] == 6) {
-                    c[s] = c[s-1] + (local_mod(c[0], 3) * c[s-1]) - (local_mod(b[0], 3) * b[s-1]) + (local_mod(a[0], 3) * a[s-1]);
+                    c[s] = local_moduloRule(c[s-1] + (local_mod(c[0], 3) * c[s-1]) - (local_mod(b[0], 3) * b[s-1]) + (local_mod(a[0], 3) * a[s-1]));
                 }
             }
         }
