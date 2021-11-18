@@ -46,12 +46,14 @@ template<typename T> T local_ternaryConverter(T conVal) {
     }
 
     if (neg)
-        for (auto &i: ans)
+        for (auto &i: ans) {
             if (i == '+') {
                 i = '-';
-            } else if (i == '-')
+            } else if (i == '-') {
                 i = '+';
-
+            }
+        }
+        
     for (int i = ans.size() - 1; i >= 0; i--)
         cout << ans[i];
     endl;
