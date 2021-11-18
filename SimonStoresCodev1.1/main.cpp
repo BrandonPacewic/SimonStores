@@ -20,6 +20,17 @@ template<typename T_Ints> void testList(T_Ints List) { return; }
 #define testArgs(...)
 #endif
 
+//lizard easter egg
+const string lizard = "lizard";
+bool lizard_test(string test) {
+    int lizard_count = 0;    
+    for (int i = 0; i < test.size(); i++) 
+        if (test[i] == lizard[i])
+            lizard_count++;
+    if (lizard_count == 6)
+        return true;
+    return false;
+}
 
 //error catch, m for max value r for required value
 template<typename N> N errorCatch(N testVal, const int maxSize, const char type) {
@@ -28,6 +39,12 @@ template<typename N> N errorCatch(N testVal, const int maxSize, const char type)
 
     assert (dataType == string_type && (type == 'm' || type == 'r'));
     string test = testVal;
+
+    while (lizard_test(test)) {
+        endl2;
+        cout << "Stop it, you know that lizard is not a valid input\n \nPlease try again: ";
+        getline (cin, test);   
+    }
 
     if (type == 'm') {
         while (test.length() > maxSize) {
@@ -41,7 +58,7 @@ template<typename N> N errorCatch(N testVal, const int maxSize, const char type)
             cout << "You did not meet the required size for this value \nThe required size is " << maxSize << ". \nPlease try again: ";
             getline (cin, test);
         }
-    
+
     return test;
 }
 
