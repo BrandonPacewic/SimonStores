@@ -17,10 +17,10 @@ More details can be found in this [repository](https://github.com/BrandonPacewic
 
 ----
 
-#### A lizard is not a valid input
+## A lizard is not a valid input
 
 As a added bonus parts of this program will accept a 6 character string which allows for the input of lizard
 
-This is of course compleatly unnaceptable and needed to be fixed 
+This is of course compleatly unacceptable and needed to be fixed 
 
 ![lizard](https://github.com/BrandonPacewic/SimonStores/blob/main/images/lizardIsNotAValidInput.png)
