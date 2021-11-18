@@ -168,7 +168,6 @@ int main() {
             }
         }
 
-        cout << d << '\n';
 
         local_colorSumbitingOrder(colorOrder, colorStageOne);
         local_ternaryConverter(a[3]);
