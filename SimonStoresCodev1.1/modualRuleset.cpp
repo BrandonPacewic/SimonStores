@@ -254,7 +254,6 @@ int local_stageTwo(const char color, int x, int s, int d, vector<int> a) {
     int y;
     switch (tolower(color)) {
         case 'r':
-            cout << "break"; endl;
             y = x + a[s-1] + local_pow(s, 2);
             break;
         case 'g':
