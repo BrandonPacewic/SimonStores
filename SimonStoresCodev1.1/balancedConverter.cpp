@@ -1,3 +1,10 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define endl cout << '\n'
+#define endl2 cout << "\n\n"
+
+
 template<typename T> T local_ternaryConverter(T conVal) {
     int64_t inVal = int64_t(conVal);
     bool neg = false;

@@ -1,3 +1,7 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
 //fixed modulo value 0-y
 int local_mod(int x, const int y) {
     if (x >= y) {

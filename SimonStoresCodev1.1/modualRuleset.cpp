@@ -1,4 +1,10 @@
+#include <bits/stdc++.h>
 #include "localMath.cpp"
+using namespace std;
+#define pb push_back
+#define endl cout << '\n'
+#define endl2 cout << "\n\n"
+
 
 //function for re-ordering color list for input
 void local_colorSumbitingOrder(const string colorOrder, string colorStage) {
