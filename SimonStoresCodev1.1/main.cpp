@@ -43,7 +43,7 @@ template<typename N> N errorCatch(N testVal, const int maxSize, const char type)
     while (lizard_test(test)) {
         endl2;
         cout << "Stop it, you know that lizard is not a valid input\n";
-        printf("https://github.com/BrandonPacewic/SimonStores/blob/qa-fixes/images/lizardIsNotAValidInput.png \n");
+        printf("https://github.com/BrandonPacewic/SimonStores/blob/main/images/lizardIsNotAValidInput.png \n");
         cout << "Please try again: ";
         getline (cin, test);   
     }
