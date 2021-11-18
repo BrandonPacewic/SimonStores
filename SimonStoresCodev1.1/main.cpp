@@ -77,32 +77,32 @@ int main() {
     const string colorStageThree = "bmrygc";
 
     //intro
-    cout << "\nWelcome to a c++ Script for sloving Simon Stores! \n";
+    cout << "\nWelcome to a c++ Script for sloving Simon Stores!\n";
     cout << "Lets get started! \n";
 
     do {
         //user input + valid input check
-        cout << "Enter the Serial#: ";
-        cin >> serial;
+        cout << "Enter the Serial# Ex(MA9KR5): ";
+        getline (cin, serial);
         serial = errorCatch(serial, 6, 'r');
 
-        cout << "Order of Colors: ";
-        cin >> colorOrder;
+        cout << "Order of Colors in clockwise order, Ignoring White and black Ex(RMYCBG): ";
+        getline (cin, colorOrder);
         colorOrder = errorCatch(colorOrder, 6, 'r');
 
-        cout << "First Color Flash: ";
-        cin >> stageFlash[0];
+        cout << "First Color Flash Ex(RM): ";
+        getline (cin, stageFlash[0]);
         stageFlash[0] = errorCatch(stageFlash[0], 3, 'm');
 
-        cout << "Second Color Flash: ";
-        cin >> stageFlash[1];
+        cout << "Second Color Flash Ex(RM): ";
+        getline (cin, stageFlash[1]);
         stageFlash[1] = errorCatch(stageFlash[1], 3, 'm');
 
-        cout << "Third Color Flash: ";
-        cin >> stageFlash[2]; 
+        cout << "Third Color Flash Ex(RM): ";
+        getline (cin, stageFlash[2]);
         stageFlash[2] = errorCatch(stageFlash[2], 3, 'm');
         endl;
-
+    
         //base 36 convertion
         local_baseConverter(serial, numOrChar, serialBase36);
 
