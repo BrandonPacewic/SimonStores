@@ -8,7 +8,7 @@ using namespace std;
 #include "balancedConverter.cpp"
 
 //dbg
-#define DBG_MODE
+// #define DBG_MODE
 long long DBG_COUNT = 0ll;
 void DBG_OUT() { cerr << '\n'; DBG_COUNT += 1ll; }
 template<typename Front, typename... Back> void DBG_OUT(Front K, Back... T) { cerr << ' ' << K; DBG_OUT(T...); }
@@ -33,13 +33,13 @@ template<typename N> N errorCatch(N testVal, const int maxSize, const char type)
         while (test.length() > maxSize) {
             endl2;
             cout << "You exceeded the maximum size for this value \nThe max size is " << maxSize << ". \nPlease try again: ";
-            cin >> test;
+            getline (cin, test);
         }
     } else if (type == 'r') 
         while (test.length() != maxSize) {
             endl2;
             cout << "You did not meet the required size for this value \nThe required size is " << maxSize << ". \nPlease try again: ";
-            cin >> test;
+            getline (cin, test);
         }
     
     return test;
@@ -47,15 +47,15 @@ template<typename N> N errorCatch(N testVal, const int maxSize, const char type)
 
 //user menu
 bool userMenu() {
-    char x;
+    string x;
     cout << "What would you like to do? \n Continue or Quit (c,q): ";
-    cin >> x;
-    while (tolower(x) != 'q' && tolower(x) != 'c') {
+    getline (cin, x);
+    while (tolower(x[0]) != 'q' && tolower(x[0]) != 'c' || x.length() != 1) {
         cout << "You did not enter a valid input please try again. \n";
         cout << "What would you like to do? \n Continue or Quit (c,q): ";
-        cin >> x;
+        getline (cin, x);
     }
-    if (tolower(x) == 'c')
+    if (tolower(x[0]) == 'c')
         return true;
     return false;
 }
@@ -102,7 +102,7 @@ int main() {
         getline (cin, stageFlash[2]);
         stageFlash[2] = errorCatch(stageFlash[2], 3, 'm');
         endl;
-    
+
         //base 36 convertion
         local_baseConverter(serial, numOrChar, serialBase36);
 
@@ -179,7 +179,7 @@ int main() {
         //*********//
 
         cout << "Forth Color Flash: ";
-        cin >> stageFlash[3];
+        getline (cin, stageFlash[3]);
         stageFlash[3] = errorCatch(stageFlash[3], 3, 'm');
         endl2;
 
@@ -264,7 +264,7 @@ int main() {
         //***********//
 
         cout << "Fith Color Flash: ";
-        cin >> stageFlash[4];
+        getline (cin, stageFlash[4]);
         stageFlash[4] = errorCatch(stageFlash[4], 3, 'm');  
         endl2;
 
