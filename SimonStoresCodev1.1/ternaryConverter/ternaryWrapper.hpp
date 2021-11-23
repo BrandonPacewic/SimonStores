@@ -2,13 +2,13 @@
 
 class balancedConverter {
     public:
-        const int MAX_VALUE = 364; //max size to be converted in the manual
+        const int MAX_VALUE = 364; //max size to be converted found in the manual
+        
         template<typename T>
         void convert(T valueToBeConverted) {
             int64_t reValueToBeConverted = int64_t(valueToBeConverted);
             
             bool invertSigns = false;
-
             if (reValueToBeConverted < 0) {
                 invertSigns = true;
             }
