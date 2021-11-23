@@ -135,9 +135,9 @@ vector<int> makeTernaryArray(vector<int64_t> VALS, int64_t valueToBeConverted) {
 
     for (int i = 0; i < VALS.size(); i++) { 
         for (int j = 0; j < 2; j++) { 
-            if (valueToBeConverted >= VALS[i]) {
+            if (abs(valueToBeConverted) >= VALS[i]) {
                 ternaryArray[i]++;
-                valueToBeConverted -= VALS[i]; 
+                valueToBeConverted = abs(valueToBeConverted) - VALS[i]; 
             }
         }
     }
