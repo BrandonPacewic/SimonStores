@@ -3,14 +3,14 @@ using namespace std;
 
 // #include "modualRuleset.cpp" //<-includes "localMath.cpp"
 #include "SimonStoresCodev1.1/ternaryConverter/ternaryWrapper.hpp"
-
+#include "SimonStoresCodev1.1/local/localMath/localMathWrapper.hpp"
 
 #define endl cout << '\n'
 #define endl2 cout << "\n\n"
 
 
 //dbg
-// #define DBG_MODE
+#define DBG_MODE
 long long DBG_COUNT = 0ll;
 void DBG_OUT() { cerr << '\n'; DBG_COUNT += 1ll; }
 template<typename Front, typename... Back> void DBG_OUT(Front K, Back... T) { cerr << ' ' << K; DBG_OUT(T...); }
@@ -21,6 +21,7 @@ template<typename T_Ints> void testList(T_Ints List) { cerr << '#' << DBG_COUNT 
 template<typename T_Ints> void testList(T_Ints List) { return; }
 #define testArgs(...)
 #endif
+
 
 //lizard easter egg
 const string lizard = "lizard";
@@ -56,6 +57,7 @@ template<typename N> N errorCatch(N testVal, const int maxSize, const char type)
             cout << "You exceeded the maximum size for this value \nThe max size is " << maxSize << ". \nPlease try again: ";
             getline (cin, test);
         }
+        
     } else if (type == 'r') 
         while (test.length() != maxSize) {
             endl2;
@@ -346,7 +348,7 @@ int main() {
         }
 
         local_colorSumbitingOrder(colorOrder, colorStageThree);
-        local_ternaryConverter(c[5]);
+        balancedConverter.convert(c[5]);
         endl;
 
 
