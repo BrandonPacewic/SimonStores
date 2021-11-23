@@ -1,11 +1,11 @@
 #include <bits/stdc++.h>
-#define pb push_back
+#include "modualRuleset.cpp" //<-includes "localMath.cpp"
+#include "balancedConverter.cpp"
+
 #define endl cout << '\n'
 #define endl2 cout << "\n\n"
 
 using namespace std;
-#include "modualRuleset.cpp" //<-includes "localMath.cpp"
-#include "balancedConverter.cpp"
 
 //dbg
 // #define DBG_MODE

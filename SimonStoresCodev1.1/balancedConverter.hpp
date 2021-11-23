@@ -4,17 +4,19 @@ using namespace std;
 #define endl cout << '\n'
 #define endl2 cout << "\n\n"
 
+//max value that will need to be converted specifyed in the manual
+const int MAX_VAL = 364;
 
 template<typename T> T local_ternaryConverter(T conVal) {
-    int64_t inVal = int64_t(conVal);
+    int64_t ReConVal = int64_t(conVal);
     bool neg = false;
-    if (inVal < 0) {
+    if (ReConVal < 0) {
         neg = true;
-        inVal *= int64_t(-1);
+        ReConVal *= int64_t(-1);
     }
 
     vector<int64_t> vals;
-    for (int i = 0; pow(3, i) <= 364; i++) 
+    for (int i = 0; pow(3, i) <= MAX_VAL; i++) 
         vals.pb(int64_t(pow(3, i)));
         
     sort(vals.begin(), vals.end(), greater<int64_t>());
@@ -22,9 +24,9 @@ template<typename T> T local_ternaryConverter(T conVal) {
     vector<int> balTer(vals.size(), 0);
     for (int i = 0; i < vals.size(); i++) 
         for (int j = 0; j < 2; j++) 
-            if (inVal >= vals[i]) {
+            if (ReConVal >= vals[i]) {
                 balTer[i]++;
-                inVal -= vals[i]; 
+                ReConVal -= vals[i]; 
             }
     
     for (int i = balTer.size() - 1; i > 0; i--) {
@@ -59,4 +61,30 @@ template<typename T> T local_ternaryConverter(T conVal) {
     endl;
 
     return conVal;
+}
+
+template<typename T_Num> 
+vector<int64_t> initalizeValues(T_Num ValueToBeConverted) {
+    vector<int64_t> vals;
+
+    for (int i = 0; pow(3, i) <= ValueToBeConverted; i++) {
+        vals.pb(int64_t(pow(3, i)));
+    }
+        
+    sort(vals.begin(), vals.end(), greater<int64_t>());
+    
+    return vals;
+}
+
+vector<int> makeTernaryArray(vector<int64_t> VALS, int64_t valueToBeConverted) {
+    vector<int> balTer(VALS.size(), 0);
+
+    for (int i = 0; i < VALS.size(); i++) { 
+        for (int j = 0; j < 2; j++) { 
+            if (ReConVal >= VALS[i]) {
+                balTer[i]++;
+                ReConVal -= VALS[i]; 
+            }
+        }
+    }
 }
