@@ -22,6 +22,6 @@ class balancedConverter {
             for (auto i : ans) {
                 cout << i;
             }
-            endl;
+            cerr << endl;
         }
 };

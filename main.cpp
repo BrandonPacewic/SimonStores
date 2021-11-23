@@ -1,11 +1,13 @@
 #include <bits/stdc++.h>
-#include "modualRuleset.cpp" //<-includes "localMath.cpp"
-#include "balancedConverter.cpp"
+using namespace std;
+
+// #include "modualRuleset.cpp" //<-includes "localMath.cpp"
+#include "SimonStoresCodev1.1/ternaryConverter/ternaryWrapper.hpp"
+
 
 #define endl cout << '\n'
 #define endl2 cout << "\n\n"
 
-using namespace std;
 
 //dbg
 // #define DBG_MODE
