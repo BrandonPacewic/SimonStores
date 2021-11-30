@@ -1,26 +1,21 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// #include "modualRuleset.cpp" //<-includes "localMath.cpp"
-#include "SimonStoresCodev1.1/ternaryConverter/ternaryWrapper.hpp"
-#include "SimonStoresCodev1.1/local/localMath/localMathWrapper.hpp"
-
-#define endl cout << '\n'
-#define endl2 cout << "\n\n"
-
-
 //dbg
 #define DBG_MODE
-long long DBG_COUNT = 0ll;
-void DBG_OUT() { cerr << '\n'; DBG_COUNT += 1ll; }
+int64_t DBG_COUNT = 0;
+void DBG_OUT() { cerr << endl; DBG_COUNT++; }
 template<typename Front, typename... Back> void DBG_OUT(Front K, Back... T) { cerr << ' ' << K; DBG_OUT(T...); }
 #ifdef DBG_MODE
-template<typename T_Ints> void testList(T_Ints List) { cerr << '#' << DBG_COUNT << " __LIST_ARGS__: ("; DBG_COUNT += 1ll; for (int i = 0; i < List.size(); i++) { cout << List[i] << (i < List.size() - 1 ? ", " : ")\n"); } }
+template<typename T_List> void testList(T_List List) { cerr << '#' << DBG_COUNT << " __LIST_ARGS__: ("; DBG_COUNT++; for (int i = 0; i < List.size(); i++) { cerr << List[i] << (i < List.size() - 1 ? ", " : ")\n"); } }
 #define testArgs(...) cerr << '#' << DBG_COUNT << " __VA_ARGS__ (" << #__VA_ARGS__ << "):", DBG_OUT(__VA_ARGS__)
 #else
-template<typename T_Ints> void testList(T_Ints List) { return; }
+template<typename T_List> void testList(T_List List) { return; }
 #define testArgs(...)
-#endif
+#endif 
+
+#include "SimonStoresCodev1.1/ternaryConverter/balancedConverter.hpp"
+#include "SimonStoresCodev1.1/local/modualRuleSet/modualRuleset.hpp"
 
 
 //lizard easter egg
@@ -44,25 +39,22 @@ template<typename N> N errorCatch(N testVal, const int maxSize, const char type)
     string test = testVal;
 
     while (lizard_test(test)) {
-        endl2;
-        cout << "Stop it, you know that lizard is not a valid input\n";
+        cout << "\n\nStop it, you know that lizard is not a valid input\n";
         printf("https://github.com/BrandonPacewic/SimonStores/blob/main/images/lizardIsNotAValidInput.png \n");
         cout << "Please try again: ";
-        getline (cin, test);   
+        getline(cin, test);   
     }
 
     if (type == 'm') {
         while (test.length() > maxSize) {
-            endl2;
-            cout << "You exceeded the maximum size for this value \nThe max size is " << maxSize << ". \nPlease try again: ";
-            getline (cin, test);
+            cout << "\n\nYou exceeded the maximum size for this value \nThe max size is " << maxSize << ". \nPlease try again: ";
+            getline(cin, test);
         }
         
     } else if (type == 'r') 
         while (test.length() != maxSize) {
-            endl2;
-            cout << "You did not meet the required size for this value \nThe required size is " << maxSize << ". \nPlease try again: ";
-            getline (cin, test);
+            cout << "\n\nYou did not meet the required size for this value \nThe required size is " << maxSize << ". \nPlease try again: ";
+            getline(cin, test);
         }
 
     return test;
@@ -72,11 +64,11 @@ template<typename N> N errorCatch(N testVal, const int maxSize, const char type)
 bool userMenu() {
     string x;
     cout << "What would you like to do? \n Continue or Quit (c,q): ";
-    getline (cin, x);
+    getline(cin, x);
     while (tolower(x[0]) != 'q' && tolower(x[0]) != 'c' || x.length() != 1) {
         cout << "You did not enter a valid input please try again. \n";
         cout << "What would you like to do? \n Continue or Quit (c,q): ";
-        getline (cin, x);
+        getline(cin, x);
     }
     if (tolower(x[0]) == 'c')
         return true;
@@ -84,7 +76,12 @@ bool userMenu() {
 }
 
 int main() {
-    //vars
+// part of dbg
+#ifdef TEXT_IO 
+    freopen("in.txt", "r", stdin);
+    freopen("ou.txt", "w", stdout);
+#endif
+
     int numOrChar[6];//used for base 36 convertion
     int serialBase36[6];//the base 36 value of the serial number
     vector<int> a(5, 0);//each arr only has pos for the numbers we need
@@ -94,10 +91,11 @@ int main() {
     string stageFlash[6];
     string serial, colorOrder, stageColorOrder, flash;
 
-    //color list arrs    
     const string colorStageOne = "rgbcmy";
     const string colorStageTwo = "ybgmcr"; 
     const string colorStageThree = "bmrygc";
+
+    balancedTernaryConverter balancedTernaryConverter; // balanced ternary type
 
     //intro
     cout << "\nWelcome to a c++ Script for sloving Simon Stores!\n";
@@ -106,25 +104,25 @@ int main() {
     do {
         //user input + valid input check
         cout << "Enter the Serial# Ex(MA9KR5): ";
-        getline (cin, serial);
+        getline(cin, serial);
         serial = errorCatch(serial, 6, 'r');
 
         cout << "Order of Colors in clockwise order, Ignoring White and black Ex(RMYCBG): ";
-        getline (cin, colorOrder);
+        getline(cin, colorOrder);
         colorOrder = errorCatch(colorOrder, 6, 'r');
 
         cout << "First Color Flash Ex(RM): ";
-        getline (cin, stageFlash[0]);
+        getline(cin, stageFlash[0]);
         stageFlash[0] = errorCatch(stageFlash[0], 3, 'm');
 
         cout << "Second Color Flash Ex(RM): ";
-        getline (cin, stageFlash[1]);
+        getline(cin, stageFlash[1]);
         stageFlash[1] = errorCatch(stageFlash[1], 3, 'm');
 
         cout << "Third Color Flash Ex(RM): ";
-        getline (cin, stageFlash[2]);
+        getline(cin, stageFlash[2]);
         stageFlash[2] = errorCatch(stageFlash[2], 3, 'm');
-        endl;
+        cout << endl;
 
         //base 36 convertion
         local_baseConverter(serial, numOrChar, serialBase36);
@@ -192,18 +190,17 @@ int main() {
         }
 
 
-        local_colorSumbitingOrder(colorOrder, colorStageOne);
-        local_ternaryConverter(a[3]);
-        endl;
+        // local_colorSumbitingOrder(colorOrder, colorStageOne);
+        balancedTernaryConverter.convert(a[3]);
 
         //*********//
         //stage two//
         //*********//
 
         cout << "Forth Color Flash: ";
-        getline (cin, stageFlash[3]);
+        getline(cin, stageFlash[3]);
         stageFlash[3] = errorCatch(stageFlash[3], 3, 'm');
-        endl2;
+        cout << "\n\n";
 
         for (int s = 1; s <= 4; s++) { 
              flash = stageFlash[s-1];
@@ -250,7 +247,7 @@ int main() {
                 temp[3] = local_addColorMix(flash);
 
                 if (temp[3] == 3) {
-                    b[s] = local_moduloRule(b[s-1] + (local_mod(b[s-1], 4) * b[0]) - a[3]);
+                    b[s] = localMath.moduloRule(b[s-1] + (localMath.mod(b[s-1], 4) * b[0]) - a[3]);
                 } else if (temp[3] == 4) {
                     for (int i = 0; i < 3; i++) {
                         if (flash[i] == 'r' || flash[i] == 'g' || flash[i] == 'b') {
@@ -258,37 +255,37 @@ int main() {
                         } else {
                             temp[4] = local_stageTwo(flash[i], a[s-1], s, d, a);
                         }
-                        b[s] = local_moduloRule(b[s-1] + temp[0] + temp[1] + temp[2] - temp[4]);
+                        b[s] = localMath.moduloRule(b[s-1] + temp[0] + temp[1] + temp[2] - temp[4]);
                     }
                 } else if (temp[3] == 5) {
                     for (int i = 0; i < 3; i++) {
-                        cout << i << ' ' << flash[i]; endl;
+                        cout << i << ' ' << flash[i] << '\n';
                         if (flash[i] == 'm' || flash[i] == 'c' || flash[i] == 'y') {
                             temp[i] = local_stageTwo(flash[i], a[s-1], s, d, a);
                         } else {
                             temp[4] = local_stageTwo(flash[i], b[s-1], s, d, a);
                         }
                     }
-                    b[s] = local_moduloRule(b[s-1] + temp[0] + temp[1] + temp[2] - temp[4]);
+                    b[s] = localMath.moduloRule(b[s-1] + temp[0] + temp[1] + temp[2] - temp[4]);
                 } else if (temp[3] == 6) {
-                    b[s] = local_moduloRule(b[s-1] + (local_mod(b[0], 4) * b[s-1]) - a[3]);
+                    b[s] = localMath.moduloRule(b[s-1] + (localMath.mod(b[0], 4) * b[s-1]) - a[3]);
                 }
             }
         } 
 
 
         local_colorSumbitingOrder(colorOrder, colorStageTwo);
-        local_ternaryConverter(b[4]);
-        endl;
+        balancedTernaryConverter.convert(b[4]);
+        cout << endl;
         
         //***********//
         //Stage Three//
         //***********//
 
         cout << "Fith Color Flash: ";
-        getline (cin, stageFlash[4]);
+        getline(cin, stageFlash[4]);
         stageFlash[4] = errorCatch(stageFlash[4], 3, 'm');  
-        endl2;
+        cout << "\n\n";
 
         for (int s = 1; s <= 5; s++) {
             flash = stageFlash[s-1]; 
@@ -348,9 +345,8 @@ int main() {
         }
 
         local_colorSumbitingOrder(colorOrder, colorStageThree);
-        balancedConverter.convert(c[5]);
-        endl;
-
+        balancedTernaryConverter.convert(c[5]);
+        cout << endl;
 
     } while (userMenu());
 }

@@ -1,15 +1,14 @@
 #include <bits/stdc++.h>
-#include "localMath.cpp"
 using namespace std;
-#define pb push_back
-#define endl cout << '\n'
-#define endl2 cout << "\n\n"
 
+#include "../localMath/localMath.hpp"
+
+localMath localMath;
 
 //function for re-ordering color list for input
 void local_colorSumbitingOrder(const string colorOrder, string colorStage) {
 
-    for (auto &i: colorStage)
+    for (auto &i : colorStage)
         i = tolower(i);
 
     //if y is on the top right
@@ -240,13 +239,13 @@ int local_stageOne(const char color, int x, int s, int d) {
             y = d - x - (s * 8);
             break;
         case 'm':
-            y = (3 * local_pow(s, 3)) - (2 * x);
+            y = (3 * localMath.pow(s, 3)) - (2 * x);
             break;
         case 'y':
             y = (x + d) - (s * 6);
             break;
     }
-    return local_moduloRule(y);
+    return localMath.moduloRule(y);
 }
 
 //stage 2 color calculations
@@ -254,13 +253,13 @@ int local_stageTwo(const char color, int x, int s, int d, vector<int> a) {
     int y;
     switch (tolower(color)) {
         case 'r':
-            y = x + a[s-1] + local_pow(s, 2);
+            y = x + a[s-1] + localMath.pow(s, 2);
             break;
         case 'g':
             y = (x * 2) - a[s-1];
             break;
         case 'b':
-            y = (x * 2) - a[0] - (4 * local_pow(s, 2));
+            y = (x * 2) - a[0] - (4 * localMath.pow(s, 2));
             break;
         case 'c':
             y = x + a[1];
@@ -272,7 +271,7 @@ int local_stageTwo(const char color, int x, int s, int d, vector<int> a) {
             y = x + a[3] - a[s-1];
             break;
     }
-    return local_moduloRule(y);
+    return localMath.moduloRule(y);
 }
 
 //stage 3 color calculations
@@ -298,7 +297,7 @@ int local_stageThr(const char color, int x, int s, int d, vector<int> a, int b[]
             y = x + b[4] - a[0];
             break;
     }
-    return local_moduloRule(y);
+    return localMath.moduloRule(y);
 }
     
 //function for determining the number of primary or seconday color flashes in a muit color flash sequence
@@ -372,5 +371,6 @@ char local_missingColor(string flash) {
                 break;
         }
     }
+
     return 'h';
 }
