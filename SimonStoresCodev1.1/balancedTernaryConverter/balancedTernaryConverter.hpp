@@ -1,10 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class balancedTernaryConverter {
+template<typename T_Num, typename T_Vector>
+class BALANCED_TERNARY_CONVERTER {
 
 private: 
-    template<typename T_Num>
     vector<int64_t> initalizeValues(T_Num ValueToBeConverted) {
         vector<int64_t> VALUES;
 
@@ -17,7 +17,7 @@ private:
         return VALUES;
     }
 
-    vector<int> makeTernaryArray(vector<int64_t> VALUES, int64_t valueToBeConverted) {
+    vector<int> makeTernaryArray(const vector<int64_t> VALUES, int64_t valueToBeConverted) {
         vector<int> ternaryArray(VALUES.size(), 0);
 
         for (int i = 0; i < VALUES.size(); i++) { 
@@ -44,7 +44,7 @@ private:
         }
     }
 
-    vector<char> convertToSymbols(vector<int> balancedTernaryArray, bool invertSigns = false) {
+    T_Vector convertToSymbols(const vector<int> &balancedTernaryArray, const bool invertSigns = false) {
         vector<char> ans(balancedTernaryArray.size(), '0');
         
         for (int i = 0; i < balancedTernaryArray.size(); i++) {
@@ -67,7 +67,6 @@ private:
 public:
     const int MAX_VALUE = 364; //max int size to be converted found in the manual
 
-    template<typename T_Num>
     void convert(T_Num valueToBeConverted) {
         int64_t standardizedValueToBeConverted = int64_t(valueToBeConverted);
         bool invertSigns = false;
@@ -82,7 +81,7 @@ public:
 
         convertTernaryArrayToBalancedTernary(ternaryArray);
 
-        vector<char> ans = convertToSymbols(ternaryArray, invertSigns);
+        T_Vector ans = convertToSymbols(ternaryArray, invertSigns);
 
         printAnswer(ans);
     }
