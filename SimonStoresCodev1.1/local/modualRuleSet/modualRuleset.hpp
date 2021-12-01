@@ -1,12 +1,12 @@
-#include <bits/stdc++.h>
-using namespace std;
-
+#include <string>
+#include <vector>
+#include <iostream>
 #include "../localMath/localMath.hpp"
 
-localMath localMath;
+LOCAL_MATH localMath;
 
 //function for re-ordering color list for input
-void local_colorSumbitingOrder(const string colorOrder, string colorStage) {
+void local_colorSumbitingOrder(const std::string colorOrder, std::string colorStage) {
 
     for (auto &i : colorStage)
         i = tolower(i);
@@ -14,7 +14,7 @@ void local_colorSumbitingOrder(const string colorOrder, string colorStage) {
     //if y is on the top right
     if (colorOrder[0] == 'y') {
         //each color gets shifted 1 right
-        vector<char> temp(6, '-');
+        std::vector<char> temp(6, '-');
         for (int i = 0; i < 6; i++) 
             temp[i] = colorStage[i];
         
@@ -153,12 +153,12 @@ void local_colorSumbitingOrder(const string colorOrder, string colorStage) {
         }
     }
 
-    cout << colorStage << '\n';
+    std::cout << colorStage << '\n';
 }
 
 //function for a0 b0 and c0 inital calculations
-void local_initalCalculations(int serialBase36[], const int numOrChar[], vector<int> &a, int b[], int c[]) {
-    vector<int> temp(2);
+void local_initalCalculations(int serialBase36[], const int numOrChar[], std::vector<int> &a, int b[], int c[]) {
+    std::vector<int> temp(2);
 
     //a0
     if (numOrChar[2] == 0) {
@@ -249,7 +249,7 @@ int local_stageOne(const char color, int x, int s, int d) {
 }
 
 //stage 2 color calculations
-int local_stageTwo(const char color, int x, int s, int d, vector<int> a) {
+int local_stageTwo(const char color, int x, int s, int d, std::vector<int> a) {
     int y;
     switch (tolower(color)) {
         case 'r':
@@ -275,7 +275,7 @@ int local_stageTwo(const char color, int x, int s, int d, vector<int> a) {
 }
 
 //stage 3 color calculations
-int local_stageThr(const char color, int x, int s, int d, vector<int> a, int b[]) {
+int local_stageThr(const char color, int x, int s, int d, std::vector<int> a, int b[]) {
     int y;
     switch (tolower(color)) {
         case 'r':
@@ -301,8 +301,8 @@ int local_stageThr(const char color, int x, int s, int d, vector<int> a, int b[]
 }
     
 //function for determining the number of primary or seconday color flashes in a muit color flash sequence
-int local_addColorMix(string flash) {
-    vector<int> temp(3, 0);
+int local_addColorMix(std::string &flash) {
+    std::vector<int> temp(3, 0);
 
     for (auto &i: flash)
         i = tolower(i);
@@ -318,7 +318,7 @@ int local_addColorMix(string flash) {
 }
 
 //function for detmining what color of two did not flash
-char local_missingColor(string flash) {
+char local_missingColor(const std::string flash) {
     int x = 0, primary = 0;
     for (int i = 0; i < 2; i++) {
         switch (tolower(flash[i])) {

@@ -1,7 +1,7 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include <vector>
+#include <string>
 
-class localMath {
+class LOCAL_MATH {
 
 private:
 
@@ -14,20 +14,18 @@ private:
         } else if(x < 0) {
             x = (x % y) + y;
         }
-        return(x);
+        return x;
     }
 
-    //modual rule range = -364/364
     int local_moduloRule(int x) {
         if (x >= 365 || x <= -365) {
             x = x % 365;
         }
         
-        return(x);
+        return x;
     }
 
-    //base 36 convertion
-    void local_baseConverter(string str, int numOrChar[], int base36[]) {
+    void local_baseConverter(std::string str, int numOrChar[], int base36[]) {
         for (int i = 0; i < 6; i++) {
             base36[i] = tolower(str[i]) - 96;
         }
@@ -42,23 +40,22 @@ private:
         }
     }
 
-    //exponent function
-    int local_pow(int base, const int exponent) {
+    template<typename T_Num>
+    T_Num local_pow(T_Num base, const T_Num exponent) {
         if (exponent == 0) {
             return 1;
         }
 
-        int x = base;
+        auto x = base;
 
         for (int i = 0; i < exponent - 1; i++) { 
             base *= x;
         }
 
-        return(base);
+        return base;
     }
 
-    //max function
-    int local_max(vector<int> x, const int size) {
+    int local_max(const std::vector<int> &x, const int size) {
         int y = -INF;
 
         for (int i = 0; i < size; i++) {
@@ -67,20 +64,18 @@ private:
             }
         }
 
-        return(y);
+        return y;
     }
 
-    //min function
-    int local_min(vector<int> x, const int size) {
+    int local_min(const std::vector<int> &x, const int size) {
         int y = INF;
 
         for (int i = 0; i < size; i++) 
             if (x[i] < y) 
                 y = x[i];
-        return(y);
+        return y;
     }
 
-    //absolute value function
     int local_abs(int x) {
         return x < 0 ? x *= -1 : x;
     }
@@ -94,7 +89,7 @@ public:
         return local_moduloRule(x);
     }
 
-    void bace36Converter(string serial, int numOrChar[], int base36[]) {
+    void bace36Converter(std::string serial, int numOrChar[], int base36[]) {
         local_baseConverter(serial, numOrChar, base36);
     }
 
@@ -102,11 +97,11 @@ public:
         return local_pow(base, exponent);
     }
 
-    int max(vector<int> x, const int size) {
+    int max(std::vector<int> x, const int size) {
         return local_max(x, size);
     }
     
-    int min(vector<int> x, const int size) {
+    int min(std::vector<int> x, const int size) {
         return local_min(x, size);
     }
 

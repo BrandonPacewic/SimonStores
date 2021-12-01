@@ -3,12 +3,12 @@
 #include <iostream>
 #include <vector>
 
-template<typename T_Num, typename T_Vector>
 class BALANCED_TERNARY_CONVERTER {
 
 private: 
     template<typename T> T abs(T T_Type) { return T_Type < 0 ? T_Type *= -1 : T_Type; }
 
+    template<typename T_Num>
     std::vector<int64_t> initalizeValues(T_Num ValueToBeConverted) {
         std::vector<int64_t> VALUES;
 
@@ -48,7 +48,7 @@ private:
         }
     }
 
-    T_Vector convertToSymbols(const std::vector<int> &balancedTernaryArray, const bool invertSigns = false) {
+    std::vector<char> convertToSymbols(const std::vector<int> &balancedTernaryArray, const bool invertSigns = false) {
         std::vector<char> ans(balancedTernaryArray.size(), '0');
         
         for (int i = 0; i < balancedTernaryArray.size(); i++) {
@@ -72,6 +72,7 @@ public:
     //max int size to be converted found in the manual
     const int MAX_VALUE = 364; 
 
+    template<typename T_Num>
     void convert(T_Num valueToBeConverted) {
         int64_t standardizedValueToBeConverted = int64_t(valueToBeConverted);
         bool invertSigns = false;
@@ -86,7 +87,7 @@ public:
 
         convertTernaryArrayToBalancedTernary(ternaryArray);
 
-        T_Vector ans = convertToSymbols(ternaryArray, invertSigns);
+        std::vector<char> ans = convertToSymbols(ternaryArray, invertSigns);
 
         printAnswer(ans);
     }
