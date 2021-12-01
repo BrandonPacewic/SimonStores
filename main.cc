@@ -14,9 +14,8 @@ template<typename T_List> void testList(T_List List) { return; }
 #define testArgs(...)
 #endif 
 
-#include "SimonStoresCodev1.1/ternaryConverter/balancedConverter.hpp"
+#include "SimonStoresCodev1.1/balancedTernaryConverter/balancedTernaryConverter.hpp"
 #include "SimonStoresCodev1.1/local/modualRuleSet/modualRuleset.hpp"
-
 
 //lizard easter egg
 const string lizard = "lizard";
@@ -95,7 +94,7 @@ int main() {
     const string colorStageTwo = "ybgmcr"; 
     const string colorStageThree = "bmrygc";
 
-    balancedTernaryConverter balancedTernaryConverter; // balanced ternary type
+    BALANCED_TERNARY_CONVERTER balancedTernaryConverter; // balanced ternary type
 
     //intro
     cout << "\nWelcome to a c++ Script for sloving Simon Stores!\n";
