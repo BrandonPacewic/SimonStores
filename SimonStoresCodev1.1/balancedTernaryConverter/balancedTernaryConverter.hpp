@@ -6,7 +6,9 @@
 class BALANCED_TERNARY_CONVERTER {
 
 private: 
-    template<typename T> T abs(T T_Type) { return T_Type < 0 ? T_Type *= -1 : T_Type; }
+    template<typename T> T abs(T T_Type) { 
+        return T_Type < 0 ? T_Type *= -1 : T_Type; 
+    }
 
     template<typename T_Num>
     std::vector<int64_t> initalizeValues(T_Num ValueToBeConverted) {
