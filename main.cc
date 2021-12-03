@@ -1,5 +1,5 @@
-#include "SimonStoresCodev1.1/balancedTernaryConverter/balancedTernaryConverter.hpp"
-#include "SimonStoresCodev1.1/local/modualRuleSet/modualRuleset.hpp"
+#include "balancedTernaryConverter/balancedTernaryConverter.hpp"
+#include "local/modualRuleSet/modualRuleset.hpp"
 using namespace std;
 
 

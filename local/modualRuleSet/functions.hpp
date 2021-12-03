@@ -8,6 +8,10 @@
 class LOCAL_FUNCTIONS {
 private:
 
+    template<typename T> T abs(T num) {
+        return num < 0 ? num *= -1 : num;
+    }
+
     std::unordered_map<char, int> createColorMap(const std::string &stageColorSequence) {
         std::unordered_map<char, int> colorMap;
 
@@ -34,7 +38,7 @@ private:
                 switch (tolower(cl)) {
                     case 'r':
                         cl = 'c';
-                        break; //breaks might need to be changed to continue
+                        break; //TODO: breaks might need to be changed to continue
 
                     case 'c':
                         cl = 'r';
@@ -65,45 +69,55 @@ private:
 
     void cyclePrimary(const std::unordered_map<char, int> colorMap, std::string &stageColorSequence) {
         if (colorMap.find('g') -> second == 0 || colorMap.find('g') -> second == 5) {
-            for (int i = 0; i < stageColorSequence.length(); i++) {
+            for (auto &cl : stageColorSequence) {
+                switch (tolower(cl)) {
+                    case 'r':
+                        cl = 'g';
+                        break;
 
+                    case 'g':
+                        cl = 'b';
+                        break;
+
+                    case 'b':
+                        cl = 'r';
+                        break;
+                }
             }
         }
     }
 
+    void cycleSecondary(const std::unordered_map<char, int> colorMap, std::string &stageColorSequence) {
+        if (colorMap.find('m') -> second == 2 || colorMap.find('m') -> second == 3) {
+            for (auto &cl : stageColorSequence) {
+                switch (tolower(cl)) {
+                    case 'c':
+                        cl = 'm';
+                        break;
+
+                    case 'm':
+                        cl = 'y';
+                        break;
+
+                    case 'y':
+                        cl = 'c';
+                        break;
+                }
+            }
+        }
+    }
+
+    void swapBlueOpposite(const std::unordered_map<char, int> colorMap, std::string &stageColorSequence) {
+        if ((colorMap.find('b') -> second <= 2 && colorMap.find('y') -> second <= 2) || (colorMap.find('b') -> second > 2 && colorMap.find('y') -> second > 2)) {
+            int opposite = abs(stageColorSequence.length() - 1 - colorMap.find('b') -> second);
+            //TODO
+
+        }
+    }
 
 
     //function for re-ordering color list for input
     void local_colorSumbitingOrder(const std::string colorOrder, std::string colorStage) {
-
-        //find g and w in the string if they are adjacent cycle primary colors
-        if (colorOrder[0] == 'g' || colorOrder[5] == 'g') {
-            //cycle primary colors
-            for (int i = 0; i < 6; i++) {
-                if (colorStage[i] == 'r') {
-                    colorStage[i] = 'g';
-                } else if (colorStage[i] == 'g') {
-                    colorStage[i] = 'b';
-                } else if (colorStage[i] == 'b') {
-                    colorStage[i] = 'r';
-                }
-            }
-        }
-
-        //find m if it is at 3 or 4 cycle secondary colors
-        int m;
-        if (colorOrder[2] == 'm' || colorOrder[3] == 'm') {
-            //cycle secondary colors 
-            for (int i = 0; i < 6; i++) {
-                if (colorStage[i] == 'c') {
-                    colorStage[i] = 'm';
-                } else if (colorStage[i] == 'm') {
-                    colorStage[i] = 'y';
-                } else if (colorStage[i] == 'y') {
-                    colorStage[i] = 'c';
-                }
-            }
-        }
 
         //find b and y if they are on the same side swap blue with its opposite
         int b, y, bl; //if value is 1 its on the right if the value is 2 its on the left
