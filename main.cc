@@ -16,7 +16,7 @@ bool lizard_test(string test) {
 }
 
 //error catch, m for max value r for required value
-template<typename N> N errorCatch(N testVal, const int maxSize, const char type) {
+//dbg
     string dataType = typeid(testVal).name();
     const string string_type = "NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE";
 
