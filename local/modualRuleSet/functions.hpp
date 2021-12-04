@@ -145,7 +145,9 @@ private:
 
 public:
 
-    
+    const std::string baceColorOrderStageOne = "rgbcmy";
+    const std::string baceColorCrderStageTwo = "ybgmcr";
+    const std::string baceColorOrderStageThree = "bmrygc";
 
 
     std::string createColorSubmittingOrder(const std::string colorOrder, std::string stageColorSequence) {
@@ -168,5 +170,9 @@ public:
         return stageColorSequence;
     }
 
+    void printStageColorSequenceStageOne(const int stage, const std::string colorOrder) {
+        std::string colorSequence = createColorSubmittingOrder(colorOrder, stage == 1 ? baceColorOrderStageOne : stage == 2 ? baceColorCrderStageTwo : baceColorOrderStageThree);
 
+        std::cout << colorSequence << '\n';
+    }
 };

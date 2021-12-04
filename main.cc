@@ -77,10 +77,6 @@ int main() {
     string stageFlash[6];
     string serial, colorOrder, stageColorOrder, flash;
 
-    const string colorStageOne = "rgbcmy";
-    const string colorStageTwo = "ybgmcr"; 
-    const string colorStageThree = "bmrygc";
-
     BALANCED_TERNARY_CONVERTER balancedTernaryConverter; // balanced ternary type
 
     //intro
