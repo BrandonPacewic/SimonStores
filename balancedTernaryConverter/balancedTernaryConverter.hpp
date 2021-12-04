@@ -3,27 +3,22 @@
 #include <iostream>
 #include <vector>
 
-class BALANCED_TERNARY_CONVERTER {
-
+class balancedTernaryConverter {
 private: 
-    template<typename T> T abs(T T_Type) { 
-        return T_Type < 0 ? T_Type *= -1 : T_Type; 
-    }
 
-    template<typename T_Num>
-    std::vector<int64_t> initalizeValues(T_Num ValueToBeConverted) {
-        std::vector<int64_t> VALUES;
+    static std::vector<int> initalizeValues(const int ValueToBeConverted) {
+        std::vector<int> VALUES;
 
         for (int i = 0; pow(3, i) <= ValueToBeConverted; i++) {
-            VALUES.push_back(int64_t(pow(3, i)));
+            VALUES.push_back(pow(3, i));
         }
 
-        sort(VALUES.begin(), VALUES.end(), std::greater<int64_t>());
+        sort(VALUES.begin(), VALUES.end(), std::greater<int>());
         
         return VALUES;
     }
 
-    std::vector<int> makeTernaryArray(const std::vector<int64_t> VALUES, int64_t valueToBeConverted) {
+    static std::vector<int> makeTernaryArray(const std::vector<int> VALUES, int valueToBeConverted) {
         std::vector<int> ternaryArray(VALUES.size(), 0);
 
         for (int i = 0; i < VALUES.size(); i++) { 
@@ -38,7 +33,7 @@ private:
         return ternaryArray;
     }
 
-    void convertTernaryArrayToBalancedTernary(std::vector<int> &ternaryArray) {
+    static void convertTernaryArrayToBalancedTernary(std::vector<int> &ternaryArray) {
         for (int i = ternaryArray.size() - 1; i > 0; i--) {
             if (ternaryArray[i] == 3) {
                 ternaryArray[i] = 0;
@@ -50,7 +45,7 @@ private:
         }
     }
 
-    std::vector<char> convertToSymbols(const std::vector<int> &balancedTernaryArray, const bool invertSigns = false) {
+    static std::vector<char> convertToSymbols(const std::vector<int> &balancedTernaryArray, const bool invertSigns = false) {
         std::vector<char> ans(balancedTernaryArray.size(), '0');
         
         for (int i = 0; i < balancedTernaryArray.size(); i++) {
@@ -63,7 +58,7 @@ private:
         return ans;
     }
 
-    void printAnswer(std::vector<char> ans) {
+    static void printAnswer(std::vector<char> ans) {
         for (auto i : ans) {
             std::cout << i;
         }
@@ -72,20 +67,18 @@ private:
 
 public:
     //max int size to be converted found in the manual
-    const int MAX_VALUE = 364; 
+    static const int MAX_VALUE = 364; 
 
-    template<typename T_Num>
-    void convert(T_Num valueToBeConverted) {
-        int64_t standardizedValueToBeConverted = int64_t(valueToBeConverted);
+    static void convert(int valueToBeConverted) {
         bool invertSigns = false;
 
-        if (standardizedValueToBeConverted < 0) {
+        if (valueToBeConverted < 0) {
             invertSigns = true;
         }
 
-        std::vector<int64_t> values = initalizeValues(MAX_VALUE);
+        std::vector<int> values = initalizeValues(MAX_VALUE);
 
-        std::vector<int> ternaryArray = makeTernaryArray(values, standardizedValueToBeConverted);
+        std::vector<int> ternaryArray = makeTernaryArray(values, valueToBeConverted);
 
         convertTernaryArrayToBalancedTernary(ternaryArray);
 

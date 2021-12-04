@@ -79,8 +79,6 @@ int main() {
     string stageFlash[6];
     string serial, colorOrder, stageColorOrder, flash;
 
-    BALANCED_TERNARY_CONVERTER balancedTernaryConverter; // balanced ternary type
-
     //intro
     cout << "\nWelcome to a c++ Script for sloving Simon Stores!\n";
     cout << "Lets get started! \n";
@@ -175,7 +173,7 @@ int main() {
 
 
         // local_colorSumbitingOrder(colorOrder, colorStageOne);
-        balancedTernaryConverter.convert(a[3]);
+        balancedTernaryConverter::convert(a[3]);
 
         //*********//
         //stage two//
@@ -259,7 +257,7 @@ int main() {
 
 
         local_colorSumbitingOrder(colorOrder, colorStageTwo);
-        balancedTernaryConverter.convert(b[4]);
+        balancedTernaryConverter::convert(b[4]);
         cout << endl;
         
         //***********//
@@ -329,7 +327,7 @@ int main() {
         }
 
         local_colorSumbitingOrder(colorOrder, colorStageThree);
-        balancedTernaryConverter.convert(c[5]);
+        balancedTernaryConverter::convert(c[5]);
         cout << endl;
 
     } while (userMenu());
