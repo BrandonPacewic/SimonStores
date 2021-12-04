@@ -3,7 +3,7 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
-
+#include <cassert>
 
 class LOCAL_FUNCTIONS {
 private:
@@ -11,7 +11,7 @@ private:
         return num < 0 ? num *= -1 : num;
     }
 
-    std::unordered_map<char, int> createColorMap(const std::string colorOrder) {
+    static std::unordered_map<char, int> createColorMap(const std::string colorOrder) {
         std::unordered_map<char, int> colorMap;
 
         for (int i = 0; i < colorOrder.length(); i++) {
@@ -21,7 +21,7 @@ private:
         return colorMap;
     }
 
-    void shiftRight(const std::unordered_map<char, int> colorMap, std::string &stageColorSequence) {
+    static void shiftRight(const std::unordered_map<char, int> colorMap, std::string &stageColorSequence) {
         if (colorMap.find('y') -> second == 0) {
             for (int i = 1; i < stageColorSequence.length(); i++) {
                 char temp = stageColorSequence[i];
@@ -31,7 +31,7 @@ private:
         }
     }
 
-    void swapComplementary(const std::unordered_map<char, int> colorMap, std::string &stageColorSequence) {
+    static void swapComplementary(const std::unordered_map<char, int> colorMap, std::string &stageColorSequence) {
         if (colorMap.find('r') -> second + 3 == colorMap.find('c') -> second || colorMap.find('c') -> second + 3 == colorMap.find('r') -> second) {
             for (auto &cl : stageColorSequence) {
                 switch (tolower(cl)) {
@@ -66,7 +66,7 @@ private:
         }
     }
 
-    void cyclePrimary(const std::unordered_map<char, int> colorMap, std::string &stageColorSequence) {
+    static void cyclePrimary(const std::unordered_map<char, int> colorMap, std::string &stageColorSequence) {
         if (colorMap.find('g') -> second == 0 || colorMap.find('g') -> second == 5) {
             for (auto &cl : stageColorSequence) {
                 switch (tolower(cl)) {
@@ -86,7 +86,7 @@ private:
         }
     }
 
-    void cycleSecondary(const std::unordered_map<char, int> colorMap, std::string &stageColorSequence) {
+    static void cycleSecondary(const std::unordered_map<char, int> colorMap, std::string &stageColorSequence) {
         if (colorMap.find('m') -> second == 2 || colorMap.find('m') -> second == 3) {
             for (auto &cl : stageColorSequence) {
                 switch (tolower(cl)) {
@@ -106,7 +106,7 @@ private:
         }
     }
 
-    void swapBlueOpposite(const std::unordered_map<char, int> colorMap, std::string &stageColorSequence) {
+    static void swapBlueOpposite(const std::unordered_map<char, int> colorMap, std::string &stageColorSequence) {
         if ((colorMap.find('b') -> second <= 2 && colorMap.find('y') -> second <= 2) || (colorMap.find('b') -> second > 2 && colorMap.find('y') -> second > 2)) {
             for (int i = 0; i < stageColorSequence.length(); i++) {
                 if (tolower(stageColorSequence[i]) == 'b') {
@@ -119,7 +119,7 @@ private:
         }
     }
 
-    void swapRedAndYellow(const std::unordered_map<char, int> colorMap, std::string &stageColorSequence) {
+    static void swapRedAndYellow(const std::unordered_map<char, int> colorMap, std::string &stageColorSequence) {
         if (colorMap.find('r') -> second <= 2) {
             for (auto &cl : stageColorSequence) {
                 if (tolower(cl) == 'y') {
@@ -131,7 +131,7 @@ private:
         }
     }
 
-    void swapGreenAndCyan(const std::unordered_map<char, int> colorMap, std::string &stageColorSequence) {
+    static void swapGreenAndCyan(const std::unordered_map<char, int> colorMap, std::string &stageColorSequence) {
         if (colorMap.find('b') -> second > 2) {
             for (auto &cl : stageColorSequence) {
                 if (tolower(cl) == 'g') {
@@ -145,12 +145,15 @@ private:
 
 public:
 
-    const std::string baceColorOrderStageOne = "rgbcmy";
-    const std::string baceColorCrderStageTwo = "ybgmcr";
-    const std::string baceColorOrderStageThree = "bmrygc";
+    static std::string getbaseColorOrder(const int stage) {
+        const std::string baseColorOrderStageOne = "rgbcmy";
+        const std::string baseColorCrderStageTwo = "ybgmcr";
+        const std::string baseColorOrderStageThree = "bmrygc";
 
+        return stage == 1 ? baseColorOrderStageOne : stage == 2 ? baseColorCrderStageTwo : baseColorOrderStageThree;
+    }
 
-    std::string createColorSubmittingOrder(const std::string colorOrder, std::string stageColorSequence) {
+    static std::string createColorSubmittingOrder(const std::string colorOrder, std::string stageColorSequence) {
         std::unordered_map<char, int> colorMap = createColorMap(colorOrder);
 
         shiftRight(colorMap, stageColorSequence);
@@ -170,8 +173,10 @@ public:
         return stageColorSequence;
     }
 
-    void printStageColorSequenceStageOne(const int stage, const std::string colorOrder) {
-        std::string colorSequence = createColorSubmittingOrder(colorOrder, stage == 1 ? baceColorOrderStageOne : stage == 2 ? baceColorCrderStageTwo : baceColorOrderStageThree);
+    static void printStageColorSequenceStageOne(const int stage, const std::string colorOrder) {
+        assert(stage == 1 || stage == 2 || stage == 3);
+
+        std::string colorSequence = createColorSubmittingOrder(colorOrder, getbaseColorOrder(stage));
 
         std::cout << colorSequence << '\n';
     }
