@@ -1,23 +1,12 @@
 #include <vector>
 #include <string>
 
-class LOCAL_MATH {
+const int INF = int(1e9) + 5;
 
+class localMath {
 private:
 
-    const int INF = int(1e9) + 5;
-
-    //fixed modulo value 0-y
-    int local_mod(int x, const int y) {
-        if (x >= y) {
-            x = x % y;
-        } else if(x < 0) {
-            x = (x % y) + y;
-        }
-        return x;
-    }
-
-    int local_moduloRule(int x) {
+    static int local_moduloRule(int x) {
         if (x >= 365 || x <= -365) {
             x = x % 365;
         }
@@ -25,7 +14,9 @@ private:
         return x;
     }
 
-    void local_baseConverter(std::string str, int numOrChar[], int base36[]) {
+
+    //TODO: remake bace36 converter 
+    static void local_baseConverter(std::string str, int numOrChar[], int base36[]) {
         for (int i = 0; i < 6; i++) {
             base36[i] = tolower(str[i]) - 96;
         }
@@ -40,8 +31,7 @@ private:
         }
     }
 
-    template<typename T_Num>
-    T_Num local_pow(T_Num base, const T_Num exponent) {
+    static int local_pow(int base, const int exponent) {
         if (exponent == 0) {
             return 1;
         }
@@ -55,7 +45,7 @@ private:
         return base;
     }
 
-    int local_max(const std::vector<int> &x, const int size) {
+    static int local_max(const std::vector<int> &x, const int size) {
         int y = -INF;
 
         for (int i = 0; i < size; i++) {
@@ -81,9 +71,6 @@ private:
     }
 
 public:
-    int mod(int x, const int y) {
-        return local_mod(x, y);
-    }
 
     int moduloRule(int x) {
         return local_moduloRule(x);

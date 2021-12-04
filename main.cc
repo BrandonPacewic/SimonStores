@@ -1,5 +1,5 @@
-#include "SimonStoresCodev1.1/balancedTernaryConverter/balancedTernaryConverter.hpp"
-#include "SimonStoresCodev1.1/local/modualRuleSet/modualRuleset.hpp"
+#include "balancedTernaryConverter/balancedTernaryConverter.hpp"
+#include "local/modualRuleSet/modualRuleset.hpp"
 using namespace std;
 
 
@@ -76,10 +76,6 @@ int main() {
     int d = 0;//sum of base 36 in serial#
     string stageFlash[6];
     string serial, colorOrder, stageColorOrder, flash;
-
-    const string colorStageOne = "rgbcmy";
-    const string colorStageTwo = "ybgmcr"; 
-    const string colorStageThree = "bmrygc";
 
     BALANCED_TERNARY_CONVERTER balancedTernaryConverter; // balanced ternary type
 
