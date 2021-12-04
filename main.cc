@@ -1,5 +1,7 @@
 #include "balancedTernaryConverter/balancedTernaryConverter.hpp"
 #include "local/modualRuleSet/modualRuleset.hpp"
+#include "local/modualRuleSet/functions.hpp"
+#include "local/localMath/modulo.hpp"
 using namespace std;
 
 
@@ -229,7 +231,7 @@ int main() {
                 temp[3] = local_addColorMix(flash);
 
                 if (temp[3] == 3) {
-                    b[s] = localMath.moduloRule(b[s-1] + (localMath.mod(b[s-1], 4) * b[0]) - a[3]);
+                    b[s] = localMath::moduloRule(b[s-1] + ((b[s-1] <mod> 4) * b[0]) - a[3]);
                 } else if (temp[3] == 4) {
                     for (int i = 0; i < 3; i++) {
                         if (flash[i] == 'r' || flash[i] == 'g' || flash[i] == 'b') {
@@ -237,7 +239,7 @@ int main() {
                         } else {
                             temp[4] = local_stageTwo(flash[i], a[s-1], s, d, a);
                         }
-                        b[s] = localMath.moduloRule(b[s-1] + temp[0] + temp[1] + temp[2] - temp[4]);
+                        b[s] = localMath::moduloRule(b[s-1] + temp[0] + temp[1] + temp[2] - temp[4]);
                     }
                 } else if (temp[3] == 5) {
                     for (int i = 0; i < 3; i++) {
@@ -248,9 +250,9 @@ int main() {
                             temp[4] = local_stageTwo(flash[i], b[s-1], s, d, a);
                         }
                     }
-                    b[s] = localMath.moduloRule(b[s-1] + temp[0] + temp[1] + temp[2] - temp[4]);
+                    b[s] = localMath::moduloRule(b[s-1] + temp[0] + temp[1] + temp[2] - temp[4]);
                 } else if (temp[3] == 6) {
-                    b[s] = localMath.moduloRule(b[s-1] + (localMath.mod(b[0], 4) * b[s-1]) - a[3]);
+                    b[s] = localMath::moduloRule(b[s-1] + ((b[0] <mod> 4) * b[s-1]) - a[3]);
                 }
             }
         } 
@@ -296,7 +298,7 @@ int main() {
                 temp[5] = local_addColorMix(flash);
 
                 if (temp[5] == 3) {
-                    c[s] = local_moduloRule(c[s-1] + (local_mod(c[s-1], 3) * c[0]) - (local_mod(b[s-1], 3) * b[0]) + (local_mod(a[s-1], 3) * a[0]));
+                    c[s] = local_moduloRule(c[s-1] + ((c[s-1] <mod> 3) * c[0]) - ((b[s-1] <mod> 3) * b[0]) + ((a[s-1] <mod> 3) * a[0]));
                     
                 } else if (temp[5] == 4) {
                     for (int i = 0; i < 3; i++) {
@@ -321,7 +323,7 @@ int main() {
                     c[s] = local_moduloRule(temp[0] + temp[1] + temp[2] - temp[3] - temp[4]);
 
                 } else if (temp[5] == 6) {
-                    c[s] = local_moduloRule(c[s-1] + (local_mod(c[0], 3) * c[s-1]) - (local_mod(b[0], 3) * b[s-1]) + (local_mod(a[0], 3) * a[s-1]));
+                    c[s] = local_moduloRule(c[s-1] + ((c[0] <mod> 3) * c[s-1]) - ((b[0] <mod> 3) * b[s-1]) + ((a[0] <mod> 3) * a[s-1]));
                 }
             }
         }

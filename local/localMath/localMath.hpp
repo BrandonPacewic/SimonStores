@@ -57,7 +57,7 @@ private:
         return y;
     }
 
-    int local_min(const std::vector<int> &x, const int size) {
+    static int local_min(const std::vector<int> &x, const int size) {
         int y = INF;
 
         for (int i = 0; i < size; i++) 
@@ -66,33 +66,33 @@ private:
         return y;
     }
 
-    int local_abs(int x) {
+    static int local_abs(int x) {
         return x < 0 ? x *= -1 : x;
     }
 
 public:
 
-    int moduloRule(int x) {
+    static int moduloRule(int x) {
         return local_moduloRule(x);
     }
 
-    void bace36Converter(std::string serial, int numOrChar[], int base36[]) {
+    static void bace36Converter(std::string serial, int numOrChar[], int base36[]) {
         local_baseConverter(serial, numOrChar, base36);
     }
 
-    int pow(int base, const int exponent) {
+    static int pow(int base, const int exponent) {
         return local_pow(base, exponent);
     }
 
-    int max(std::vector<int> x, const int size) {
+    static int max(std::vector<int> x, const int size) {
         return local_max(x, size);
     }
     
-    int min(std::vector<int> x, const int size) {
+    static int min(std::vector<int> x, const int size) {
         return local_min(x, size);
     }
 
-    int abs(int x) {
+    static int abs(int x) {
         return local_abs(x);
     }
 };
