@@ -5,7 +5,7 @@
 #include <vector>
 #include <cassert>
 
-class LOCAL_FUNCTIONS {
+class localFunctions {
 private:
     template<typename T> T abs(T num) {
         return num < 0 ? num *= -1 : num;
@@ -144,7 +144,6 @@ private:
     }
 
 public:
-
     static std::string getbaseColorOrder(const int stage) {
         const std::string baseColorOrderStageOne = "rgbcmy";
         const std::string baseColorCrderStageTwo = "ybgmcr";
