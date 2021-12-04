@@ -109,62 +109,19 @@ private:
 
     void swapBlueOpposite(const std::unordered_map<char, int> colorMap, std::string &stageColorSequence) {
         if ((colorMap.find('b') -> second <= 2 && colorMap.find('y') -> second <= 2) || (colorMap.find('b') -> second > 2 && colorMap.find('y') -> second > 2)) {
-            int opposite = abs(stageColorSequence.length() - 1 - colorMap.find('b') -> second);
-            //TODO
-
+            
         }
     }
 
+    void swapRedAndYellow(const std::unordered_map<char, int> colorMap, std::string &stageColorSequence) {
+        if (colorMap.find('r') -> second <= 2) {
+            
+        }
+    }
 
     //function for re-ordering color list for input
     void local_colorSumbitingOrder(const std::string colorOrder, std::string colorStage) {
 
-        //find b and y if they are on the same side swap blue with its opposite
-        int b, y, bl; //if value is 1 its on the right if the value is 2 its on the left
-        for (int i = 0; i < 6; i++) {
-            if (colorOrder[i] == 'b') { 
-                if (i <= 2) {
-                    b = 2;
-                } else {
-                    b = 1;
-                }
-            }
-            if (colorOrder[i] == 'y') {
-                if (i <= 2) {
-                    y = 2;
-                } else {
-                    y = 1;
-                }
-            }
-        }
-
-        if (b == 1 && y == 1 || b == 2 && y == 2) {
-            for (int i = 0; i < 6; i++) {
-                if (colorStage[i] == 'b') {
-                    bl = i;
-                }
-            }
-            //swap blue with its opposite
-            int opp;
-            char temp;
-            if (bl == 0) {
-                opp = 5;
-            } else if (bl == 1) {
-                opp = 4;
-            } else if (bl == 2) {
-                opp = 3;
-            } else if (bl == 3) {
-                opp = 2;
-            } else if (bl == 4) {
-                opp = 1;
-            } else { 
-                opp = 0;
-            }
-
-            temp = colorStage[opp];
-            colorStage[opp] = 'b';
-            colorStage[bl] = temp;
-        }
 
         //if r is on the right swap r and y, we know r and y from a previous step
         if (r <= 2) {
