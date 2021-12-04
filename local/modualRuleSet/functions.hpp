@@ -7,16 +7,15 @@
 
 class LOCAL_FUNCTIONS {
 private:
-
     template<typename T> T abs(T num) {
         return num < 0 ? num *= -1 : num;
     }
 
-    std::unordered_map<char, int> createColorMap(const std::string &stageColorSequence) {
+    std::unordered_map<char, int> createColorMap(const std::string colorOrder) {
         std::unordered_map<char, int> colorMap;
 
-        for (int i = 0; i < stageColorSequence.length(); i++) {
-            colorMap[tolower(stageColorSequence[i])] = i;
+        for (int i = 0; i < colorOrder.length(); i++) {
+            colorMap[tolower(colorOrder[i])] = i;
         }
 
         return colorMap;
@@ -109,45 +108,65 @@ private:
 
     void swapBlueOpposite(const std::unordered_map<char, int> colorMap, std::string &stageColorSequence) {
         if ((colorMap.find('b') -> second <= 2 && colorMap.find('y') -> second <= 2) || (colorMap.find('b') -> second > 2 && colorMap.find('y') -> second > 2)) {
-            
+            for (int i = 0; i < stageColorSequence.length(); i++) {
+                if (tolower(stageColorSequence[i]) == 'b') {
+                    int opposite = i > 2 ? i - 3 : i + 3;
+                    stageColorSequence[i] = stageColorSequence[opposite];
+                    stageColorSequence[opposite] = 'b';
+                    break;
+                }
+            }
         }
     }
 
     void swapRedAndYellow(const std::unordered_map<char, int> colorMap, std::string &stageColorSequence) {
         if (colorMap.find('r') -> second <= 2) {
-            
-        }
-    }
-
-    //function for re-ordering color list for input
-    void local_colorSumbitingOrder(const std::string colorOrder, std::string colorStage) {
-
-
-        //if r is on the right swap r and y, we know r and y from a previous step
-        if (r <= 2) {
-            //swap r and y
-            for (int i = 0; i < 6; i++) {
-                if (colorStage[i] == 'y') {
-                    colorStage[i] = 'r';
-                } else if (colorStage[i] == 'r') {
-                    colorStage[i] = 'y';
+            for (auto &cl : stageColorSequence) {
+                if (tolower(cl) == 'y') {
+                    cl = 'r';
+                } else if (tolower(cl) == 'r') {
+                    cl = 'y';
                 }
             }
         }
+    }
 
-        //if b is on the left side swap g and c, we know b from a previous step
-        if (b == 1) {
-            //swap g and c
-            for (int i = 0; i < 6; i++) {
-                if (colorStage[i] == 'g') {
-                    colorStage[i] = 'c';
-                } else if (colorStage[i] == 'c') {
-                    colorStage[i] = 'g';
+    void swapGreenAndCyan(const std::unordered_map<char, int> colorMap, std::string &stageColorSequence) {
+        if (colorMap.find('b') -> second > 2) {
+            for (auto &cl : stageColorSequence) {
+                if (tolower(cl) == 'g') {
+                    cl = 'c';
+                } else if (tolower(cl) == 'c') {
+                    cl = 'g';
                 }
             }
         }
-
-        std::cout << colorStage << '\n';
     }
+
+public:
+
+    
+
+
+    std::string createColorSubmittingOrder(const std::string colorOrder, std::string stageColorSequence) {
+        std::unordered_map<char, int> colorMap = createColorMap(colorOrder);
+
+        shiftRight(colorMap, stageColorSequence);
+
+        swapComplementary(colorMap, stageColorSequence);
+
+        cyclePrimary(colorMap, stageColorSequence);
+
+        cycleSecondary(colorMap, stageColorSequence);
+
+        swapBlueOpposite(colorMap, stageColorSequence);
+
+        swapRedAndYellow(colorMap, stageColorSequence);
+
+        swapGreenAndCyan(colorMap, stageColorSequence);
+
+        return stageColorSequence;
+    }
+
 
 };
