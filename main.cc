@@ -2,6 +2,7 @@
 #include "local/modualRuleSet/modualRuleset.hpp"
 #include "local/modualRuleSet/functions.hpp"
 #include "local/localMath/modulo.hpp"
+#include <algorithm>
 using namespace std;
 
 
@@ -107,11 +108,11 @@ int main() {
         cout << endl;
 
         //base 36 convertion
-        local_baseConverter(serial, numOrChar, serialBase36);
+        localMath::bace36Converter(serial, numOrChar, serialBase36);
 
         //inital calculations
         local_initalCalculations(serialBase36, numOrChar, a, b, c);
-        
+
         //calculating d
         d = local_dCalculation(serialBase36, numOrChar);
 
@@ -133,26 +134,23 @@ int main() {
 
                 switch (temp[2]) {
                     case 2:
-                        a[s] = local_max(temp, 2);
+                        a[s] = int(max_element(temp.begin(), temp.begin() + 3) - temp.begin());
                         break;
                     case 3:
                         a[s] = temp[0] + temp[1] - (d * 2);
                         break;
                     case 4:
-                        a[s] = local_min(temp, 2);
-                        break;
-                    default:
-                        cout << "Something broke come find it";
-                        return(0);
+                        a[s] = int(min_element(temp.begin(), temp.begin() + 3) - temp.begin());
                         break;
                 }
+
             } else if (flash.length() == 3) {
                 vector<int> temp(6, 0);
 
                 temp[5] = local_addColorMix(flash);
 
                 if (temp[5] == 3) {
-                    a[s] = local_moduloRule(a[s-1] + a[0]);
+                    a[s] = localMath::moduloRule(a[s-1] + a[0]);
                 } else if (temp[5] == 4 || temp[5] == 5) {
 
                     for (int  i = 0; i < 3; i++) 
