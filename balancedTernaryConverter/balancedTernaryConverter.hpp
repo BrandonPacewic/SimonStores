@@ -3,12 +3,11 @@
 #include <iostream>
 #include <vector>
 
-template<typename T_Num>
 class balancedTernaryConverter {
 private: 
 
-    static std::vector<T_Num> initalizeValues(const T_Num ValueToBeConverted) {
-        std::vector<T_Num> VALUES;
+    static std::vector<int> initalizeValues(const int ValueToBeConverted) {
+        std::vector<int> VALUES;
 
         for (int i = 0; pow(3, i) <= ValueToBeConverted; i++) {
             VALUES.push_back(pow(3, i));
@@ -19,7 +18,7 @@ private:
         return VALUES;
     }
 
-    static std::vector<int> makeTernaryArray(const std::vector<T_Num> VALUES, int valueToBeConverted) {
+    static std::vector<int> makeTernaryArray(const std::vector<int> VALUES, int valueToBeConverted) {
         std::vector<int> ternaryArray(VALUES.size(), 0);
 
         for (int i = 0; i < VALUES.size(); i++) { 
@@ -70,14 +69,14 @@ public:
     //max int size to be converted found in the manual
     static const int MAX_VALUE = 364; 
 
-    static void convert(T_Num valueToBeConverted) {
+    static void convert(int valueToBeConverted) {
         bool invertSigns = false;
 
         if (valueToBeConverted < 0) {
             invertSigns = true;
         }
 
-        std::vector<T_Num> values = initalizeValues(MAX_VALUE);
+        std::vector<int> values = initalizeValues(MAX_VALUE);
 
         std::vector<int> ternaryArray = makeTernaryArray(values, valueToBeConverted);
 
