@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <cmath>
 #include "../localMath/localMath.hpp"
 
 //function for re-ordering color list for input
@@ -237,7 +238,7 @@ int local_stageOne(const char color, int x, int s, int d) {
             y = d - x - (s * 8);
             break;
         case 'm':
-            y = (3 * localMath::pow(s, 3)) - (2 * x);
+            y = (3 * pow(s, 3)) - (2 * x);
             break;
         case 'y':
             y = (x + d) - (s * 6);
@@ -251,13 +252,13 @@ int local_stageTwo(const char color, int x, int s, int d, std::vector<int> a) {
     int y;
     switch (tolower(color)) {
         case 'r':
-            y = x + a[s-1] + localMath::pow(s, 2);
+            y = x + a[s-1] + pow(s, 2);
             break;
         case 'g':
             y = (x * 2) - a[s-1];
             break;
         case 'b':
-            y = (x * 2) - a[0] - (4 * localMath::pow(s, 2));
+            y = (x * 2) - a[0] - (4 * pow(s, 2));
             break;
         case 'c':
             y = x + a[1];
