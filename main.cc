@@ -65,12 +65,6 @@ bool userMenu() {
 }
 
 int main() {
-// part of dbg
-#ifdef TEXT_IO 
-    freopen("in.txt", "r", stdin);
-    freopen("ou.txt", "w", stdout);
-#endif
-
     int numOrChar[6];//used for base 36 convertion
     int serialBase36[6];//the base 36 value of the serial number
     vector<int> a(5, 0);//each arr only has pos for the numbers we need
