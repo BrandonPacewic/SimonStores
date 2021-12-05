@@ -170,7 +170,7 @@ int main() {
         }
 
 
-        // local_colorSumbitingOrder(colorOrder, colorStageOne);
+        localFunctions::printStageColorSequenceStageOne(1, colorOrder);
         balancedTernaryConverter::convert(a[3]);
 
         //*********//
@@ -185,24 +185,24 @@ int main() {
         for (int s = 1; s <= 4; s++) { 
              flash = stageFlash[s-1];
 
-             //one color flash
              if (flash.length() == 1) {
                  b[s] = local_stageTwo(flash[0], b[s-1], s, d, a);
              } else if (flash.length() == 2) {
                  vector<int> temp(6, 0);
 
-                 //two color flashes
                  temp[2] = local_addColorMix(flash);
 
                  if (temp[2] == 2 || temp[2] == 3) {
                      for (int i = 0; i < 2; i++) {
                          temp[i] = local_stageTwo(flash[i], b[s-1], s, d, a);
                     }
+
                     if (temp[2] == 2) {
-                        b[s] = local_moduloRule(local_abs(temp[0] - temp[1]));
+                        b[s] = localMath::moduloRule(abs(temp[0] - temp[1]));
                     } else {
-                        b[s] = local_moduloRule((4 * d) - local_abs(temp[0] - temp[1]));
+                        b[s] = localMath::moduloRule((4 * d) - abs(temp[0] - temp[1]));
                     }
+
                  } else {
                     switch (local_missingColor(flash)) {
                         case 'c':
@@ -218,10 +218,11 @@ int main() {
                             temp[1] = local_stageTwo('y', a[s-1], s, d, a);
                             break;
                     }
-                b[s] = local_min(temp, 2);
+
+                b[s] = int(min_element(temp.begin(), temp.begin() + 3) - temp.begin());
                 }
+
             } else if (flash.length() == 3) {
-                //three color flashes
                 vector<int> temp(6, 0);
 
                 temp[3] = local_addColorMix(flash);
@@ -239,14 +240,15 @@ int main() {
                     }
                 } else if (temp[3] == 5) {
                     for (int i = 0; i < 3; i++) {
-                        cout << i << ' ' << flash[i] << '\n';
                         if (flash[i] == 'm' || flash[i] == 'c' || flash[i] == 'y') {
                             temp[i] = local_stageTwo(flash[i], a[s-1], s, d, a);
                         } else {
                             temp[4] = local_stageTwo(flash[i], b[s-1], s, d, a);
                         }
                     }
+
                     b[s] = localMath::moduloRule(b[s-1] + temp[0] + temp[1] + temp[2] - temp[4]);
+
                 } else if (temp[3] == 6) {
                     b[s] = localMath::moduloRule(b[s-1] + ((b[0] <mod> 4) * b[s-1]) - a[3]);
                 }
@@ -254,7 +256,7 @@ int main() {
         } 
 
 
-        local_colorSumbitingOrder(colorOrder, colorStageTwo);
+        localFunctions::printStageColorSequenceStageOne(2, colorOrder);
         balancedTernaryConverter::convert(b[4]);
         cout << endl;
         
@@ -277,16 +279,16 @@ int main() {
                 temp[4] = local_addColorMix(flash);
 
                 if (temp[4] == 2) {
-                    c[s] = local_moduloRule(local_stageThr(local_missingColor(flash), c[s-1], s, d, a, b) + local_stageThr(local_missingColor(flash), b[s-1], s, d, a, b) + local_stageThr(local_missingColor(flash), a[s-1], s, d, a, b));
+                    c[s] = localMath::moduloRule(local_stageThr(local_missingColor(flash), c[s-1], s, d, a, b) + local_stageThr(local_missingColor(flash), b[s-1], s, d, a, b) + local_stageThr(local_missingColor(flash), a[s-1], s, d, a, b));
                 
                 } else if (temp[4] == 3) {
                     for (int i = 0; i < 2; i++)
                         temp[i] = local_stageThr(flash[i], c[s-1], s, d, a, b); 
-                    temp[2] = local_moduloRule(-1 * local_abs(local_stageThr(flash[0], c[s-1], s, d, a, b) - local_stageThr(flash[1], c[s-1], s, d, a, b)));
-                    c[s] = local_min(temp, 3);
+                    temp[2] = localMath::moduloRule(-1 * abs(local_stageThr(flash[0], c[s-1], s, d, a, b) - local_stageThr(flash[1], c[s-1], s, d, a, b)));
+                    c[s] = int(min_element(temp.begin(), temp.begin() + 4) - temp.begin());
 
                 } else if (temp[4] == 4) {
-                    c[s] = local_moduloRule(local_stageThr(local_missingColor(flash), c[s-1], s, d, a, b) - local_stageThr(flash[0], c[s-1], s, d, a, b) - local_stageThr(flash[1], c[s-1], s, d, a, b));
+                    c[s] = localMath::moduloRule(local_stageThr(local_missingColor(flash), c[s-1], s, d, a, b) - local_stageThr(flash[0], c[s-1], s, d, a, b) - local_stageThr(flash[1], c[s-1], s, d, a, b));
                 }
 
             } else if (flash.length() == 3) {
@@ -294,7 +296,7 @@ int main() {
                 temp[5] = local_addColorMix(flash);
 
                 if (temp[5] == 3) {
-                    c[s] = local_moduloRule(c[s-1] + ((c[s-1] <mod> 3) * c[0]) - ((b[s-1] <mod> 3) * b[0]) + ((a[s-1] <mod> 3) * a[0]));
+                    c[s] = localMath::moduloRule(c[s-1] + ((c[s-1] <mod> 3) * c[0]) - ((b[s-1] <mod> 3) * b[0]) + ((a[s-1] <mod> 3) * a[0]));
                     
                 } else if (temp[5] == 4) {
                     for (int i = 0; i < 3; i++) {
@@ -316,15 +318,15 @@ int main() {
                             temp[4] = local_stageThr(flash[i], a[s-1], s, d, a, b);
                         }
                     }
-                    c[s] = local_moduloRule(temp[0] + temp[1] + temp[2] - temp[3] - temp[4]);
+                    c[s] = localMath::moduloRule(temp[0] + temp[1] + temp[2] - temp[3] - temp[4]);
 
                 } else if (temp[5] == 6) {
-                    c[s] = local_moduloRule(c[s-1] + ((c[0] <mod> 3) * c[s-1]) - ((b[0] <mod> 3) * b[s-1]) + ((a[0] <mod> 3) * a[s-1]));
+                    c[s] = localMath::moduloRule(c[s-1] + ((c[0] <mod> 3) * c[s-1]) - ((b[0] <mod> 3) * b[s-1]) + ((a[0] <mod> 3) * a[s-1]));
                 }
             }
         }
 
-        local_colorSumbitingOrder(colorOrder, colorStageThree);
+        localFunctions::printStageColorSequenceStageOne(3, colorOrder);
         balancedTernaryConverter::convert(c[5]);
         cout << endl;
 
