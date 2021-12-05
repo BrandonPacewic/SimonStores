@@ -157,14 +157,14 @@ int main() {
                         temp[i] = local_stageOne(flash[i], a[s-1], s, d);
 
                     if (temp[5] == 4) {
-                        a[s] = local_max(temp, 3);
+                        a[s] = int(max_element(temp.begin(), temp.begin() + 4) - temp.begin());
 
                     } else { 
-                        a[s] = local_min(temp, 3);
+                        a[s] = int(max_element(temp.begin(), temp.begin() + 4) - temp.begin());
                     }
 
                 } else {
-                    a[s] = local_moduloRule(a[s-1] - a[0]);
+                    a[s] = localMath::moduloRule(a[s-1] - a[0]);
                 }
             }
         }
