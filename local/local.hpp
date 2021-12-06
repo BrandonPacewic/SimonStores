@@ -2,6 +2,7 @@
 #include "math/math.hpp"
 #include "math/modulo.hpp"
 #include "modualRuleSet/functions.hpp"
+#include "modualRuleSet/initalCalculations.hpp"
 #include "stageFunctions/stageOne.hpp"
 #include "stageFunctions/stageTwo.hpp"
 #include "stageFunctions/stageThree.hpp"

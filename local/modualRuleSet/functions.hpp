@@ -5,7 +5,7 @@
 #include <vector>
 #include <cassert>
 
-class localFunctions {
+class functions {
 private:
     template<typename T> T abs(T num) {
         return num < 0 ? num *= -1 : num;

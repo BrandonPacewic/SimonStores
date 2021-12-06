@@ -1,6 +1,6 @@
 #include <vector>
+#include <array>
 #include <string>
-
 
 class math {
 public:
@@ -12,7 +12,7 @@ public:
     }
 
     //TODO: remake bace36 converter 
-    static void baseConverter(std::string str, int numOrChar[], int base36[]) {
+    static void baseConverter(std::string str, std::array<char, 6> &numOrChar, std::array<int, 6> &base36) {
         for (int i = 0; i < 6; i++) {
             base36[i] = tolower(str[i]) - 96;
         }
@@ -20,9 +20,9 @@ public:
         for (int i = 0; i < 6; i++) {
             if (base36[i] < 0) {
                 base36[i] = base36[i] + 48;
-                numOrChar[i] = 0;//if int = 0
+                numOrChar[i] = 'i';//if int = 0
             } else {
-                numOrChar[i] = 1;//if char = 1
+                numOrChar[i] = 'c';//if char = 1
             }
         }
     }
