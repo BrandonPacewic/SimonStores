@@ -1,25 +1,10 @@
-#include "balancedTernaryConverter/balancedTernaryConverter.hpp"
+#include "local/balancedTernaryConverter/balancedTernaryConverter.hpp"
 #include "local/modualRuleSet/modualRuleset.hpp"
 #include "local/modualRuleSet/functions.hpp"
 #include "local/localMath/modulo.hpp"
 #include <algorithm>
 using namespace std;
 
-
-//user menu
-bool userMenu() {
-    string x;
-    cout << "What would you like to do? \n Continue or Quit (c,q): ";
-    getline(cin, x);
-    while (tolower(x[0]) != 'q' && tolower(x[0]) != 'c' || x.length() != 1) {
-        cout << "You did not enter a valid input please try again. \n";
-        cout << "What would you like to do? \n Continue or Quit (c,q): ";
-        getline(cin, x);
-    }
-    if (tolower(x[0]) == 'c')
-        return true;
-    return false;
-}
 
 int main() {
     int numOrChar[6];//used for base 36 convertion
