@@ -18,6 +18,22 @@ private:
         }
     }
 
+    static std::string local_convertToLower(std::string &str) {
+        for (auto &ch : str) {
+            ch = tolower(ch);
+        }
+
+        return str;
+    }
+
+
+    static void checkForLizzardInput(std::string &testStr) {
+        while (local_convertToLower(testStr) == "lizard") {
+            std::cout << '\n' << '\n' << "Stop it... You know that Lizard is not a valid input..." << '\n' << "I guess try again?";
+            getline(std::cin, testStr);
+        }
+    }
+
 public:
 
     static std::string userStringInput(const std::string inputType, const int expectedLength) {
@@ -26,9 +42,12 @@ public:
         std::string userInputStr;
         getline(std::cin, userInputStr);
 
+        //Lizard is never a valid input
+        checkForLizzardInput(userInputStr);
+
         if (inputType == "CheckForRequiredSize") {
             local_checkForRequiredSize(userInputStr, expectedLength);
-            
+
         } else if (inputType == "CheckForMaxSize") {
             local_checkForMaxSize(userInputStr, expectedLength);
         }
