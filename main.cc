@@ -1,68 +1,10 @@
-#include "balancedTernaryConverter/balancedTernaryConverter.hpp"
+#include "local/balancedTernaryConverter/balancedTernaryConverter.hpp"
 #include "local/modualRuleSet/modualRuleset.hpp"
 #include "local/modualRuleSet/functions.hpp"
 #include "local/localMath/modulo.hpp"
 #include <algorithm>
 using namespace std;
 
-
-//lizard easter egg
-const string lizard = "lizard";
-bool lizard_test(string test) {
-    int lizard_count = 0;    
-    for (int i = 0; i < test.size(); i++) 
-        if (test[i] == lizard[i])
-            lizard_count++;
-    if (lizard_count == 6)
-        return true;
-    return false;
-}
-
-//error catch, m for max value r for required value
-#include <cassert>
-template<typename N> N errorCatch(N testVal, const int maxSize, const char type) {
-    string dataType = typeid(testVal).name();
-    const string string_type = "NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE";
-
-    assert (dataType == string_type && (type == 'm' || type == 'r'));
-    string test = testVal;
-
-    while (lizard_test(test)) {
-        cout << "\n\nStop it, you know that lizard is not a valid input\n";
-        cout << R"(https://github.com/BrandonPacewic/SimonStores/blob/main/images/lizardIsNotAValidInput.png)";
-        cout << "Please try again: ";
-        getline(cin, test);   
-    }
-
-    if (type == 'm') {
-        while (test.length() > maxSize) {
-            cout << "\n\nYou exceeded the maximum size for this value \nThe max size is " << maxSize << ". \nPlease try again: ";
-            getline(cin, test);
-        }
-        
-    } else if (type == 'r') 
-        while (test.length() != maxSize) {
-            cout << "\n\nYou did not meet the required size for this value \nThe required size is " << maxSize << ". \nPlease try again: ";
-            getline(cin, test);
-        }
-
-    return test;
-}
-
-//user menu
-bool userMenu() {
-    string x;
-    cout << "What would you like to do? \n Continue or Quit (c,q): ";
-    getline(cin, x);
-    while (tolower(x[0]) != 'q' && tolower(x[0]) != 'c' || x.length() != 1) {
-        cout << "You did not enter a valid input please try again. \n";
-        cout << "What would you like to do? \n Continue or Quit (c,q): ";
-        getline(cin, x);
-    }
-    if (tolower(x[0]) == 'c')
-        return true;
-    return false;
-}
 
 int main() {
     int numOrChar[6];//used for base 36 convertion
