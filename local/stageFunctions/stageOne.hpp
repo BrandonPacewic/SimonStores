@@ -1,11 +1,12 @@
 #include <string>
 #include <cmath>
- 
+#include <cassert>
+
 class stageOne {
 private:
     static const int modOperator = 364;
 
-    static int local_stageOneFunctions(const char color, const int X, const int S, const int D) {
+    static int local_stageFunctions(const char color, const int X, const int S, const int D) {
         int Y;
 
         switch (tolower(color)) {
@@ -39,8 +40,19 @@ private:
         return Y;
     }
 
-public:
-    static int stageOneFunctions(const char color, const int X, const int S, const int D) {
-        return local_stageOneFunctions(color, X, S, D);
+    static int oneColorFlash(const std::string flash, const int X, const int S, const int D) {
+        assert(flash.length() == 1);
+
+        return local_stageFunctions(flash[0], X, S, D);
     }
+
+    static int twoColorFlash(const std::string flash, const int X, const int S, const int D) {
+        assert(flash.length() == 2);
+
+        
+    }
+
+public:
+
+
 };
