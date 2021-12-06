@@ -4,20 +4,22 @@
 class initalCalculations {
 private:
     static const int modOpperator = 365;
+    static const int base36factor = 36;
+    static const int charAdd = 9;
 
     static int local_initalAlphaCalculation(const std::array<int, 6> serialBase36, const std::array<char, 6> numOrChar) {
         int tempOne, tempTwo;
 
         if (numOrChar[2] == 'i') {
-            tempOne = serialBase36[2] * 36;
+            tempOne = serialBase36[2] * base36factor;
         } else {
-            tempOne = (serialBase36[2] + 9) * 36;
+            tempOne = (serialBase36[2] + charAdd) * base36factor;
         }
 
         if (numOrChar[3] == 'i') {
             tempTwo = serialBase36[3];
         } else {
-            tempOne = serialBase36[3] + 9;
+            tempOne = serialBase36[3] + charAdd;
         }
         
         tempOne %= modOpperator;
@@ -30,9 +32,9 @@ private:
         int temp;
 
         if (numOrChar[4] == 'i') {
-            temp = serialBase36[4] * 36;
+            temp = serialBase36[4] * base36factor;
         } else {
-            temp = (serialBase36[4] + 9) * 36; 
+            temp = (serialBase36[4] + charAdd) * base36factor; 
         }
 
         temp %= modOpperator;
@@ -45,13 +47,13 @@ private:
         int tempOne, tempTwo;
         
         if (numOrChar[0] == 'i') {
-            tempOne = serialBase36[0] * 36;
+            tempOne = serialBase36[0] * base36factor;
         } else {
-            tempOne = (serialBase36[0] + 9) * 36;
+            tempOne = (serialBase36[0] + charAdd) * base36factor;
         }
 
         if (numOrChar[1] == 'c') {
-            tempTwo = serialBase36[1] + 9;
+            tempTwo = serialBase36[1] + charAdd;
         } else {
             tempTwo = serialBase36[1];
         }
@@ -69,7 +71,7 @@ private:
             if (numOrChar[i] == 'i') {
                 D += serialBase36[i];
             } else {
-                D += serialBase36[i] + 9;
+                D += serialBase36[i] + charAdd;
             }
         }
 
