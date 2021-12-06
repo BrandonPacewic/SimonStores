@@ -1,3 +1,4 @@
+#include <vector>
 #include <array>
 #include <string>
 
@@ -5,7 +6,7 @@ class initalCalculations {
 private:
     static const int modOpperator = 365;
 
-    static int initalAlphaCalculation(const std::array<int, 6> serialBase36, const std::array<char, 6> numOrChar) {
+    static int local_initalAlphaCalculation(const std::array<int, 6> serialBase36, const std::array<char, 6> numOrChar) {
         int tempOne, tempTwo;
 
         if (numOrChar[2] == 'i') {
@@ -26,7 +27,7 @@ private:
         return tempOne + tempTwo;
     }
 
-    static int initalBravoCalculation(const std::array<int, 6> serialBase36, const std::array<char, 6> numOrChar) {
+    static int local_initalBravoCalculation(const std::array<int, 6> serialBase36, const std::array<char, 6> numOrChar) {
         int temp;
 
         if (numOrChar[4] == 'i') {
@@ -41,7 +42,7 @@ private:
         return temp + serialBase36[5];
     }
 
-    static int initalCharlieCalculation(const std::array<int, 6> serialBase36, const std::array<char, 6> numOrChar) {
+    static int local_initalCharlieCalculation(const std::array<int, 6> serialBase36, const std::array<char, 6> numOrChar) {
         int tempOne, tempTwo;
         
         if (numOrChar[0] == 'i') {
@@ -62,7 +63,7 @@ private:
         return tempOne + tempTwo;
     }
 
-    static int initalDeltaCalculation(const std::array<int, 6> serialBase36, const std::array<char, 6> numOrChar) {
+    static int local_initalDeltaCalculation(const std::array<int, 6> serialBase36, const std::array<char, 6> numOrChar) {
         int D = 0;
 
         for (int i = 0; i < serialBase36.size(); i++) {
@@ -73,7 +74,21 @@ private:
             }
         }
 
+        D %= modOpperator;
+
         return D;
     }
 
+public:
+    static void initalNatoCalculations(const std::array<int, 6> serialBase36, const std::array<char, 6> numOrChar, std::vector<int> &A, std::array<int, 6> &B, std::array<int, 7> &C) {
+        A[0] = local_initalAlphaCalculation(serialBase36, numOrChar);
+
+        B[0] = local_initalBravoCalculation(serialBase36, numOrChar);
+
+        C[0] = local_initalCharlieCalculation(serialBase36, numOrChar);
+    }
+
+    static int initalDCalculation(const std::array<int, 6> serialBase36, const std::array<char, 6> numOrChar) {
+        return local_initalDeltaCalculation(serialBase36, numOrChar);
+    }
 };
