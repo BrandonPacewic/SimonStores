@@ -1,2 +1,10 @@
 #include "balancedTernaryConverter/balancedTernaryConverter.hpp"
-#include "Mmth/"
+#include "math/math.hpp"
+#include "math/modulo.hpp"
+#include "modualRuleSet/functions.hpp"
+#include "stageFunctions/stageOne.hpp"
+#include "stageFunctions/stageTwo.hpp"
+#include "stageFunctions/stageThree.hpp"
+#include "userInput/userErrorCatch/errorCatch.hpp"
+#include "userInput/userMenu.hpp"
+
