@@ -1,5 +1,4 @@
-#include <array>
-#include <vector>
+#include <string>
 #include <cmath>
 
 class stageOne {
@@ -38,5 +37,10 @@ private:
         Y %= modOperator;
 
         return Y;
+    }
+
+public:
+    static int stageOneFunctions(const char color, const int X, const int S, const int D) {
+        return local_stageOneFunctions(color, X, S, D);
     }
 };
