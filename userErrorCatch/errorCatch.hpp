@@ -21,15 +21,16 @@ private:
 public:
 
     static std::string userStringInput(const std::string inputType, const int expectedLength) {
+        assert(inputType == "CheckForRequiredSize" || inputType == "CheckForMaxSize");
+        
         std::string userInputStr;
         getline(std::cin, userInputStr);
 
         if (inputType == "CheckForRequiredSize") {
             local_checkForRequiredSize(userInputStr, expectedLength);
+            
         } else if (inputType == "CheckForMaxSize") {
             local_checkForMaxSize(userInputStr, expectedLength);
-        } else {
-            assert(false);
         }
 
         return userInputStr;
