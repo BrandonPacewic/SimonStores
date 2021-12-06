@@ -26,7 +26,6 @@ private:
         return str;
     }
 
-
     static void checkForLizzardInput(std::string &testStr) {
         while (local_convertToLower(testStr) == "lizard") {
             std::cout << '\n' << '\n' << "Stop it... You know that Lizard is not a valid input..." << '\n' << "I guess try again?";
