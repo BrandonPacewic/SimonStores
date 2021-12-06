@@ -1,6 +1,6 @@
 #include <string>
 #include <cmath>
-
+ 
 class stageOne {
 private:
     static const int modOperator = 364;
