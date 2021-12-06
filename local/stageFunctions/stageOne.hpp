@@ -2,6 +2,9 @@
 #include <cmath>
 #include <cassert>
 
+#include "colorDetermineFunctions.hpp"
+using namespace colorDetermine;
+
 class stageOne {
 private:
     static const int modOperator = 364;
@@ -40,14 +43,16 @@ private:
         return Y;
     }
 
-    static int oneColorFlash(const std::string flash, const int X, const int S, const int D) {
+    static int oneColorFlash(const std::string flash, const std::vector<int> A, const int S, const int D) {
         assert(flash.length() == 1);
 
-        return local_stageFunctions(flash[0], X, S, D);
+        return local_stageFunctions(flash[0], A[S - 1], S, D);
     }
 
     static int twoColorFlash(const std::string flash, const int X, const int S, const int D) {
         assert(flash.length() == 2);
+
+        int colorMixValue = primaryVsSecondaryMix(flash);
 
         
     }

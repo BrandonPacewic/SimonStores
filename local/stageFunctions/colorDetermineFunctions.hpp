@@ -3,7 +3,7 @@
 
 namespace colorDetermine {
 
-    int primaryVsSecondaryMix(std::string &flash) {
+    int primaryVsSecondaryMix(const std::string flash) {
         std::vector<int> temp(3, 0);
         
         for (int i = flash.length(); i > 0; i--) {
