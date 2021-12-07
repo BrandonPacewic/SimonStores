@@ -1,3 +1,4 @@
+#include <iterator>
 #include <string>
 #include <cmath>
 #include <array>
@@ -80,6 +81,28 @@ private:
 
         if (colorMixValue == 3) {
             return (A[S - 1] + A[0]) % modOperator;
+        
+        } else if (colorMixValue == 4 || colorMixValue == 5) {
+            //3 is == to flash.length()
+            std::array<int, 3> colorValues;
+
+            for (int i = 0; i < flash.length(); i++) {
+                colorValues[i] = stageFunctions(flash[i], A[S - 1], S, D);
+            }
+
+            switch (colorMixValue) {
+                case 4:
+                    return int(std::max_element(colorValues.begin(), colorValues.end()) - colorValues.begin());
+
+                case 5:
+                    return int(std::min_element(colorValues.begin(), colorValues.end()) - colorValues.begin());
+
+                default:
+                    return -INF;
+            }
+
+        } else {
+            return (A[S - 1] - A[0]) % modOperator;
         }
     }
 
