@@ -107,6 +107,21 @@ private:
     }
 
 public:
+    static int stageOneCalculations(const std::string flash, const std::vector<int> A, const int S, const int D) {
+        assert(flash.length() <= 3);
 
+        switch (flash.length()) {
+            case 1:
+                return oneColorFlash(flash, A, S, D);
 
+            case 2:
+                return twoColorFlash(flash, A, S, D);
+
+            case 3:
+                return threeColorFlash(flash, A, S, D);
+
+            default:
+                return -INF;
+        }
+    }
 };
