@@ -1,12 +1,9 @@
 #include <array>
-#include <cstdlib>
-#include <iterator>
 #include <string>
 #include <cmath>
 #include <algorithm>
 #include <cassert>
 #include <vector>
-#include <unordered_map>
 #include "colorDetermineFunctions.hpp"
 
 #include "../math/modulo.hpp"
