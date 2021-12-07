@@ -1,7 +1,6 @@
 #include <array>
 #include <string>
 #include <cmath>
-#include <algorithm>
 #include <cassert>
 #include <vector>
 #include "colorDetermineFunctions.hpp"

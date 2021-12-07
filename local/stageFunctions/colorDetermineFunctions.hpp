@@ -1,6 +1,8 @@
 #include <string>
 #include <vector>
 
+#ifndef __colorDetermine__
+#define __colorDetermine__
 namespace colorDetermine {
 
     int primaryVsSecondaryMix(const std::string flash) {
@@ -89,3 +91,4 @@ namespace colorDetermine {
         }
     }
 }
+#endif
