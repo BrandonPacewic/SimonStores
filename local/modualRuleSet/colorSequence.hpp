@@ -172,7 +172,7 @@ public:
         return stageColorSequence;
     }
 
-    static void printStageColorSequenceStageOne(const int stage, const std::string colorOrder) {
+    static void printStageColorSequence(const int stage, const std::string colorOrder) {
         assert(stage == 1 || stage == 2 || stage == 3);
 
         std::string colorSequence = createColorSubmittingOrder(colorOrder, getbaseColorOrder(stage));

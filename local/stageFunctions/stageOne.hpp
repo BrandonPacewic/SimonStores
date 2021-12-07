@@ -107,7 +107,7 @@ private:
     }
 
 public:
-    static const int stageOneCalculations (const std::string flash, const std::vector<int> A, const int S, const int D) {
+    static const int stageOneCalculations(const std::string flash, const std::vector<int> A, const int S, const int D) {
         assert(flash.length() <= 3);
 
         switch (flash.length()) {

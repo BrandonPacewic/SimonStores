@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cassert>
 
-class ErrorCatch {
+class errorCatch {
 private:
 
     static void local_checkForRequiredSize(std::string &testStr, const int requiredSize) {
