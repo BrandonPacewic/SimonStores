@@ -5,10 +5,11 @@
 class math {
 public:
 
+    static const int modOperator = 365;
     static const int INF = int(1e9) + 5;
 
     static int moduloRule(int x) {
-        return x % 365;
+        return x % modOperator;
     }
 
     //TODO: remake bace36 converter 

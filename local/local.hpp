@@ -9,3 +9,6 @@
 #include "userInput/userErrorCatch/errorCatch.hpp"
 #include "userInput/userMenu.hpp"
 
+namespace local {
+	;
+}

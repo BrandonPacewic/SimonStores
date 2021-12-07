@@ -123,6 +123,8 @@ int main() {
 
              if (flash.length() == 1) {
                  b[s] = local_stageTwo(flash[0], b[s-1], s, d, a);
+
+
              } else if (flash.length() == 2) {
                  vector<int> temp(6, 0);
 
@@ -157,6 +159,7 @@ int main() {
 
                 b[s] = int(min_element(temp.begin(), temp.begin() + 3) - temp.begin());
                 }
+
 
             } else if (flash.length() == 3) {
                 vector<int> temp(6, 0);
