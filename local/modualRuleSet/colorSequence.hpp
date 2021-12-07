@@ -5,7 +5,7 @@
 #include <vector>
 #include <cassert>
 
-class functions {
+class colorSequence {
 private:
     template<typename T> T abs(T num) {
         return num < 0 ? num *= -1 : num;
