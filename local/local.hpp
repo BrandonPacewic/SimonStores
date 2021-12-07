@@ -8,9 +8,6 @@
 #include "stageFunctions/stageThree.hpp"
 #include "userInput/userErrorCatch/errorCatch.hpp"
 #include "userInput/userMenu.hpp"
-#include <array>
-#include <string>
-#include <vector>
 
 namespace local {
 	namespace preCompute{
