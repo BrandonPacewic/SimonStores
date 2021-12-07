@@ -1,15 +1,16 @@
 #include <string>
 #include <cmath>
+#include <array>
+#include <algorithm>
 #include <cassert>
-
 #include "colorDetermineFunctions.hpp"
-using namespace colorDetermine;
 
 class stageOne {
 private:
+    static const int INF = int(1e9) + 5;
     static const int modOperator = 364;
 
-    static int local_stageFunctions(const char color, const int X, const int S, const int D) {
+    static int stageFunctions(const char color, const int X, const int S, const int D) {
         int Y;
 
         switch (tolower(color)) {
@@ -46,15 +47,40 @@ private:
     static int oneColorFlash(const std::string flash, const std::vector<int> A, const int S, const int D) {
         assert(flash.length() == 1);
 
-        return local_stageFunctions(flash[0], A[S - 1], S, D);
+        return stageFunctions(flash[0], A[S - 1], S, D);
     }
 
-    static int twoColorFlash(const std::string flash, const int X, const int S, const int D) {
+    static int twoColorFlash(const std::string flash, const std::vector<int> A, const int S, const int D) {
         assert(flash.length() == 2);
 
-        int colorMixValue = primaryVsSecondaryMix(flash);
+        int colorMixValue = colorDetermine::primaryVsSecondaryMix(flash);
 
-        
+        int colorOneValue = stageFunctions(flash[0], A[S - 1], S, D);
+        int colorTwoValue = stageFunctions(flash[1], A[S - 1], S, D);
+
+        switch (colorMixValue) {
+            case 2:
+                return std::max(colorOneValue, colorTwoValue);
+
+            case 3:
+                return colorOneValue + colorTwoValue - (D * 2);
+
+            case 4:
+                return std::min(colorOneValue, colorTwoValue);
+
+            default:
+                return -INF;
+        }
+    }
+
+    static int threeColorFlash(const std::string flash, const std::vector<int> A, const int S, const int D) {
+        assert(flash.length() == 3);
+
+        int colorMixValue = colorDetermine::primaryVsSecondaryMix(flash);
+
+        if (colorMixValue == 3) {
+            return (A[S - 1] + A[0]) % modOperator;
+        }
     }
 
 public:

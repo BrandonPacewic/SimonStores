@@ -3,7 +3,7 @@
 
 class initalCalculations {
 private:
-    static const int modOpperator = 365;
+    static const int modOperator = 365;
     static const int base36factor = 36;
     static const int charAdd = 9;
 
@@ -22,8 +22,8 @@ private:
             tempOne = serialBase36[3] + charAdd;
         }
         
-        tempOne %= modOpperator;
-        tempTwo %= modOpperator;
+        tempOne %= modOperator;
+        tempTwo %= modOperator;
 
         return tempOne + tempTwo;
     }
@@ -37,7 +37,7 @@ private:
             temp = (serialBase36[4] + charAdd) * base36factor; 
         }
 
-        temp %= modOpperator;
+        temp %= modOperator;
 
         //serial index 5 is always a num
         return temp + serialBase36[5];
@@ -58,8 +58,8 @@ private:
             tempTwo = serialBase36[1];
         }
 
-        tempOne %= modOpperator;
-        tempTwo %= modOpperator;
+        tempOne %= modOperator;
+        tempTwo %= modOperator;
 
         return tempOne + tempTwo;
     }
@@ -75,7 +75,7 @@ private:
             }
         }
 
-        D %= modOpperator;
+        D %= modOperator;
 
         return D;
     }
