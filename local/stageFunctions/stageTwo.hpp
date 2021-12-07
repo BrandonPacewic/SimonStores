@@ -5,7 +5,6 @@
 #include <cassert>
 #include <vector>
 #include "colorDetermineFunctions.hpp"
-
 #include "../math/modulo.hpp"
 
 class stageTwo {
@@ -18,29 +17,28 @@ private:
 
 		switch (tolower(color)) {
 	        case 'r':
-	            Y = X + B[S - 1] - A[S - 1];
+	            Y = X + A[S - 1] + pow(S, 2);
 	            break;
 
 	        case 'g':
-	            Y = X - (B[S - 1] * 2);
+	            Y = (X * 2) - A[S - 1];
 	            break;
 
 	        case 'b':
-	            Y = X + B[0] - A[3];
+	            Y = (X * 2) - A[0] - (4 * pow(S, 2));
 	            break;
 
 	        case 'c':
-	            Y = X - B[S - 1] + A[S - 1];
+	            Y = X + A[1];
 	            break;
 
 	        case 'm':
-	            Y = X - (A[S - 1] * 2);
+	            Y = X + A[2] - D;
 	            break;
 
-	        case 'Y':
-	            Y = X + B[4] - A[0];
+	        case 'y':
+	            Y = X + A[3] - A[S - 1];
 	            break;
-
 	    }
 
 	    Y %= modOperator;
