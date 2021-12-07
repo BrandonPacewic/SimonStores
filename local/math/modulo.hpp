@@ -1,4 +1,3 @@
-namespace mod {
     template<typename T, typename OP> 
     struct modulo { 
         T bace; 
@@ -12,4 +11,3 @@ namespace mod {
         int& bace = tail.bace; 
         return bace % exponent < 0 ? (bace % exponent) + exponent : bace % exponent; 
     }
-}

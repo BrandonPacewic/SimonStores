@@ -6,7 +6,10 @@
 #include <algorithm>
 #include <cassert>
 #include <vector>
+#include <unordered_map>
 #include "colorDetermineFunctions.hpp"
+
+#include "../math/modulo.hpp"
 
 class stageTwo {
 private:
@@ -79,10 +82,60 @@ private:
 		return std::min(colorValueOne, colorValueTwo);
 	}
 
-	static int threeColorFlash(const std::string flash, const std::vector<int> A, const std::array<int, 6> B, const int S, const int D0 {
+	static int threeColorFlash(const std::string flash, const std::vector<int> A, const std::array<int, 6> B, const int S, const int D) {
 		assert(flash.length() == 3);
 	
+		int colorMixValue = colorDetermine::primaryVsSecondaryMix(flash);
+
+		if (colorMixValue == 3) {
+			return (B[S - 1] + ((B[S - 1] <mod> 4) * B[0]) - A[3]) % modOperator;
 		
+		} else if (colorMixValue == 4) {
+			std::vector<int> colorValues(flash.length() + 1, 0);
+
+			for (int i = 0; i < flash.length(); i++) {
+				if (flash[i] == 'r' || flash[i] == 'g' || flash[i] == 'b') {
+					colorValues[i] = stageFunctions(flash[i], A, B, B[S - 1], S, D);
+				} else {
+					colorValues[3] = stageFunctions(flash[i], A, B, A[S - 1], S, D);
+				}
+			}
+
+			return (B[S - 1] + colorValues[0] + colorValues[1] + colorValues[2] - colorValues[4]) % modOperator;
+		
+		} else if (colorMixValue == 5) {
+			std::vector<int> colorValues(flash.length() + 1, 0);
+
+			for (int i = 0; i < flash.length(); i++) {
+				if (flash[i] == 'c' || flash[i] == 'm' || flash[i] == 'y') {
+					colorValues[i] = stageFunctions(flash[i], A, B, A[S - 1], S, D);
+				} else {
+					colorValues[3] = stageFunctions(flash[i], A, B, B[S - 1], S, D);
+				}
+			}
+
+			return (B[S - 1] + colorValues[0] + colorValues[1] + colorValues[2] - colorValues[3]) % modOperator;
+		}
+
+		return (B[S - 1] + ((B[0] <mod> 4) * B[S - 1]) - A[3]) % modOperator;  
 	}
 
+public:
+	static const int stageOneCalculation(const std::string flash, const std::vector<int> A, const std::array<int, 6> B, const int S, const int D) {
+		assert(flash.length() <= 3);
+
+		switch (flash.length()) {
+			case 1:
+				return oneColorFlash(flash, A, B, S, D);
+
+			case 2:
+				return twoColorFlash(flash, A, B, S, D);
+
+			case 3:
+				return threeColorFlash(flash, A, B, S, D);
+
+			default:
+				return -INF;
+		}
+	}
 };
