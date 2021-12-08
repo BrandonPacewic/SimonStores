@@ -3,9 +3,8 @@ using namespace std;
 using namespace local;
 
 const int STAGE_ONE_FLASHES = 3;
-const int STAGE_TWO_FLASHES = 1;
-const int STAGE_THREE_FLASHES = 1;
-const int TOTAL_FLASHES = STAGE_ONE_FLASHES + STAGE_TWO_FLASHES + STAGE_THREE_FLASHES;
+const int STAGE_TWO_FLASHES = 4;
+const int TOTAL_FLASHES = 5;
 
 int main() {
     do {
@@ -51,7 +50,7 @@ int main() {
         cout << "Enter flash #4: ";
         stageFlashes[3] = user::stringInput("CheckForMaxSize", 3);
 
-        for (int S = 1; S <= STAGE_ONE_FLASHES + STAGE_TWO_FLASHES; S++) {
+        for (int S = 1; S <= STAGE_TWO_FLASHES; S++) {
             B[S] = stage::two::calculations(stageFlashes[S - 1], A, B, S, D);
         }
 
