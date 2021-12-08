@@ -8,6 +8,8 @@
 #include "stageFunctions/stageThree.hpp"
 #include "userInput/userErrorCatch/errorCatch.hpp"
 #include "userInput/userMenu.hpp"
+#include <array>
+#include <string>
 
 namespace local {
 	namespace preCompute{
@@ -59,6 +61,12 @@ namespace local {
 
 		bool menu() {
 			return userInput::userMenu();
+		}
+	}
+
+	namespace math {
+		void base36Converter(std::string serial, std::array<char, 6> &numOrChar, std::array<int, 6> &base36) {
+			extendedMath::baseConverter(serial, numOrChar, base36);
 		}
 	}
 }
