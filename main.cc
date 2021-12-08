@@ -36,6 +36,7 @@ int main() {
         //-Stage One-
         //-----------
 
+        //S is for step or n in the manual
         for (int S = 1; S <= STAGE_ONE_FLASHES; S++) {
             A[S] = stage::one::calculations(stageFlashes[S - 1], A, S, D);
         }
@@ -61,10 +62,8 @@ int main() {
         //-Stage Three-
         //-------------
 
-
         cout << "Enter flash #5: ";
         stageFlashes[4] = user::stringInput("CheckForMaxSize", 3);
-
 
         for (int S = 1; S <= TOTAL_FLASHES; S++) {
             C[S] = stage::three::calculations(stageFlashes[S - 1], A, B, C, S, D);
