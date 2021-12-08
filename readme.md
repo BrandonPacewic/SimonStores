@@ -17,7 +17,7 @@ More details can be found in this [repository](https://github.com/BrandonPacewic
 
 ----
 
-#### Project Directory
+### Project Directory
 
 ```bash
 main.cc
@@ -44,7 +44,9 @@ main.cc
 		└── userMenu.hpp
 ```
 
-#### A lizard is not a valid input
+----
+
+### A lizard is not a valid input
 
 As a added bonus parts of this program will accept a 6 character string which allows for the input of lizard
 
