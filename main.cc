@@ -18,7 +18,7 @@ int main() {
         array<string, TOTAL_FLASHES> stageFlashes;
 
         for (int i = 0; i < STAGE_ONE_FLASHES; i++) {
-            cout << "Enter flash # " << i + 1 << "(Ex: rmy): "; 
+            cout << "Enter flash #" << i + 1 << "(Ex: rmy): "; 
             stageFlashes[i] = user::stringInput("CheckForMaxSize", 3);
         }
 
@@ -47,7 +47,7 @@ int main() {
         //-Stage Two-
         //-----------
 
-        cout << "Enter flash # 4: ";
+        cout << "Enter flash #4: ";
         stageFlashes[3] = user::stringInput("CheckForMaxSize", 3);
 
         for (int S = 1; S <= STAGE_ONE_FLASHES + STAGE_TWO_FLASHES; S++) {
@@ -62,7 +62,7 @@ int main() {
         //-------------
 
 
-        cout << "Enter flash # 5: ";
+        cout << "Enter flash #5: ";
         stageFlashes[4] = user::stringInput("CheckForMaxSize", 3);
 
 
