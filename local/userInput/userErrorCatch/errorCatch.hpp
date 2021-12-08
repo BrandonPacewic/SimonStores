@@ -9,6 +9,8 @@ private:
             std::cout << '\n' << '\n' << "You did not meet the required size of " << requiredSize << '.' << '\n' << "Please try again:";
             getline(std::cin, testStr);
         }
+
+        std::cout << '\n';
     }
 
     static void local_checkForMaxSize(std::string &testStr, const int maxSize) {
@@ -16,6 +18,8 @@ private:
             std::cout << '\n' << '\n' << "You exceeded the maximum size of " << maxSize << '.' << '\n' << "please try again:";
             getline(std::cin, testStr);
         }
+
+        std::cout << '\n';
     }
 
     static std::string local_convertToLower(std::string &str) {
