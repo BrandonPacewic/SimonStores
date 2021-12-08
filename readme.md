@@ -1,4 +1,4 @@
-# Simon Stores Code v1.1
+# Simon Stores Code v1.2
 
 Simon Stores is a complex math problem in the game Keep Talking and Nobody Explodes
 
@@ -16,6 +16,33 @@ More details can be found in this [repository](https://github.com/BrandonPacewic
 ![pic](https://github.com/BrandonPacewic/SimonStores/blob/main/images/simonStores.jpeg)
 
 ----
+
+#### Project Directory
+
+```bash
+main.cc
+└── local.hpp
+	├── balancedTernaryConverter
+	│  	└── balancedTernaryConverter.hpp
+	│  
+	├── math
+	│	├── math.hpp
+	│	└── modulo.hpp	
+	│
+	├── modualRuleSet
+	│	├── colorSequence.hpp	
+	│	└── initalCalculations.hpp
+	│
+	├── stageFunctions
+	│	├── stageOne.hpp 
+	│	├── stageTwo.hpp
+	│	└── stageThree.hpp	
+	│
+	└── userInput	
+		├── userErrorCatch
+		│	└── userErrorCatch.hpp	
+		└── userMenu.hpp
+```
 
 #### A lizard is not a valid input
 
