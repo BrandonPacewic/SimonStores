@@ -2,15 +2,11 @@
 #include <array>
 #include <string>
 
-class math {
+class extendedMath {
 public:
 
     static const int modOperator = 365;
     static const int INF = int(1e9) + 5;
-
-    static int moduloRule(int x) {
-        return x % modOperator;
-    }
 
     //TODO: remake bace36 converter 
     static void baseConverter(std::string str, std::array<char, 6> &numOrChar, std::array<int, 6> &base36) {
