@@ -13,7 +13,7 @@ More details can be found in this [repository](https://github.com/BrandonPacewic
 
 ----
 
-![pic](https://github.com/BrandonPacewic/SimonStores/blob/main/images/simonStores.jpeg)
+![pic](https://github.com/BrandonPacewic/SimonStores/blob/master/images/simonStores.jpeg)
 
 ----
 
@@ -52,4 +52,4 @@ As a added bonus parts of this program will accept a 6 character string which al
 
 This is of course compleatly unnaceptable and needed to be fixed 
 
-![lizard](https://github.com/BrandonPacewic/SimonStores/blob/main/images/lizardIsNotAValidInput.png)
+![lizard](https://github.com/BrandonPacewic/SimonStores/blob/master/images/lizardIsNotAValidInput.png)
