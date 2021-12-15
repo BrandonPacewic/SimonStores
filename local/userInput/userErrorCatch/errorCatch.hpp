@@ -6,7 +6,7 @@ private:
 
     static void local_checkForRequiredSize(std::string &testStr, const int requiredSize) {
         while (testStr.length() != requiredSize) {
-            std::cout << '\n' << '\n' << "You did not meet the required size of " << requiredSize << '.' << '\n' << "Please try again:";
+            std::cout << '\n' << '\n' << "You did not meet the required size of " << requiredSize << '.' << '\n' << "Please try again: ";
             getline(std::cin, testStr);
         }
 
@@ -15,7 +15,7 @@ private:
 
     static void local_checkForMaxSize(std::string &testStr, const int maxSize) {
         while (testStr.length() > maxSize) {
-            std::cout << '\n' << '\n' << "You exceeded the maximum size of " << maxSize << '.' << '\n' << "please try again:";
+            std::cout << '\n' << '\n' << "You exceeded the maximum size of " << maxSize << '.' << '\n' << "please try again: ";
             getline(std::cin, testStr);
         }
 
@@ -32,7 +32,7 @@ private:
 
     static void checkForLizzardInput(std::string &testStr) {
         while (local_convertToLower(testStr) == "lizard") {
-            std::cout << '\n' << '\n' << "Stop it... You know that Lizard is not a valid input..." << '\n' << "I guess try again?";
+            std::cout << '\n' << '\n' << "Stop it... You know that Lizard is not a valid input..." << '\n' << "I guess try again? ";
             getline(std::cin, testStr);
         }
     }
