@@ -8,7 +8,7 @@ const int TOTAL_FLASHES = 5;
 
 int main() {
     do {
-        cout << "Enter the Serial#(Ex: 12qm5): ";
+        cout << "Enter the Serial#(Ex: 12qmt0): ";
         string serial = user::stringInput("CheckForRequiredSize", 6);
 
         cout << "Enter the Order of the Colors in Clockwise Order(Ex: rmybcg): ";
