@@ -15,10 +15,9 @@
 
 namespace color_sequence {
 
-// Maps the color order on the modual to the placement of each color
-// this map is only generated once
-std::unordered_map<char, int> create_color_to_placment_map(
-    const std:: string& color_order);
+// Setup must be run afetr retreving the color sequence from the user
+// Should only be called once
+void setup(const std::string& color_sequence);
 
 // Stores the starting color sequence that gets modified at the end of each
 // stage calculation
