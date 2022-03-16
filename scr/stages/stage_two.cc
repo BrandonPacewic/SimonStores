@@ -103,8 +103,18 @@ int two_color_flash(const std::string& flash, const std::vector<int>& alpha,
     else {
         assert(color_mix_value == 4); // both colors are secondary
 
-        char missing_color = missing_color(flash);
+        const char absent_color = missing_color(flash);
+        const int first = color_to_function_map.find(absent_color)->second(
+            alpha, alpha[step-1], step, delta
+        );
+        const int second = color_to_function_map.find(absent_color)->second(
+            alpha, bravo[step-1], step, delta
+        );
+
+        answer += std::min(first, second);
     }
+
+    return int(answer);
 }
 
 } // namespace
