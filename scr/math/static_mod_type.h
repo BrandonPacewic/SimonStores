@@ -12,7 +12,7 @@
 
 #include <cstdint>
 
-namespace bp {
+namespace mod_types {
 
 // TODO: Check overflow; default is int
 typedef int ceil_num;
@@ -63,6 +63,6 @@ public:
 	bool operator>=(const static_mod_type&) const;
 };
 
-} // namespace bp
+} // namespace mod_types
 
 #endif

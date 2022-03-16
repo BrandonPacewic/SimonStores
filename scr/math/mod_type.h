@@ -12,7 +12,7 @@
 
 #include <cstdint>
 
-namespace bp {
+namespace mod_types {
 
 template<typename _Tp>
 class mod_type {
@@ -56,6 +56,6 @@ public:
 	bool operator>=(const mod_type&) const;
 };
 
-} // namespace bp
+} // namespace mod_types
 
 #endif // _BRANDON_MOD_TYPE_H

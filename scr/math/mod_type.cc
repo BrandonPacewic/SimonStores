@@ -14,7 +14,7 @@
 #include <istream>
 
 #include "mod_type.h"
-using bp::mod_type;
+using mod_types::mod_type;
 
 template<typename _Tp>
 mod_type<_Tp>::mod_type(_Tp _value) : value{_value} {}

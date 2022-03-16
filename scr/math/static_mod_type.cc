@@ -15,8 +15,8 @@
 #include <istream>
 
 #include "static_mod_type.h"
-using bp::static_mod_type;
-using bp::ceil_num;
+using mod_types::static_mod_type;
+using mod_types::ceil_num;
 
 template<typename _Tp>
 static_mod_type<_Tp>::static_mod_type(ceil_num _ceil) : value{0}, ceil{_ceil} {}
