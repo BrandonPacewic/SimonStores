@@ -11,7 +11,6 @@
 #define _color_sequence_H 1
 
 #include <string>
-#include <unordered_map>
 
 namespace color_sequence {
 
@@ -19,16 +18,9 @@ namespace color_sequence {
 // Should only be called once
 void setup(const std::string& color_sequence);
 
-// Stores the starting color sequence that gets modified at the end of each
-// stage calculation
-const std::string get_base_colors(const int& stage);
-
-// Reorders the base color sequence for each stage
-std::string get_color_submitting_order(const std::string& color_order, 
-    std::string& base_color_sequence);
-
-void print_stage_color_sequence(const int& stage, 
-    const std::string& color_order);
+// Outputs the color sequence submit order for the desired stage
+// the modual color sequence is not needed thanks to setup
+void print_stage_color_sequence(const int& stage);
 
 } // namespace color_sequence
 

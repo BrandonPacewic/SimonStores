@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <array>
 #include <cassert>
+#include <iostream>
 #include <string>
 #include <unordered_map>
 
@@ -175,12 +176,25 @@ const std::string get_base_color_sequence(const int& stage) {
     return base_color_sequences[stage - 1];
 }
 
-std::unordered_map<char, int> color_placment_map;
+std::unordered_map<char, int> color_placement_map;
 
 } // namespace
 
 void setup(const std::string& color_sequence) {
-    color_placment_map = create_color_placement_map(color_sequence);
+    color_placement_map = create_color_placement_map(color_sequence);
+}
+
+void print_stage_color_sequence(const int& stage) {
+    auto base_color_sequence = get_base_color_sequence(stage);
+    shift_right(color_placement_map, base_color_sequence);
+    swap_complementary(color_placement_map, base_color_sequence);
+    cycle_primary(color_placement_map, base_color_sequence);
+    cycle_secondary(color_placement_map, base_color_sequence);
+    swap_blue_with_opposite(color_placement_map, base_color_sequence);
+    swap_red_yellow(color_placement_map, base_color_sequence);
+    swap_green_cyan(color_placement_map, base_color_sequence);
+
+    std::cout << base_color_sequence << '\n';
 }
 
 } // namespace color_sequence
