@@ -18,8 +18,12 @@
 #include <vector>
 
 #include "../math/static_mod_type.h"
-#include "../ruleset/color_determine.h"
 using mod_types::static_mod_type;
+
+#include "../math/mod_type.h"
+using mod_types::mod_type;
+
+#include "../ruleset/color_determine.h"
 using color_determine::primary_secondary_mix;
 
 #include "stage_one.h"
@@ -65,7 +69,8 @@ const std::unordered_map<
     }},
 };
 
-int one_color_flash(const std::string& flash, const std::vector<int>& alpha,
+int one_color_flash(const std::string& flash, 
+    const std::vector<mod_type<int>>& alpha,
     const int& step, const int& delta) {
     assert(flash.length() == 1);
 
@@ -74,7 +79,8 @@ int one_color_flash(const std::string& flash, const std::vector<int>& alpha,
     );
 }
 
-int two_color_flash(const std::string& flash, const std::vector<int>& alpha,
+int two_color_flash(const std::string& flash, 
+    const std::vector<mod_type<int>>& alpha,
     const int& step, const int& delta) {
     assert(flash.length() == 2);
 
@@ -104,7 +110,8 @@ int two_color_flash(const std::string& flash, const std::vector<int>& alpha,
     return int(answer);
 }
 
-int three_color_flash(const std::string& flash, const std::vector<int>& alpha,
+int three_color_flash(const std::string& flash, 
+    const std::vector<mod_type<int>>& alpha,
     const int& step, const int& delta) {
     assert(flash.length() == 3);
 
@@ -148,7 +155,8 @@ int three_color_flash(const std::string& flash, const std::vector<int>& alpha,
 } // namespace
 
 int one_calculations(const std::string& flash, 
-    const std::vector<int>& alpha, const int& step, const int& delta) {
+    const std::vector<mod_type<int>>& alpha, 
+    const int& step, const int& delta) {
     assert(flash.length() <= 3);
 
     int answer = -999;

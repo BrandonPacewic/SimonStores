@@ -21,23 +21,3 @@ namespace stages {
 } // namespace stages
 
 #endif // _STAGE_TWO_H
-
-{
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "type": "shell",
-            "label": "g++ build active file",
-            "command": "/usr/bin/g++",
-            "args": ["-g", "${file}", "-o", "${fileDirname}/${fileBasenameNoExtension}"],
-            "options": {
-                "cwd": "/usr/bin"
-            },
-            "problemMatcher": ["$gcc"],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        }
-    ]
-}

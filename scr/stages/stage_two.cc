@@ -17,8 +17,12 @@
 #include <vector>
 
 #include "../math/static_mod_type.h"
-#include "../ruleset/color_determine.h"
 using mod_types::static_mod_type;
+
+#include "../math/mod_type.h"
+using mod_types::mod_type;
+
+#include "../ruleset/color_determine.h"
 using color_determine::primary_secondary_mix;
 using color_determine::missing_color;
 
@@ -29,39 +33,39 @@ namespace {
 constexpr int mod_limit = 365;
 
 const std::unordered_map<
-    char, std::function<int(std::vector<int>, int, int, int)>
+    char, std::function<int(std::vector<mod_type<int>>, int, int, int)>
 > color_to_function_map = {
-    {'r', [](const std::vector<int>& a, const int& x, 
+    {'r', [](const std::vector<mod_type<int>>& a, const int& x, 
         const int& s, const int& d) -> int {
         static_mod_type<int> answer(mod_limit);
         answer += x + a[s-1] + pow(s, 2);
         return int(answer);
     }},
-    {'g', [](const std::vector<int>& a, const int& x,
+    {'g', [](const std::vector<mod_type<int>>& a, const int& x,
         const int& s, const int& d) -> int {
         static_mod_type<int> answer(mod_limit);
         answer += (x * 2) - a[s-1];
         return int(answer);
     }},
-    {'b', [](const std::vector<int>& a, const int& x,
+    {'b', [](const std::vector<mod_type<int>>& a, const int& x,
         const int& s, const int& d) -> int {
         static_mod_type<int> answer(mod_limit);
         answer += (x * 2) - a[0] - (4 * pow(s, 2));
         return int(answer);
     }},
-    {'c', [](const std::vector<int>& a, const int& x,
+    {'c', [](const std::vector<mod_type<int>>& a, const int& x,
         const int& s, const int& d) -> int {
         static_mod_type<int> answer(mod_limit);
         answer += x + a[1];
         return int(answer);
     }},
-    {'m', [](const std::vector<int>& a, const int& x,
+    {'m', [](const std::vector<mod_type<int>>& a, const int& x,
         const int& s, const int& d) -> int {
         static_mod_type<int> answer(mod_limit);
         answer += x + a[2] - d;
         return int(answer);
     }},
-    {'y', [](const std::vector<int>& a, const int& x,
+    {'y', [](const std::vector<mod_type<int>>& a, const int& x,
         const int& s, const int& d) -> int {
         static_mod_type<int> answer(mod_limit);
         answer += x + a[3] - a[s-1];
@@ -69,8 +73,10 @@ const std::unordered_map<
     }},
 };
 
-int one_color_flash(const std::string& flash, const std::vector<int>& alpha,
-    const std::vector<int>& bravo, const int& step, const int& delta) {
+int one_color_flash(const std::string& flash, 
+    const std::vector<mod_type<int>>& alpha,
+    const std::vector<mod_type<int>>& bravo, 
+    const int& step, const int& delta) {
     assert(flash.length() == 1);
 
     return color_to_function_map.find(flash[0])->second(
@@ -78,8 +84,10 @@ int one_color_flash(const std::string& flash, const std::vector<int>& alpha,
     );
 }
 
-int two_color_flash(const std::string& flash, const std::vector<int>& alpha,
-    const std::vector<int>& bravo, const int& step, const int& delta) {
+int two_color_flash(const std::string& flash, 
+    const std::vector<mod_type<int>>& alpha,
+    const std::vector<mod_type<int>>& bravo, 
+    const int& step, const int& delta) {
     assert(flash.length() == 2);
 
     const int color_mix_value = primary_secondary_mix(flash);
@@ -117,8 +125,10 @@ int two_color_flash(const std::string& flash, const std::vector<int>& alpha,
     return int(answer);
 }
 
-int three_color_flash(const std::string& flash, const std::vector<int>& alpha,
-    const std::vector<int>& bravo, const int& step, const int& delta) {
+int three_color_flash(const std::string& flash, 
+    const std::vector<mod_type<int>>& alpha,
+    const std::vector<mod_type<int>>& bravo, 
+    const int& step, const int& delta) {
     assert(flash.length() == 3);
 
     const int color_mix_value = primary_secondary_mix(flash);
