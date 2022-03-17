@@ -38,37 +38,37 @@ const std::unordered_map<
     {'r', [](const std::vector<mod_type<int>>& a, const int& x, 
         const int& s, const int& d) -> int {
         static_mod_type<int> answer(mod_limit);
-        answer += x + a[s-1] + pow(s, 2);
+        answer += x + int(a[s-1]) + pow(s, 2);
         return int(answer);
     }},
     {'g', [](const std::vector<mod_type<int>>& a, const int& x,
         const int& s, const int& d) -> int {
         static_mod_type<int> answer(mod_limit);
-        answer += (x * 2) - a[s-1];
+        answer += (x * 2) - int(a[s-1]);
         return int(answer);
     }},
     {'b', [](const std::vector<mod_type<int>>& a, const int& x,
         const int& s, const int& d) -> int {
         static_mod_type<int> answer(mod_limit);
-        answer += (x * 2) - a[0] - (4 * pow(s, 2));
+        answer += (x * 2) - int(a[0]) - (4 * pow(s, 2));
         return int(answer);
     }},
     {'c', [](const std::vector<mod_type<int>>& a, const int& x,
         const int& s, const int& d) -> int {
         static_mod_type<int> answer(mod_limit);
-        answer += x + a[1];
+        answer += x + int(a[1]);
         return int(answer);
     }},
     {'m', [](const std::vector<mod_type<int>>& a, const int& x,
         const int& s, const int& d) -> int {
         static_mod_type<int> answer(mod_limit);
-        answer += x + a[2] - d;
+        answer += x + int(a[2]) - d;
         return int(answer);
     }},
     {'y', [](const std::vector<mod_type<int>>& a, const int& x,
         const int& s, const int& d) -> int {
         static_mod_type<int> answer(mod_limit);
-        answer += x + a[3] - a[s-1];
+        answer += x + int(a[3] - a[s-1]);
         return int(answer);
     }},
 };
@@ -80,7 +80,7 @@ int one_color_flash(const std::string& flash,
     assert(flash.length() == 1);
 
     return color_to_function_map.find(flash[0])->second(
-        alpha, bravo[step-1], step, delta
+        alpha, int(bravo[step-1]), step, delta
     );
 }
 
@@ -95,10 +95,10 @@ int two_color_flash(const std::string& flash,
 
     if (color_mix_value == 2 || color_mix_value == 3) {
         const int first = color_to_function_map.find(flash[0])->second(
-            alpha, bravo[step-1], step, delta
+            alpha, int(bravo[step-1]), step, delta
         );
         const int second = color_to_function_map.find(flash[1])->second(
-            alpha, bravo[step-1], step, delta
+            alpha, int(bravo[step-1]), step, delta
         );
 
         if (color_mix_value == 2) {
@@ -113,10 +113,10 @@ int two_color_flash(const std::string& flash,
 
         const char absent_color = missing_color(flash);
         const int first = color_to_function_map.find(absent_color)->second(
-            alpha, alpha[step-1], step, delta
+            alpha, int(alpha[step-1]), step, delta
         );
         const int second = color_to_function_map.find(absent_color)->second(
-            alpha, bravo[step-1], step, delta
+            alpha, int(bravo[step-1]), step, delta
         );
 
         answer += std::min(first, second);
@@ -135,7 +135,9 @@ int three_color_flash(const std::string& flash,
     static_mod_type<int> answer(mod_limit);
 
     if (color_mix_value == 3) {
-        // TODO
+        answer += int(
+            bravo[step-1] + ((bravo[step-1] % 4) * bravo[0]) - alpha[3]
+        );
     }
 
     return -1;

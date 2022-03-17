@@ -75,7 +75,7 @@ int one_color_flash(const std::string& flash,
     assert(flash.length() == 1);
 
     return color_to_function_map.find(flash[0])->second(
-        alpha[step-1], step, delta
+        int(alpha[step-1]), step, delta
     );
 }
 
@@ -87,10 +87,10 @@ int two_color_flash(const std::string& flash,
     const int color_mix_value = primary_secondary_mix(flash);
 
     const int first = color_to_function_map.find(flash[0])->second(
-        alpha[step-1], step, delta
+        int(alpha[step-1]), step, delta
     );
     const int second = color_to_function_map.find(flash[1])->second(
-        alpha[step-1], step, delta
+        int(alpha[step-1]), step, delta
     );
 
     static_mod_type<int> answer(mod_limit);
@@ -119,7 +119,7 @@ int three_color_flash(const std::string& flash,
     static_mod_type<int> answer(mod_limit);
 
     if (color_mix_value == 3) {
-        answer += alpha[step-1] + alpha[0];
+        answer += int(alpha[step-1]) + int(alpha[0]);
     }
     else if (color_mix_value == 4 || color_mix_value == 5) {
         std::array<int, 3> color_calculations;
@@ -127,7 +127,7 @@ int three_color_flash(const std::string& flash,
         for (int i = 0; i < 3; ++i) {
             color_calculations[i] = (
                 color_to_function_map.find(flash[i])->second(
-                    alpha[step-1], step, delta
+                    int(alpha[step-1]), step, delta
                 )
             );
         }
@@ -146,7 +146,7 @@ int three_color_flash(const std::string& flash,
         }
     }
     else {
-        answer += alpha[step-1] - alpha[0];
+        answer += int(alpha[step-1]) - int(alpha[0]);
     }
 
     return int(answer);
