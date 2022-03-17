@@ -117,6 +117,20 @@ int two_color_flash(const std::string& flash, const std::vector<int>& alpha,
     return int(answer);
 }
 
+int three_color_flash(const std::string& flash, const std::vector<int>& alpha,
+    const std::vector<int>& bravo, const int& step, const int& delta) {
+    assert(flash.length() == 3);
+
+    const int color_mix_value = primary_secondary_mix(flash);
+    static_mod_type<int> answer(mod_limit);
+
+    if (color_mix_value == 3) {
+        // TODO
+    }
+
+    return -1;
+}
+
 } // namespace
 
 } // namespace stages
