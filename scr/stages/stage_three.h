@@ -3,12 +3,12 @@
  *
  * Developed and tested by Brandon Pacewic
  * 
- * stage_two.h
+ * stage_three.h
  */
 
 #pragma once
-#ifndef _STAGE_TWO_H
-#define _STAGE_TWO_H 1
+#ifndef _STAGE_THREE_H
+#define _STAGE_THREE_H 1
 
 #include <string>
 #include <vector>
@@ -18,11 +18,12 @@ using mod_types::mod_type;
 
 namespace stages {
 
-    int two_calculations(const std::string& flash, 
+    int three_calculations(const std::string& flash, 
         const std::vector<mod_type<int>>& alpha, 
         const std::vector<mod_type<int>>& bravo,
+        const std::vector<mod_type<int>>& charlie,
         const int& step, const int& delta);
 
 } // namespace stages
 
-#endif // _STAGE_TWO_H
+#endif // _STAGE_THREE_H

@@ -13,10 +13,14 @@
 #include <string>
 #include <vector>
 
+#include "../math/mod_type.h"
+using mod_types::mod_type;
+
 namespace stages {
 
     int one_calculations(const std::string& flash, 
-        const std::vector<int>& alpha, const int& step, const int& delta);
+        const std::vector<mod_type<int>>& alpha, 
+        const int& step, const int& delta);
 
 } // namespace stages
 
