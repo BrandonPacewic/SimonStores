@@ -66,6 +66,16 @@ char missing_color(const std::string& flash) {
     return answer;
 }
 
+bool is_primary(const char& color) {
+    const std::string primarys = "rbg";
+    return primarys.find(color) != std::string::npos;
+}
+
+bool is_secondary(const char& color) {
+    const std::string secondarys = "cmy";
+    return secondarys.find(color) != std::string::npos;
+}
+
 } // namespace color_determine
 
 #endif // _COLOR_DETERMINE_C

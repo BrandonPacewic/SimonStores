@@ -16,6 +16,10 @@
 #include <string>
 #include <unordered_map>
 
+#include "color_determine.h"
+using color_determine::is_primary;
+using color_determine::is_secondary;
+
 #include "color_sequence.h"
 
 namespace color_sequence {
@@ -24,17 +28,6 @@ namespace {
 
 constexpr int expected_color_sequence_length = 6;
 constexpr int right_cutoff = 2;
-
-// TODO: Could use class enumerations
-const bool is_primary(const char& ch) {
-    const std::string primarys = "rbg";
-    return primarys.find(ch) != std::string::npos; 
-}
-
-const bool is_secondary(const char& ch) {
-    const std::string secondarys = "cmy";
-    return secondarys.find(ch) != std::string::npos;
-}
 
 const std::unordered_map<char, char> color_to_complementary_map = {
     {'r', 'c'}, {'c', 'r'},
