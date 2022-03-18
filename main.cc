@@ -1,75 +1,102 @@
-#include "local/local.hpp"
-using namespace std;
-using namespace local;
+/*
+ * Copyright (c) 2022 Brandon Pacewic
+ *
+ * Developed and tested by Brandon Pacewic
+ * 
+ * main file for SimonStores
+ */
 
-const int STAGE_ONE_FLASHES = 3;
-const int STAGE_TWO_FLASHES = 4;
-const int TOTAL_FLASHES = 5;
+#include <array>
+#include <iostream>
+#include <vector>
+
+#include "scr/math/balanced_ternary_converter.h"
+#include "scr/math/base_36_type.h"
+#include "scr/math/mod_type.h"
+
+#include "scr/stages/stage_one.h"
+#include "scr/stages/stage_two.h"
+#include "scr/stages/stage_three.h"
+
+#include "scr/ruleset/inital_calculations.h"
+#include "scr/ruleset/color_sequence.h"
+
+#include "scr/user_handling/user_input.h"
+
+constexpr int stage_one_flashes = 3;
+constexpr int stage_two_flashes = 4;
+constexpr int total_flashes = 5;
 
 int main() {
     do {
-        cout << "Enter the Serial#(Ex: 12qmt0): ";
-        string serial = user::stringInput("CheckForRequiredSize", 6);
+        std::cout << "Enter the Serial#(Ex: 12qmt0): ";
+        std::string serial = user_input::input_check(6);
+        base_36::base_36_type serial_base(serial);
 
-        cout << "Enter the Order of the Colors in Clockwise Order(Ex: rmybcg): ";
-        string colorOrder = user::stringInput("CheckForRequiredSize", 6);
+        std::cout << "Enter the Order of the Colors" 
+            " in Clockwise Order(Ex: rmybcg): ";
+        std::string color_order = user_input::input_check(6);
+        color_sequence::setup(color_order);
 
-        array<string, TOTAL_FLASHES> stageFlashes;
+        std::array<std::string, total_flashes> stage_flashes;
 
-        for (int i = 0; i < STAGE_ONE_FLASHES; i++) {
-            cout << "Enter flash #" << i + 1 << "(Ex: rmy): "; 
-            stageFlashes[i] = user::stringInput("CheckForMaxSize", 3);
+        for (int i = 0; i < stage_one_flashes; ++i) {
+            std::cout << "Enter flash #" << i + 1 << "(EX: rmy): ";
+            stage_flashes[i] = user_input::input_check(-1, 1, 3);
         }
 
-        array<char, 6> numOrChar;
-        array<int, 6> serialBase36;
-        math::base36Converter(serial, numOrChar, serialBase36);
+        std::vector<
+            mod_types::mod_type<int>
+        > alpha(5, 0), bravo(6, 0), charlie(7, 0);
 
-        vector<int> A(5, 0);
-        array<int, 6> B;
-        array<int, 7> C;
-        preCompute::nato(serialBase36, numOrChar, A, B, C);
-        int D = preCompute::D(serialBase36, numOrChar);
+        alpha.front() = inital_calculations::alpha(serial_base);
+        bravo.front() = inital_calculations::bravo(serial_base);
+        charlie.front() = inital_calculations::charlie(serial_base);
+        const int delta = inital_calculations::delta(serial_base);
 
-        //-----------
-        //-Stage One-
-        //-----------
-
-        //S is for step or n in the manual
-        for (int S = 1; S <= STAGE_ONE_FLASHES; S++) {
-            A[S] = stage::one::calculations(stageFlashes[S - 1], A, S, D);
+        // Stage One
+        for (int step = 1; step <= stage_one_flashes; ++step) {
+            alpha[step] = stages::one_calculations(
+                stage_flashes[step-1], alpha, step, delta
+            );
         }
 
-        stageColorSequence::print(1, colorOrder);
-        balancedTernary::convert(A[3]);
+        color_sequence::print_stage_color_sequence(1); // stage#
+        auto stage_ternary = ternary::balanced_convert(int(alpha[3]));
 
-        //-----------
-        //-Stage Two-
-        //-----------
-
-        cout << "Enter flash #4: ";
-        stageFlashes[3] = user::stringInput("CheckForMaxSize", 3);
-
-        for (int S = 1; S <= STAGE_TWO_FLASHES; S++) {
-            B[S] = stage::two::calculations(stageFlashes[S - 1], A, B, S, D);
+        // Stage Two
+        for (int step = 1; step <= stage_two_flashes; ++step) {
+            alpha[step] = stages::two_calculations(
+                stage_flashes[step-1], alpha, bravo, step, delta
+            );
         }
 
-        stageColorSequence::print(2, colorOrder);
-        balancedTernary::convert(B[4]);
+        color_sequence::print_stage_color_sequence(2); // stage#
+        stage_ternary = ternary::balanced_convert(int(bravo[4]));
 
-        //-------------
-        //-Stage Three-
-        //-------------
-
-        cout << "Enter flash #5: ";
-        stageFlashes[4] = user::stringInput("CheckForMaxSize", 3);
-
-        for (int S = 1; S <= TOTAL_FLASHES; S++) {
-            C[S] = stage::three::calculations(stageFlashes[S - 1], A, B, C, S, D);
+        // Stage Three
+        for (int step = 1; step <= total_flashes; ++step) {
+            charlie[step] = stages::three_calculations(
+                stage_flashes[step-1], alpha, bravo, charlie, step, delta
+            );
         }
 
-        stageColorSequence::print(3, colorOrder);
-        balancedTernary::convert(C[5]);
+        color_sequence::print_stage_color_sequence(3); // stage#
+        stage_ternary = ternary::balanced_convert(int(charlie[5]));
 
-    } while (user::menu());
+    } while ([]() -> bool {
+        char input;
+        std::cout << "Enter 0 to quit or 1 to continue: ";
+        std::cin >> input;
+
+        while (input != '0' || input != '1') {
+            std::cout << "You did not enter a valid input. "
+                "Please try again: ";
+            std::cin >> input;
+        }
+
+        return (input == '0') ? false : true;
+    });
+
+    return 0;
 }
