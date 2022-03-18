@@ -66,12 +66,12 @@ char missing_color(const std::string& flash) {
     return answer;
 }
 
-bool is_primary(const char& color) {
+const bool is_primary(const char& color) {
     const std::string primarys = "rbg";
     return primarys.find(color) != std::string::npos;
 }
 
-bool is_secondary(const char& color) {
+const bool is_secondary(const char& color) {
     const std::string secondarys = "cmy";
     return secondarys.find(color) != std::string::npos;
 }

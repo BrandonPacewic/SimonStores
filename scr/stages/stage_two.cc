@@ -27,10 +27,6 @@ using mod_types::mod_type;
 using color_determine::primary_secondary_mix;
 using color_determine::missing_color;
 
-#include "../ruleset/color_determine.h"
-using color_determine::is_primary;
-using color_determine::is_secondary;
-
 #include "stage_two.h"
 
 namespace stages {
@@ -154,7 +150,7 @@ int three_color_flash(const std::string& flash,
         std::vector<int> color_values(flash.length() + 1, 0);
 
         for (int i = 0; i < int(flash.length()); ++i) {
-            if (is_primary(flash[i])) {
+            if (color_determine::is_primary(flash[i])) {
                 color_values[i] = color_to_function_map.find(flash[i])->second(
                     alpha, int(bravo[step-1]), step, delta
                 );
@@ -176,7 +172,7 @@ int three_color_flash(const std::string& flash,
         std::vector<int> color_values(flash.length() + 1, 0);
 
         for (int i = 0; i < flash.length(); ++i) {
-            if (is_secondary(flash[i])) {
+            if (color_determine::is_secondary(flash[i])) {
                 color_values[i] = color_to_function_map.find(flash[i])->second(
                     bravo, int(alpha[step-1]), step, delta
                 );

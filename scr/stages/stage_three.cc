@@ -14,6 +14,7 @@
 #include <cassert>
 #include <cmath>
 #include <functional>
+#include <numeric>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -153,8 +154,107 @@ int two_color_flash(const std::string& flash,
     return int(answer);
 }
 
+int three_color_flash(const std::string& flash,
+    const std::vector<mod_type<int>>& alpha,
+    const std::vector<mod_type<int>>& bravo,
+    const std::vector<mod_type<int>>& charlie,
+    const int& step, const int& delta) {
+    assert(flash.length() == 3);
+
+    const int color_mix_value = primary_secondary_mix(flash);
+    static_mod_type<int> answer(mod_limit);
+
+    if (color_mix_value == 3) {
+        answer += int(
+            (charlie[step-1] + ((charlie[step-1] % 3) * charlie[0])
+            ) - (
+                ((bravo[step-1] % 3 * bravo[0])
+            ) + (
+                ((alpha[step-1] % 3) * alpha[0]))
+            )
+        );
+    }
+    else if (color_mix_value == 4) {
+        std::vector<int> color_values(flash.length() + 2, 0);
+
+        for (int i = 0; i < flash.length(); ++i) {
+            if (color_determine::is_primary(flash[i])) {
+                color_values[i] = color_to_function_map.find(flash[i])->second(
+                    alpha, bravo, int(charlie[step-1]), step, delta
+                );
+            }
+            else {
+                color_values[3] = color_to_function_map.find(flash[i])->second(
+                    alpha, bravo, int(bravo[step-1]), step, delta
+                );
+                color_values[4] = color_to_function_map.find(flash[i])->second(
+                    alpha, bravo, int(alpha[step-1]), step, delta
+                );
+            }
+        }
+
+        answer += std::accumulate(color_values.begin(), color_values.end(), 0);
+    }
+    else if (color_mix_value == 5) {
+        std::vector<int> color_values(flash.length() + 2, 0);
+
+        for (int i = 0; i < flash.length(); ++i) {
+            if (color_determine::is_secondary(flash[i])) {
+                color_values[i] = color_to_function_map.find(flash[i])->second(
+                    alpha, bravo, int(charlie[step-1]), step, delta
+                );
+            }
+            else {
+                color_values[3] = color_to_function_map.find(flash[i])->second(
+                    alpha, bravo, int(bravo[step-1]), step, delta
+                );
+                color_values[4] = color_to_function_map.find(flash[i])->second(
+                    alpha, bravo, int(alpha[step-1]), step, delta
+                );
+            }
+        }
+
+        answer += std::accumulate(color_values.begin(), color_values.end(), 0);
+    }
+    else {
+        answer += int(
+            (charlie[step-1] + ((charlie[0] % 3) * charlie[step-1])
+            ) - (
+                (bravo[0] % 3) * bravo[step-1]
+            ) + (
+                (alpha[0] % 3) * alpha[step-1]
+            )
+        );
+    }
+
+    return int(answer);
+}
 
 } // namespace
+
+int three_calculations(const std::string& flash,
+    const std::vector<mod_type<int>>& alpha,
+    const std::vector<mod_type<int>>& bravo,
+    const std::vector<mod_type<int>>& charlie,
+    const int& step, const int& delta) {
+    assert(flash.length() <= 3);
+
+    int answer = -999;
+
+    switch (flash.length()) {
+        case 1:
+            answer = one_color_flash(flash, alpha, bravo, charlie, step, delta);
+            break;
+        case 2:
+            answer = two_color_flash(flash, alpha, bravo, charlie, step, delta);
+            break;
+        case 3:
+            answer = three_color_flash(flash, alpha, bravo, charlie, step, delta);
+            break;
+    }  
+
+    return answer;
+}
 
 } // namespace stages
 
