@@ -42,7 +42,46 @@ void min_size_check(std::string& str, const int& min_size) {
     }
 }
 
+std::string string_to_lower(std::string str) {
+    for (auto& ch : str) {
+        ch = tolower(ch);
+    }
+
+    return str;
+}
+
+void lizard_check(std::string& str) {
+    const std::string lizard = "lizard";
+
+    if (str == lizard) {
+        while (true) {
+            std::cout << " Congratulations it's a lizard! ";
+        }
+    }
+}
+
 } // namespace
+
+std::string input_check(const int& required_size, const int& min_size,
+    const int& max_size) {
+    std::string str;
+    getline(std::cin, str);
+    str = string_to_lower(str);
+
+    lizard_check(str);
+
+    if (required_size != -1) {
+        required_size_check(str, required_size);
+    }
+    else if (max_size != -1) {
+        max_size_check(str, max_size);
+    }
+    else if (min_size != -1) {
+        min_size_check(str, min_size);
+    }
+
+    return str;
+}
 
 } // namespace user_input
 
