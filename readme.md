@@ -1,4 +1,4 @@
-# Simon Stores Code v1.2
+# Simon Stores Code v2.0
 
 Simon Stores is a complex math problem in the game Keep Talking and Nobody Explodes
 
