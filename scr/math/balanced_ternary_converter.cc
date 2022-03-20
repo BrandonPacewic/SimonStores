@@ -77,7 +77,12 @@ std::string convert_to_symbols(const std::vector<int>& balanced_ternary,
     return symbols;
 }
 
-constexpr int min_value = 364;
+// Const value - It is always assumed that this is the number being converted
+// to teranry, this is because the length of the ternary symbol string is
+// required to be of length 6. 364 is the largest possible number that can be
+// represented in ternary with only 6 digits. You will notice that this number
+// is one less that the ceil used for the static_mod_type
+constexpr int const_value = 364;
 std::unordered_map<int, std::vector<int>> value_to_values_map;
 
 } // namespace
@@ -90,12 +95,12 @@ std::string balanced_convert(int value) {
         value = abs(value);
     }
 
-    if (!value_to_values_map.count(min_value)) {
-        value_to_values_map[min_value] = initalize_values(min_value);
+    if (!value_to_values_map.count(const_value)) {
+        value_to_values_map[const_value] = initalize_values(const_value);
     }
 
     auto ternary = make_ternary(
-        value_to_values_map.find(min_value)->second, value);
+        value_to_values_map.find(const_value)->second, value);
 
     convert_to_balanced(ternary);
     auto symbols = convert_to_symbols(ternary, invert_signs);
