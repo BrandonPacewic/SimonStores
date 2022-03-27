@@ -36,3 +36,6 @@
 
 # Other
 *.txt
+
+# VSCode
+.vscode
