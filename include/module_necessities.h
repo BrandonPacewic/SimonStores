@@ -11,9 +11,9 @@
 
 #pragma once
 #ifndef _MODULE_NECESSITIES_H
-#define _MODULE_NECESSITIES_H
+#define _MODULE_NECESSITIES_H 1
 
-// Math + math types
+// math + math types
 #include "balanced_ternary_converter.h"
 #include "mod_type.h"
 #include "static_mod_type.h"
