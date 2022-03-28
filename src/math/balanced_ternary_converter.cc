@@ -15,7 +15,7 @@
 #include <unordered_map>
 #include <vector>
 
-#include "balanced_ternary_converter.h"
+#include "../../include/balanced_ternary_converter.h"
 
 namespace ternary {
 

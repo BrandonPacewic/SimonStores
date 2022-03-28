@@ -15,7 +15,7 @@
 #include <unordered_set>
 #include <vector>
 
-#include "color_determine.h"
+#include "../../include/color_determine.h"
 
 namespace color_determine {
 

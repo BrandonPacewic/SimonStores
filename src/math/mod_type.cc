@@ -13,7 +13,7 @@
 #include <iostream>
 #include <istream>
 
-#include "mod_type.h"
+#include "../../include/mod_type.h"
 using mod_types::mod_type;
 
 template<typename _Tp>

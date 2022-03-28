@@ -14,7 +14,7 @@
 #include <iostream>
 #include <istream>
 
-#include "static_mod_type.h"
+#include "../../include/static_mod_type.h"
 using mod_types::static_mod_type;
 using mod_types::ceil_num;
 

@@ -16,11 +16,11 @@
 #include <string>
 #include <unordered_map>
 
-#include "color_determine.h"
+#include "../../include/color_determine.h"
 using color_determine::is_primary;
 using color_determine::is_secondary;
 
-#include "color_sequence.h"
+#include "../../include/color_sequence.h"
 
 namespace color_sequence {
 

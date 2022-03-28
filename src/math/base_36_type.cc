@@ -12,7 +12,7 @@
 #include <string>
 #include <vector>
 
-#include "base_36_type.h"
+#include "../../include/base_36_type.h"
 using base_36::base_36_type;
 
 base_36_type::base_36_type(std::string _char_base)

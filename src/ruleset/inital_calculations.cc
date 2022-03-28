@@ -12,8 +12,8 @@
 #include <cassert>
 #include <vector>
 
-#include "../math/base_36_type.h"
-#include "../math/static_mod_type.h"
+#include "../../include/base_36_type.h"
+#include "../../include/static_mod_type.h"
 using base_36::base_36_type;
 using mod_types::static_mod_type;
 
