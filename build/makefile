@@ -31,3 +31,26 @@ mod_type.o: ${MATH}/mod_type.cc ${INCLUDE}/mod_type.h
 static_mod_type.o: ${MATH}/static_mod_type.cc ${INCLUDE}/static_mod_type.h
 	${CPP} ${DEBUG} -c ${MATH}/static_mod_type.cc -o static_mod_type.o
 
+# Ruleset object files
+color_determine.o: ${RULESET}/color_determine.cc ${INCLUDE}/color_determine.h
+	${CPP} ${DEBUG} -c ${RULESET}/color_determine.cc -o color_determine.o
+
+color_sequence.o: ${RULESET}/color_sequence.cc ${INCLUDE}/color_sequence.h
+	${CPP} ${DEBUG} -c ${RULESET}/color_sequence.cc -o color_sequence.o
+
+inital_calculations.o: ${RULESET}/inital_calculations.cc ${INCLUDE}/inital_calculations.h
+	${CPP} ${DEBUG} -c ${RULESET}/inital_calculations.cc -o inital_calculations.o
+
+# Stages object files
+stage_one.o: ${STAGES}/stage_one.cc ${INCLUDE}/stage_one.h
+	${CPP} ${DEBUG} -c ${STAGES}/stage_one.cc -o stage_one.o
+
+stage_two.o: ${STAGES}/stage_two.cc ${INCLUDE}/stage_two.h
+	${CPP} ${DEBUG} -c ${STAGES}/stage_two.cc -o stage_two.o
+
+stage_three.o: ${STAGES}/stage_three.cc ${INCLUDE}/stage_three.h
+	${CPP} ${DEBUG} -c ${STAGES}/stage_three.cc -o stage_three.o
+
+user_handling.o: ${USER_HANDLING}/user_handling.cc ${INCLUDE}/user_handling.h
+	${CPP} ${DEBUG} -c ${USER_HANDLING}/user_handling.cc -o user_handeling.o
+
