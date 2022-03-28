@@ -10,7 +10,7 @@
 #ifndef _INITAL_CALCULATIONS_H
 #define _INITAL_CALCULATIONS_H 1
 
-#include "../math/base_36_type.h"
+#include "base_36_type.h"
 using base_36::base_36_type;
 
 namespace inital_calculations {

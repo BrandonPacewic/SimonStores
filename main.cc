@@ -10,18 +10,7 @@
 #include <iostream>
 #include <vector>
 
-#include "scr/math/balanced_ternary_converter.h"
-#include "scr/math/base_36_type.h"
-#include "scr/math/mod_type.h"
-
-#include "scr/stages/stage_one.h"
-#include "scr/stages/stage_two.h"
-#include "scr/stages/stage_three.h"
-
-#include "scr/ruleset/inital_calculations.h"
-#include "scr/ruleset/color_sequence.h"
-
-#include "scr/user_handling/user_input.h"
+#include "include/module_necessities.h"
 
 constexpr int stage_one_flashes = 3;
 constexpr int stage_two_flashes = 4;

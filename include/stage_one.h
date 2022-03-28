@@ -13,7 +13,7 @@
 #include <string>
 #include <vector>
 
-#include "../math/mod_type.h"
+#include "mod_type.h"
 using mod_types::mod_type;
 
 namespace stages {
