@@ -1,0 +1,20 @@
+# *
+# * Copyright (c) 2022 Brandon Pacewic
+# *
+# * Developed and tested by Brandon Pacewic
+# * 
+# * MakeFile for Simon Stores
+# *
+
+# Options
+CPP = gcc
+OPTS = -o
+DEBUG = -g
+
+# Expected File Directories
+MATH = ../scr/math/
+RULESET = ../src/ruleset/
+STAGES = ../src/stages/
+USER_HANDLING = ../src/user_handling/
+MAIN = ../
+
