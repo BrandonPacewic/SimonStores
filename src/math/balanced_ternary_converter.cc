@@ -24,8 +24,8 @@ namespace {
 std::vector<int> initalize_values(const int& value) {
     std::vector<int> values;
 
-    for (int i = 0; pow(3, i) <= value; ++i) {
-        values.push_back(pow(3, i));
+    for (int i = 0; std::pow(3, i) <= value; ++i) {
+        values.push_back(std::pow(3, i));
     }
 
     std::reverse(values.begin(), values.end());
