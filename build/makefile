@@ -1,5 +1,5 @@
 # *
-# * Copyright {c} 2022 Brandon Pacewic
+# * Copyright (c) 2022 Brandon Pacewic
 # *
 # * Developed and tested by Brandon Pacewic
 # * 
@@ -17,6 +17,13 @@ RULESET = ../src/ruleset
 STAGES = ../src/stages
 USER_HANDLING = ../src/user_handling
 MAIN = ..
+
+# Main executable
+# TODO: Create a list of all dependencies here
+executable: main.o
+	${CPP} ${DEBUG} main.o balanced_ternary_converter.o base_36_type.o 
+	color_determine.o color_sequence.o inital_calculations.o mod_type.o 
+	stage_one.o stage_two.o stage_three.o static_mod_type.o user_input.o -o main
 
 # Math object files
 balanced_ternary_converter.o: ${MATH}/balanced_ternary_converter.cc ${INCLUDE}/balanced_ternary_converter.h
@@ -51,6 +58,8 @@ stage_two.o: ${STAGES}/stage_two.cc ${INCLUDE}/stage_two.h
 stage_three.o: ${STAGES}/stage_three.cc ${INCLUDE}/stage_three.h
 	${CPP} ${DEBUG} -c ${STAGES}/stage_three.cc -o stage_three.o
 
-user_handling.o: ${USER_HANDLING}/user_handling.cc ${INCLUDE}/user_handling.h
-	${CPP} ${DEBUG} -c ${USER_HANDLING}/user_handling.cc -o user_handeling.o
+user_input.o: ${USER_HANDLING}/user_input.cc ${INCLUDE}/user_input.h
+	${CPP} ${DEBUG} -c ${USER_HANDLING}/user_input.cc -o user_input.o
 
+main.o: ${MAIN}/main.cc
+	${CPP} ${DEBUG} -c ${MAIN}/main.cc -o main.o
