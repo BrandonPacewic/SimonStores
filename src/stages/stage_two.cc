@@ -17,17 +17,17 @@
 #include <unordered_map>
 #include <vector>
 
-#include "../math/static_mod_type.h"
+#include "../../include/static_mod_type.h"
 using mod_types::static_mod_type;
 
-#include "../math/mod_type.h"
+#include "../../include/mod_type.h"
 using mod_types::mod_type;
 
-#include "../ruleset/color_determine.h"
+#include "../../include/color_determine.h"
 using color_determine::primary_secondary_mix;
 using color_determine::missing_color;
 
-#include "stage_two.h"
+#include "../../include/stage_two.h"
 
 namespace stages {
 
