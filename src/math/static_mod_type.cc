@@ -6,7 +6,6 @@
  * static_mod_type.cc
  */
 
-
 #ifndef _BRANDON_STATIC_MOD_TYPE_C
 #define _BRANDON_STATIC_MOD_TYPE_C 1
 
