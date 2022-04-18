@@ -54,109 +54,80 @@ std::unordered_map<char, int> create_color_placement_map(
     return color_placement_map;
 }
 
-void shift_right(const std::unordered_map<char, int>& color_placment_map,
-    std::string& base_color_sequence) {
-    constexpr int required_placement = 0;
+std::string shift_right(std::string& base_color_sequence) {
+    std::next_permutation(
+        base_color_sequence.begin(), 
+        base_color_sequence.end()
+    );
 
-    if (color_placment_map.find('y')->second == required_placement) {
-        std::next_permutation(base_color_sequence.begin(), 
-            base_color_sequence.end());
-    }
+    return base_color_sequence;
 }
 
-void swap_complementary(const std::unordered_map<char, int>& color_placment_map,
-    std::string& base_color_sequence) {
-    const int opposite_adjustment = int(base_color_sequence.length()) / 2;
-    const auto& red_placement = color_placment_map.find('r')->second;
-    const auto& cyan_placement = color_placment_map.find('c')->second;
-
-    if (red_placement + opposite_adjustment == cyan_placement ||
-        cyan_placement + opposite_adjustment == red_placement) {
-        for (auto& ch : base_color_sequence) {
-            ch = color_to_complementary_map.find(ch)->second;
-        }
+std::string swap_complementary(std::string& base_color_sequence) {
+    for (auto& ch : base_color_sequence) {
+        ch = color_to_complementary_map.find(ch)->second;
     }
-}
-
-void cycle_primary(const std::unordered_map<char, int>& color_placment_map,
-    std::string& base_color_sequence) {
-    const auto& green_placement = color_placment_map.find('g')->second;
-    const std::array<int, 2> required_placements = {0, 5};
     
-    if (green_placement == required_placements[0] || 
-        green_placement == required_placements[1]) {
-        for (auto& ch : base_color_sequence) {
-            if (is_primary(ch)) {
-                ch = primary_cycle_map.find(ch)->second;
-            }
-        }
-    }
+    return base_color_sequence;
 }
 
-void cycle_secondary(const std::unordered_map<char, int>& color_placment_map,
-    std::string& base_color_sequence) {
-    const auto& magenta_placement = color_placment_map.find('m')->second;
-
-    if (magenta_placement == 2 || magenta_placement == 3) {
-        for (auto& ch : base_color_sequence) {
-            if (is_secondary(ch)) {
-                ch = secondary_cycle_map.find(ch)->second;
-            }
+std::string cycle_primary(std::string& base_color_sequence) {
+    for (auto& ch : base_color_sequence) {
+        if (is_primary(ch)) {
+            ch = primary_cycle_map.find(ch)->second;
         }
     }
+
+    return base_color_sequence;
 }
 
-void swap_blue_with_opposite(
-    const std::unordered_map<char, int>& color_placment_map, 
-    std::string& base_color_sequence) {
-    const auto& blue_placement = color_placment_map.find('b')->second;
-    const bool blue_on_right = blue_placement <= right_cutoff;
-    
-    const auto& yellow_placement = color_placment_map.find('y')->second;
-    const bool yellow_on_right = yellow_placement <= right_cutoff;
-
-    if (blue_on_right != yellow_on_right) {
-        for (int i = 0; i < int(base_color_sequence.length()); ++i) {
-            if (base_color_sequence[i] == 'b') {
-                const int opposite = (i > right_cutoff) ? i - 3 : i + 3;
-                base_color_sequence[i] = base_color_sequence[opposite];
-                base_color_sequence[opposite] = 'b';
-                break;
-            }
+std::string cycle_secondary(std::string& base_color_sequence) {
+    for (auto& ch : base_color_sequence) {
+        if (is_secondary(ch)) {
+            ch = secondary_cycle_map.find(ch)->second;
         }
     }
+
+    return base_color_sequence;
 }
 
-void swap_red_yellow(const std::unordered_map<char, int>& color_placment_map,
-    std::string& base_color_sequence) {
-    const auto& red_placement = color_placment_map.find('r')->second;
-
-    if (red_placement <= right_cutoff) {
-        for (auto& ch : base_color_sequence) {
-            if (ch == 'y') {
-                ch = 'r';
-            }
-            else if (ch == 'r') {
-                ch = 'y';
-            }
+std::string swap_blue_with_opposite(std::string& base_color_sequence) {
+    for (int i = 0; i < int(base_color_sequence.length()); ++i) {
+        if (base_color_sequence[i] == 'b') {
+            const int opposite = (i > right_cutoff) ? i - 3 : i + 3;
+            base_color_sequence[i] = base_color_sequence[opposite];
+            base_color_sequence[opposite] = 'b';
+            break;
         }
     }
+
+    return base_color_sequence;
 }
 
-void swap_green_cyan(const std::unordered_map<char, int>& color_placment_map,
-    std::string& base_color_sequence) {
-    const auto& blue_placement = color_placment_map.find('b')->second;
-
-    if (blue_placement > right_cutoff) {
-        for (auto& ch : base_color_sequence) {
-            if (ch == 'g') {
-                ch = 'c';
-            }
-            else if (ch == 'c') {
-                ch = 'g';
-            }
+std::string swap_red_yellow(std::string& base_color_sequence) {
+    for (auto& ch : base_color_sequence) {
+        if (ch == 'y') {
+            ch = 'r';
+        }
+        else if (ch == 'r') {
+            ch = 'y';
         }
     }
+
+    return base_color_sequence;
+}
+
+std::string swap_green_cyan(std::string& base_color_sequence) {
+    for (auto& ch : base_color_sequence) {
+        if (ch == 'g') {
+            ch = 'c';
+        }
+        else if (ch == 'c') {
+            ch = 'g';
+        }
+    }
+
+    return base_color_sequence;
 }
 
 const std::string get_base_color_sequence(const int& stage) {
@@ -179,13 +150,56 @@ void setup(const std::string& color_sequence) {
 
 void print_stage_color_sequence(const int& stage) {
     auto base_color_sequence = get_base_color_sequence(stage);
-    shift_right(color_placement_map, base_color_sequence);
-    swap_complementary(color_placement_map, base_color_sequence);
-    cycle_primary(color_placement_map, base_color_sequence);
-    cycle_secondary(color_placement_map, base_color_sequence);
-    swap_blue_with_opposite(color_placement_map, base_color_sequence);
-    swap_red_yellow(color_placement_map, base_color_sequence);
-    swap_green_cyan(color_placement_map, base_color_sequence);
+    const auto& yellow_placement = color_placement_map.find('y')->second;
+
+    // Yellow in position 0
+    if (yellow_placement == 0) {
+        base_color_sequence = shift_right(base_color_sequence);
+    }
+
+    const auto& red_placement = color_placement_map.find('r')->second;
+    const auto& cyan_placement = color_placement_map.find('c')->second;
+
+    // Red and cyan opposite
+    if (red_placement + int(base_color_sequence.length()) == cyan_placement ||
+            cyan_placement + int(
+                base_color_sequence.length()) == red_placement) {
+        base_color_sequence = swap_complementary(base_color_sequence);
+    }
+
+    const auto& green_placement = color_placement_map.find('g')->second;
+
+    // Green in first or last position
+    if (green_placement == 0 || green_placement == 5) {
+        base_color_sequence = cycle_primary(base_color_sequence);
+    }
+
+    const auto& magenta_placement = color_placement_map.find('m')->second;
+
+    // Magenta in 2nd or 3rd
+    if (magenta_placement == 2 || magenta_placement == 3) {
+        base_color_sequence = cycle_secondary(base_color_sequence);
+    }
+
+    const auto& blue_placement = color_placement_map.find('b')->second;
+    const bool blue_on_right = blue_placement <= right_cutoff;
+
+    const bool yellow_on_right = yellow_placement <= right_cutoff;
+
+    // Blue or yellow on right but not both
+    if (blue_on_right != yellow_on_right) {
+        base_color_sequence = swap_blue_with_opposite(base_color_sequence);
+    }
+
+    // Red on right
+    if (red_placement <= right_cutoff) {
+        base_color_sequence = swap_red_yellow(base_color_sequence);
+    }
+
+    // Blue on left
+    if (blue_placement > right_cutoff) {
+        base_color_sequence = swap_green_cyan(base_color_sequence);
+    }
 
     std::cout << base_color_sequence << '\n';
 }
