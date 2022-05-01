@@ -6,9 +6,6 @@
  * color_determine.cc
  */
 
-#ifndef _COLOR_DETERMINE_C
-#define _COLOR_DETERMINE_C 1
-
 #include "color_determine.h"
 
 #include <numeric>
@@ -81,5 +78,3 @@ const bool is_secondary(const char& color) {
 }
 
 }  // namespace color_determine
-
-#endif  // _COLOR_DETERMINE_C

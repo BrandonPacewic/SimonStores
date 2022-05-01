@@ -7,8 +7,8 @@
  */
 
 #pragma once
-#ifndef _color_sequence_H
-#define _color_sequence_H 1
+#ifndef SIMON_STORES_RULESET_COLOR_SEQUENCE_H
+#define SIMON_STORES_RULESET_COLOR_SEQUENCE_H
 
 #include <string>
 
@@ -18,10 +18,8 @@ namespace color_sequence {
 // Should only be called once
 void setup(const std::string& color_sequence);
 
-// Outputs the color sequence submit order for the desired stage
-// the modual color sequence is not needed thanks to setup
-void print_stage_color_sequence(const int& stage);
+std::string determine_stage_color_sequence(const int& stage);
 
 } // namespace color_sequence
 
-#endif // _color_sequence_H
+#endif // SIMON_STORES_RULESET_COLOR_SEQUENCE_H

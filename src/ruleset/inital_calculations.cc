@@ -6,22 +6,23 @@
  * inital_calculations.cc
  */
 
-#ifndef _INITAL_CALCULATIONS_C
-#define _INITAL_CALCULATIONS_C 1
+#include "inital_calculations.h"
 
 #include <cassert>
+#include <cstdint>
 #include <vector>
 
 #include "../math/base_36_type.h"
 #include "../math/static_mod_type.h"
+
 using base_36::base_36_type;
 using mod_types::static_mod_type;
 
 namespace inital_calculations {
 
-constexpr int mod_limit = 365;
-constexpr int base_36_factor = 36;
-constexpr int character_add = 9;
+constexpr uint16_t mod_limit = 365;
+constexpr uint16_t base_36_factor = 36;
+constexpr uint16_t character_add = 9;
 
 int alpha(const base_36_type& serial_base) {
     static_mod_type<int> first(mod_limit), second(mod_limit);
@@ -84,7 +85,7 @@ int delta(const base_36_type& serial_base) {
     const auto& serial_is_number = serial_base.is_number();
     const auto& serial_number_base = serial_base.number_base();
 
-    for (int i = 0; i < int(serial_number_base.size()); ++i) {
+    for (std::size_t i = 0; i < serial_number_base.size(); ++i) {
         if (serial_is_number[i]) {
             delta += serial_number_base[i];
         } else {
@@ -96,5 +97,3 @@ int delta(const base_36_type& serial_base) {
 }
 
 }  // namespace inital_calculations
-
-#endif  // _INITAL_CALCULATIONS_C

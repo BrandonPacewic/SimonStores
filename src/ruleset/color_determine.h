@@ -7,8 +7,8 @@
  */
 
 #pragma once
-#ifndef _COLOR_DETERMINE_H
-#define _COLOR_DETERMINE_H 1
+#ifndef SIMON_STORES_RULESET_COLOR_DETERMINE_H
+#define SIMON_STORES_RULESET_COLOR_DETERMINE_H
 
 #include <string>
 
@@ -21,4 +21,4 @@ const bool is_secondary(const char& color);
 
 } // namespace color_determine
 
-#endif // _COLOR_DETERMINE_H
+#endif // SIMON_STORES_RULESET_COLOR_DETERMINE_H
