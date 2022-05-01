@@ -2,7 +2,7 @@
  * Copyright (c) 2022 Brandon Pacewic
  *
  * Developed and tested by Brandon Pacewic
- * 
+ *
  * main file for SimonStores
  */
 
@@ -13,14 +13,11 @@
 #include "scr/math/balanced_ternary_converter.h"
 #include "scr/math/base_36_type.h"
 #include "scr/math/mod_type.h"
-
-#include "scr/stages/stage_one.h"
-#include "scr/stages/stage_two.h"
-#include "scr/stages/stage_three.h"
-
-#include "scr/ruleset/inital_calculations.h"
 #include "scr/ruleset/color_sequence.h"
-
+#include "scr/ruleset/inital_calculations.h"
+#include "scr/stages/stage_one.h"
+#include "scr/stages/stage_three.h"
+#include "scr/stages/stage_two.h"
 #include "scr/user_handling/user_input.h"
 
 constexpr int stage_one_flashes = 3;
@@ -33,8 +30,8 @@ int main() {
         std::string serial = user_input::input_check(6);
         base_36::base_36_type serial_base(serial);
 
-        std::cout << "Enter the Order of the Colors" 
-            " in Clockwise Order(Ex: rmybcg): ";
+        std::cout << "Enter the Order of the Colors"
+                     " in Clockwise Order(Ex: rmybcg): ";
         std::string color_order = user_input::input_check(6);
         color_sequence::setup(color_order);
 
@@ -45,9 +42,8 @@ int main() {
             stage_flashes[i] = user_input::input_check(-1, 1, 3);
         }
 
-        std::vector<
-            mod_types::mod_type<int>
-        > alpha(5, 0), bravo(6, 0), charlie(7, 0);
+        std::vector<mod_types::mod_type<int> > alpha(5, 0), bravo(6, 0),
+            charlie(7, 0);
 
         alpha.front() = inital_calculations::alpha(serial_base);
         bravo.front() = inital_calculations::bravo(serial_base);
@@ -56,32 +52,29 @@ int main() {
 
         // Stage One
         for (int step = 1; step <= stage_one_flashes; ++step) {
-            alpha[step] = stages::one_calculations(
-                stage_flashes[step-1], alpha, step, delta
-            );
+            alpha[step] = stages::one_calculations(stage_flashes[step - 1],
+                                                   alpha, step, delta);
         }
 
-        color_sequence::print_stage_color_sequence(1); // stage#
+        color_sequence::print_stage_color_sequence(1);  // stage#
         auto stage_ternary = ternary::balanced_convert(int(alpha[3]));
 
         // Stage Two
         for (int step = 1; step <= stage_two_flashes; ++step) {
-            alpha[step] = stages::two_calculations(
-                stage_flashes[step-1], alpha, bravo, step, delta
-            );
+            alpha[step] = stages::two_calculations(stage_flashes[step - 1],
+                                                   alpha, bravo, step, delta);
         }
 
-        color_sequence::print_stage_color_sequence(2); // stage#
+        color_sequence::print_stage_color_sequence(2);  // stage#
         stage_ternary = ternary::balanced_convert(int(bravo[4]));
 
         // Stage Three
         for (int step = 1; step <= total_flashes; ++step) {
             charlie[step] = stages::three_calculations(
-                stage_flashes[step-1], alpha, bravo, charlie, step, delta
-            );
+                stage_flashes[step - 1], alpha, bravo, charlie, step, delta);
         }
 
-        color_sequence::print_stage_color_sequence(3); // stage#
+        color_sequence::print_stage_color_sequence(3);  // stage#
         stage_ternary = ternary::balanced_convert(int(charlie[5]));
 
     } while ([]() -> bool {
@@ -91,7 +84,7 @@ int main() {
 
         while (input != '0' || input != '1') {
             std::cout << "You did not enter a valid input. "
-                "Please try again: ";
+                         "Please try again: ";
             std::cin >> input;
         }
 

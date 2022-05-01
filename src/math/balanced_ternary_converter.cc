@@ -2,20 +2,20 @@
  * Copyright (c) 2022 Brandon Pacewic
  *
  * Developed and tested by Brandon Pacewic
- * 
+ *
  * balanced_ternary_converter.cc
  */
 
 #ifndef _BALANCED_TERNARY_CONVERTER_C
 #define _BALANCED_TERNARY_CONVERTER_C 1
 
+#include "balanced_ternary_converter.h"
+
 #include <algorithm>
 #include <cmath>
 #include <string>
 #include <unordered_map>
 #include <vector>
-
-#include "balanced_ternary_converter.h"
 
 namespace ternary {
 
@@ -52,24 +52,22 @@ void convert_to_balanced(std::vector<int>& ternary) {
     for (int i = ternary.size() - 1; i >= 0; --i) {
         if (ternary[i] == 3) {
             ternary[i] = 0;
-            ++ternary[i-1];
-        }
-        else if (ternary[i] == 2) {
+            ++ternary[i - 1];
+        } else if (ternary[i] == 2) {
             ternary[i] = -1;
-            ++ternary[i-1];
+            ++ternary[i - 1];
         }
     }
 }
 
 std::string convert_to_symbols(const std::vector<int>& balanced_ternary,
-    const bool& invert_signs) {
+                               const bool& invert_signs) {
     std::string symbols(balanced_ternary.size(), '0');
 
     for (int i = 0; i < int(balanced_ternary.size()); ++i) {
         if (balanced_ternary[i] == 1) {
             symbols[i] = (invert_signs) ? '-' : '+';
-        }
-        else if (balanced_ternary[i] == -1) {
+        } else if (balanced_ternary[i] == -1) {
             symbols[i] = (invert_signs) ? '+' : '-';
         }
     }
@@ -85,7 +83,7 @@ std::string convert_to_symbols(const std::vector<int>& balanced_ternary,
 constexpr int const_value = 364;
 std::unordered_map<int, std::vector<int>> value_to_values_map;
 
-} // namespace
+}  // namespace
 
 std::string balanced_convert(int value) {
     bool invert_signs = false;
@@ -99,8 +97,8 @@ std::string balanced_convert(int value) {
         value_to_values_map[const_value] = initalize_values(const_value);
     }
 
-    auto ternary = make_ternary(
-        value_to_values_map.find(const_value)->second, value);
+    auto ternary =
+        make_ternary(value_to_values_map.find(const_value)->second, value);
 
     convert_to_balanced(ternary);
     auto symbols = convert_to_symbols(ternary, invert_signs);
@@ -108,6 +106,6 @@ std::string balanced_convert(int value) {
     return symbols;
 }
 
-} // namespace ternary
+}  // namespace ternary
 
-#endif // _BALANCED_TERNARY_CONVERTER_C
+#endif  // _BALANCED_TERNARY_CONVERTER_C
