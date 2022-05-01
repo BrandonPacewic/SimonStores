@@ -2,7 +2,7 @@
  * Copyright (c) 2022 Brandon Pacewic
  *
  * Developed and tested by Brandon Pacewic
- * 
+ *
  * color_sequence.cc
  */
 
@@ -30,18 +30,13 @@ constexpr int expected_color_sequence_length = 6;
 constexpr int right_cutoff = 2;
 
 const std::unordered_map<char, char> color_to_complementary_map = {
-    {'r', 'c'}, {'c', 'r'},
-    {'g', 'm'}, {'m', 'g'},
-    {'b', 'y'}, {'y', 'b'}
-};
+    {'r', 'c'}, {'c', 'r'}, {'g', 'm'}, {'m', 'g'}, {'b', 'y'}, {'y', 'b'}};
 
 const std::unordered_map<char, char> primary_cycle_map = {
-    {'r', 'g'}, {'g', 'b'}, {'b', 'r'}
-};
+    {'r', 'g'}, {'g', 'b'}, {'b', 'r'}};
 
 const std::unordered_map<char, char> secondary_cycle_map = {
-    {'c', 'm'}, {'m', 'y'}, {'y', 'c'}
-};
+    {'c', 'm'}, {'m', 'y'}, {'y', 'c'}};
 
 std::unordered_map<char, int> create_color_placement_map(
     const std::string& color_sequence) {
@@ -55,10 +50,8 @@ std::unordered_map<char, int> create_color_placement_map(
 }
 
 std::string shift_right(std::string& base_color_sequence) {
-    std::next_permutation(
-        base_color_sequence.begin(), 
-        base_color_sequence.end()
-    );
+    std::next_permutation(base_color_sequence.begin(),
+                          base_color_sequence.end());
 
     return base_color_sequence;
 }
@@ -67,7 +60,7 @@ std::string swap_complementary(std::string& base_color_sequence) {
     for (auto& ch : base_color_sequence) {
         ch = color_to_complementary_map.find(ch)->second;
     }
-    
+
     return base_color_sequence;
 }
 
@@ -108,8 +101,7 @@ std::string swap_red_yellow(std::string& base_color_sequence) {
     for (auto& ch : base_color_sequence) {
         if (ch == 'y') {
             ch = 'r';
-        }
-        else if (ch == 'r') {
+        } else if (ch == 'r') {
             ch = 'y';
         }
     }
@@ -121,8 +113,7 @@ std::string swap_green_cyan(std::string& base_color_sequence) {
     for (auto& ch : base_color_sequence) {
         if (ch == 'g') {
             ch = 'c';
-        }
-        else if (ch == 'c') {
+        } else if (ch == 'c') {
             ch = 'g';
         }
     }
@@ -132,17 +123,16 @@ std::string swap_green_cyan(std::string& base_color_sequence) {
 
 const std::string get_base_color_sequence(const int& stage) {
     assert(stage >= 1 && stage <= 3);
-    
-    const std::array<std::string, 3> base_color_sequences = {
-        "rgbcmy", "ybgmcr", "bmrygc"
-    };
+
+    const std::array<std::string, 3> base_color_sequences = {"rgbcmy", "ybgmcr",
+                                                             "bmrygc"};
 
     return base_color_sequences[stage - 1];
 }
 
 std::unordered_map<char, int> color_placement_map;
 
-} // namespace
+}  // namespace
 
 void setup(const std::string& color_sequence) {
     color_placement_map = create_color_placement_map(color_sequence);
@@ -162,8 +152,7 @@ void print_stage_color_sequence(const int& stage) {
 
     // Red and cyan opposite
     if (red_placement + int(base_color_sequence.length()) == cyan_placement ||
-            cyan_placement + int(
-                base_color_sequence.length()) == red_placement) {
+        cyan_placement + int(base_color_sequence.length()) == red_placement) {
         base_color_sequence = swap_complementary(base_color_sequence);
     }
 
@@ -204,6 +193,6 @@ void print_stage_color_sequence(const int& stage) {
     std::cout << base_color_sequence << '\n';
 }
 
-} // namespace color_sequence
+}  // namespace color_sequence
 
-#endif // _COLOR_SEQUENCE_C
+#endif  // _COLOR_SEQUENCE_C

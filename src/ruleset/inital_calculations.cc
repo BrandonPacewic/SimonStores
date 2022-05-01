@@ -2,7 +2,7 @@
  * Copyright (c) 2022 Brandon Pacewic
  *
  * Developed and tested by Brandon Pacewic
- * 
+ *
  * inital_calculations.cc
  */
 
@@ -30,15 +30,13 @@ int alpha(const base_36_type& serial_base) {
 
     if (serial_is_number[2]) {
         first += serial_number_base[2] * base_36_factor;
-    }
-    else {
+    } else {
         first += (serial_number_base[2] + character_add) * base_36_factor;
     }
 
     if (serial_is_number[3]) {
         second += serial_number_base[3];
-    }
-    else {
+    } else {
         second += serial_number_base[3] + character_add;
     }
 
@@ -52,8 +50,7 @@ int bravo(const base_36_type& serial_base) {
 
     if (serial_is_number[4]) {
         first += serial_number_base[4] * base_36_factor;
-    }
-    else {
+    } else {
         first += (serial_number_base[4] + character_add) * base_36_factor;
     }
 
@@ -69,15 +66,13 @@ int charlie(const base_36_type& serial_base) {
 
     if (serial_is_number[0]) {
         first += serial_number_base[0] * base_36_factor;
-    }
-    else {
+    } else {
         first += (serial_number_base[0] + character_add) * base_36_factor;
     }
 
     if (serial_is_number[1]) {
         second += serial_number_base[1];
-    }
-    else {
+    } else {
         second += serial_number_base[1] + character_add;
     }
 
@@ -92,8 +87,7 @@ int delta(const base_36_type& serial_base) {
     for (int i = 0; i < int(serial_number_base.size()); ++i) {
         if (serial_is_number[i]) {
             delta += serial_number_base[i];
-        }
-        else {
+        } else {
             delta += serial_number_base[i] + character_add;
         }
     }
@@ -101,6 +95,6 @@ int delta(const base_36_type& serial_base) {
     return int(delta);
 }
 
-} // namespace inital_calculations
+}  // namespace inital_calculations
 
-#endif // _INITAL_CALCULATIONS_C
+#endif  // _INITAL_CALCULATIONS_C
