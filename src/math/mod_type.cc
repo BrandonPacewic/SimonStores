@@ -6,21 +6,18 @@
  * mod_type.cc
  */
 
-#ifndef _BRANDON_MOD_TYPE_C
-#define _BRANDON_MOD_TYPE_C 1
-
 #include "mod_type.h"
 
 #include <cstdint>
 #include <iostream>
-#include <istream>
+
 using mod_types::mod_type;
 
 template <typename _Tp>
-mod_type<_Tp>::mod_type(_Tp _value) : value{_value} {}
+mod_type<_Tp>::mod_type() : value{0} {}
 
 template <typename _Tp>
-mod_type<_Tp>::mod_type() : value{0} {}
+mod_type<_Tp>::mod_type(_Tp _value) : value{_value} {}
 
 template <typename _Tp>
 mod_type<_Tp>::operator int() const {
@@ -161,5 +158,3 @@ template <typename _Tp>
 std::istream& operator>>(std::istream& is, mod_type<_Tp>& a) {
     return is >> a.value;
 }
-
-#endif  // _BRANDON_MOD_TYPE_C

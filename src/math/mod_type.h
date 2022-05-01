@@ -7,8 +7,8 @@
  */
 
 #pragma once
-#ifndef _BRANDON_MOD_TYPE_H
-#define _BRANDON_MOD_TYPE_H 1
+#ifndef SIMON_STORES_MATH_MOD_TYPE_H_
+#define SIMON_STORES_MATH_MOD_TYPE_H_
 
 #include <cstdint>
 
@@ -19,8 +19,8 @@ class mod_type {
 public:
 	_Tp value;
 
-	mod_type(_Tp _value);
 	mod_type();
+	mod_type(_Tp _value);
 
 	explicit operator int() const;
 	explicit operator int64_t() const;
@@ -28,15 +28,9 @@ public:
 	explicit operator double() const;
 	explicit operator long double() const;
 
-    // Main feature of mod_type<> class, modular arithmetic in C++ works
-    // different than it otherwise should. In C and C++ the % operator creates
-    // a value between -b and b when in most other cases the expected return 
-    // value should be between 0 and b. This is a simple fix.
 	mod_type& operator%=(const mod_type&);
 	mod_type operator%(const mod_type&) const;
 
-    // Other basic math operators, nothing changes
-    // besides modular arithmetic
 	mod_type& operator++();
 	mod_type& operator--();
 	mod_type& operator+=(const mod_type&);
@@ -58,4 +52,4 @@ public:
 
 } // namespace mod_types
 
-#endif // _BRANDON_MOD_TYPE_H
+#endif // SIMON_STORES_MATH_MOD_TYPE_H_

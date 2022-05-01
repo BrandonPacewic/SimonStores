@@ -6,9 +6,6 @@
  * balanced_ternary_converter.cc
  */
 
-#ifndef _BALANCED_TERNARY_CONVERTER_C
-#define _BALANCED_TERNARY_CONVERTER_C 1
-
 #include "balanced_ternary_converter.h"
 
 #include <algorithm>
@@ -18,7 +15,6 @@
 #include <vector>
 
 namespace ternary {
-
 namespace {
 
 std::vector<int> initalize_values(const int& value) {
@@ -48,7 +44,7 @@ std::vector<int> make_ternary(const std::vector<int>& values, int value) {
     return ternary;
 }
 
-void convert_to_balanced(std::vector<int>& ternary) {
+std::vector<int> convert_to_balanced(std::vector<int>& ternary) {
     for (int i = ternary.size() - 1; i >= 0; --i) {
         if (ternary[i] == 3) {
             ternary[i] = 0;
@@ -58,6 +54,8 @@ void convert_to_balanced(std::vector<int>& ternary) {
             ++ternary[i - 1];
         }
     }
+
+    return ternary;
 }
 
 std::string convert_to_symbols(const std::vector<int>& balanced_ternary,
@@ -75,12 +73,7 @@ std::string convert_to_symbols(const std::vector<int>& balanced_ternary,
     return symbols;
 }
 
-// Const value - It is always assumed that this is the number being converted
-// to teranry, this is because the length of the ternary symbol string is
-// required to be of length 6. 364 is the largest possible number that can be
-// represented in ternary with only 6 digits. You will notice that this number
-// is one less that the ceil used for the static_mod_type
-constexpr int const_value = 364;
+constexpr int max_expected_value = 364;
 std::unordered_map<int, std::vector<int>> value_to_values_map;
 
 }  // namespace
@@ -93,19 +86,18 @@ std::string balanced_convert(int value) {
         value = abs(value);
     }
 
-    if (!value_to_values_map.count(const_value)) {
-        value_to_values_map[const_value] = initalize_values(const_value);
+    if (!value_to_values_map.count(max_expected_value)) {
+        value_to_values_map[max_expected_value] =
+            initalize_values(max_expected_value);
     }
 
-    auto ternary =
-        make_ternary(value_to_values_map.find(const_value)->second, value);
+    auto ternary = make_ternary(
+        value_to_values_map.find(max_expected_value)->second, value);
 
-    convert_to_balanced(ternary);
+    ternary = convert_to_balanced(ternary);
     auto symbols = convert_to_symbols(ternary, invert_signs);
 
     return symbols;
 }
 
 }  // namespace ternary
-
-#endif  // _BALANCED_TERNARY_CONVERTER_C

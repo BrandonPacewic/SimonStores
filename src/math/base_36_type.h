@@ -6,15 +6,11 @@
  * base_36_type.h
  */
 
-// TODO: more info comment
-// Once this class has been initalized it cannot be modfyed in any way
-// The idea is just to hold information in a more convinient way without the
-// need for changing the data
-
 #pragma once
-#ifndef _BASE_36_TYPE_H
-#define _BASE_36_TYPE_H 1
+#ifndef SIMON_STORES_MATH_BASE_36_TYPE_H_
+#define SIMON_STORES_MATH_BASE_36_TYPE_H_
 
+#include <cstdint>
 #include <string>
 #include <vector>
 
@@ -29,7 +25,6 @@ private:
 
 public:
     base_36_type(std::string _char_base);
-    ~base_36_type() = default;
 
     const char& operator[](int index) const;
 
@@ -40,4 +35,4 @@ public:
 
 } // namespace base_36
 
-#endif // _BASE_36_TYPE_H
+#endif // SIMON_STORES_MATH_BASE_36_TYPE_H_

@@ -6,13 +6,11 @@
  * base_36_type.cc
  */
 
-#ifndef _BASE_36_TYPE_C
-#define _BASE_36_TYPE_C 1
-
 #include "base_36_type.h"
 
 #include <string>
 #include <vector>
+
 using base_36::base_36_type;
 
 base_36_type::base_36_type(std::string _char_base)
@@ -36,5 +34,3 @@ const char& base_36_type::operator[](int index) const {
 const std::string& base_36_type::string() const { return char_base; }
 const std::vector<int>& base_36_type::number_base() const { return num_base; }
 const std::vector<bool>& base_36_type::is_number() const { return is_num; }
-
-#endif  // _BASE_36_TYPE_C
