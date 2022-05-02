@@ -2,7 +2,7 @@
  * Copyright (c) 2022 Brandon Pacewic
  *
  * Developed and tested by Brandon Pacewic
- * 
+ *
  * stage_one.h
  */
 
@@ -18,10 +18,10 @@ using mod_types::mod_type;
 
 namespace stages {
 
-    int one_calculations(const std::string& flash, 
-        const std::vector<mod_type<int>>& alpha, 
-        const int& step, const int& delta);
+int one_calculations(const std::string& flash,
+                     const std::vector<mod_type<int>>& alpha, const int& step,
+                     const int& delta);
 
-} // namespace stages
+}  // namespace stages
 
-#endif // _STAGE_ONE_H
+#endif  // _STAGE_ONE_H

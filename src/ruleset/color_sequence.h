@@ -2,7 +2,7 @@
  * Copyright (c) 2022 Brandon Pacewic
  *
  * Developed and tested by Brandon Pacewic
- * 
+ *
  * color_sequence.h
  */
 
@@ -20,6 +20,6 @@ void setup(const std::string& color_sequence);
 
 std::string determine_stage_color_sequence(const uint16_t& stage);
 
-} // namespace color_sequence
+}  // namespace color_sequence
 
-#endif // SIMON_STORES_RULESET_COLOR_SEQUENCE_H
+#endif  // SIMON_STORES_RULESET_COLOR_SEQUENCE_H

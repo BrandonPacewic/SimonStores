@@ -2,7 +2,7 @@
  * Copyright (c) 2022 Brandon Pacewic
  *
  * Developed and tested by Brandon Pacewic
- * 
+ *
  * balanced_ternary_converter.h
  */
 
@@ -16,6 +16,6 @@ namespace ternary {
 
 std::string balanced_convert(int value);
 
-} // namespace ternary   
+}  // namespace ternary
 
-#endif // SIMON_STORES_MATH_BALANCED_TERNARY_CONVERTER_H_
+#endif  // SIMON_STORES_MATH_BALANCED_TERNARY_CONVERTER_H_

@@ -6,8 +6,7 @@
  * stage_one.cc
  */
 
-#ifndef _STAGE_ONE_C
-#define _STAGE_ONE_C 1
+#include "stage_one.h"
 
 #include <algorithm>
 #include <array>
@@ -26,13 +25,10 @@ using mod_types::mod_type;
 #include "../ruleset/color_determine.h"
 using color_determine::primary_secondary_mix;
 
-#include "stage_one.h"
-
 namespace stages {
-
 namespace {
 
-constexpr int mod_limit = 365;
+constexpr uint16_t mod_limit = 365;
 
 const std::unordered_map<char, std::function<int(int, int, int)>>
     color_to_function_map = {
@@ -173,5 +169,3 @@ int one_calculations(const std::string& flash,
 }
 
 }  // namespace stages
-
-#endif  // _STAGE_ONE_C

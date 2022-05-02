@@ -2,7 +2,7 @@
  * Copyright (c) 2022 Brandon Pacewic
  *
  * Developed and tested by Brandon Pacewic
- * 
+ *
  * base_36_type.h
  */
 
@@ -17,13 +17,13 @@
 namespace base_36 {
 
 class base_36_type {
-private:
+   private:
     std::string char_base;
     std::vector<int> num_base;
     std::vector<bool> is_num;
     std::size_t sz;
 
-public:
+   public:
     base_36_type(std::string _char_base);
 
     const char& operator[](int index) const;
@@ -33,6 +33,6 @@ public:
     const std::vector<bool>& is_number() const;
 };
 
-} // namespace base_36
+}  // namespace base_36
 
-#endif // SIMON_STORES_MATH_BASE_36_TYPE_H_
+#endif  // SIMON_STORES_MATH_BASE_36_TYPE_H_

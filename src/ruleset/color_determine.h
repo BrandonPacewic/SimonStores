@@ -2,7 +2,7 @@
  * Copyright (c) 2022 Brandon Pacewic
  *
  * Developed and tested by Brandon Pacewic
- * 
+ *
  * color_determine.h
  */
 
@@ -19,6 +19,6 @@ char missing_color(const std::string& flash);
 const bool is_primary(const char& color);
 const bool is_secondary(const char& color);
 
-} // namespace color_determine
+}  // namespace color_determine
 
-#endif // SIMON_STORES_RULESET_COLOR_DETERMINE_H
+#endif  // SIMON_STORES_RULESET_COLOR_DETERMINE_H
