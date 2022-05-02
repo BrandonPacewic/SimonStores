@@ -18,7 +18,7 @@ namespace color_sequence {
 // Should only be called once
 void setup(const std::string& color_sequence);
 
-std::string determine_stage_color_sequence(const int& stage);
+std::string determine_stage_color_sequence(const uint16_t& stage);
 
 } // namespace color_sequence
 

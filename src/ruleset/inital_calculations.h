@@ -14,10 +14,10 @@
 
 namespace inital_calculations {
 
-int alpha(const base_36::base_36_type& serial_base);
-int bravo(const base_36::base_36_type& serial_base);
-int charlie(const base_36::base_36_type& serial_base);
-int delta(const base_36::base_36_type& serial_base);
+int16_t alpha(const base_36::base_36_type& serial_base);
+int16_t bravo(const base_36::base_36_type& serial_base);
+int16_t charlie(const base_36::base_36_type& serial_base);
+int16_t delta(const base_36::base_36_type& serial_base);
 
 } // namespace inital_calculations
 

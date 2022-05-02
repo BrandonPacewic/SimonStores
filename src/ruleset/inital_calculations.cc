@@ -23,7 +23,7 @@ constexpr uint16_t mod_limit = 365;
 constexpr uint16_t base_36_factor = 36;
 constexpr uint16_t character_add = 9;
 
-int alpha(const base_36_type& serial_base) {
+int16_t alpha(const base_36_type& serial_base) {
     static_mod_type<int16_t> first(mod_limit), second(mod_limit);
     const auto& serial_is_number = serial_base.is_number();
     const auto& serial_number_base = serial_base.number_base();
@@ -43,7 +43,7 @@ int alpha(const base_36_type& serial_base) {
     return int16_t(first + second);
 }
 
-int bravo(const base_36_type& serial_base) {
+int16_t bravo(const base_36_type& serial_base) {
     static_mod_type<int16_t> first(mod_limit);
     const auto& serial_is_number = serial_base.is_number();
     const auto& serial_number_base = serial_base.number_base();
@@ -59,7 +59,7 @@ int bravo(const base_36_type& serial_base) {
     return int16_t(first + serial_number_base[5]);
 }
 
-int charlie(const base_36_type& serial_base) {
+int16_t charlie(const base_36_type& serial_base) {
     static_mod_type<int16_t> first(mod_limit), second(mod_limit);
     const auto& serial_is_number = serial_base.is_number();
     const auto& serial_number_base = serial_base.number_base();
@@ -79,7 +79,7 @@ int charlie(const base_36_type& serial_base) {
     return int16_t(first + second);
 }
 
-int delta(const base_36_type& serial_base) {
+int16_t delta(const base_36_type& serial_base) {
     static_mod_type<int16_t> delta(mod_limit);
     const auto& serial_is_number = serial_base.is_number();
     const auto& serial_number_base = serial_base.number_base();

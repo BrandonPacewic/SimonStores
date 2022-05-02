@@ -9,11 +9,9 @@
 #include "color_determine.h"
 
 #include <algorithm>
-#include <numeric>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
-#include <vector>
 
 namespace color_determine {
 
@@ -33,16 +31,16 @@ uint16_t primary_secondary_mix(const std::string& flash) {
 }
 
 char missing_color(const std::string& flash) {
-    const std::unordered_map<char, int> color_to_value_map = {
+    const std::unordered_map<char, uint16_t> color_to_value_map = {
         {'r', 1}, {'g', 2}, {'b', 3}, {'c', 4}, {'m', 5}, {'y', 6}};
 
-    int total_color_value = 0;
+    uint16_t total_color_value = 0;
 
     std::for_each(flash.begin(), flash.end(), [&](const char& ch) {
         total_color_value += color_to_value_map.find(ch)->second;
     });
 
-    char answer = '\0';
+    char answer;
 
     switch (total_color_value) {
         case 5:
@@ -62,6 +60,9 @@ char missing_color(const std::string& flash) {
             break;
         case 9:
             answer = 'y';
+            break;
+        default:
+            answer = '?';
             break;
     }
 

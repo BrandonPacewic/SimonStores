@@ -122,7 +122,7 @@ std::string swap_green_cyan(std::string& base_color_sequence) {
     return base_color_sequence;
 }
 
-const std::string get_base_color_sequence(const int& stage) {
+const std::string get_base_color_sequence(const uint16_t& stage) {
     assert(stage >= 1 && stage <= 3);
 
     const std::array<std::string, 3> base_color_sequences = {"rgbcmy", "ybgmcr",
@@ -139,7 +139,7 @@ void setup(const std::string& color_sequence) {
     color_placement_map = create_color_placement_map(color_sequence);
 }
 
-std::string determine_stage_color_sequence(const int& stage) {
+std::string determine_stage_color_sequence(const uint16_t& stage) {
     auto base_color_sequence = get_base_color_sequence(stage);
     const auto& yellow_placement = color_placement_map.find('y')->second;
     const uint16_t required_yellow_placement = 0;

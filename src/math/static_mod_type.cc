@@ -56,9 +56,6 @@ template <typename _Tp>
 static_mod_type<_Tp>& static_mod_type<_Tp>::operator%=(
     const static_mod_type<_Tp>& other) {
     value %= other.value;
-    if (value < 0) {
-        value += other.value;
-    }
     return *this;
 }
 
