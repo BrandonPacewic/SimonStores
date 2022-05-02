@@ -20,6 +20,16 @@ template <typename _Tp>
 mod_type<_Tp>::mod_type(_Tp _value) : value{_value} {}
 
 template <typename _Tp>
+mod_type<_Tp>::operator int16_t() const {
+    return value;
+}
+
+template <typename _Tp>
+mod_type<_Tp>::operator uint16_t() const {
+    return value;
+}
+
+template <typename _Tp>
 mod_type<_Tp>::operator int() const {
     return value;
 }

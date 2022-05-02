@@ -8,6 +8,7 @@
 
 #include "color_determine.h"
 
+#include <algorithm>
 #include <numeric>
 #include <string>
 #include <unordered_map>
@@ -16,17 +17,17 @@
 
 namespace color_determine {
 
-int primary_secondary_mix(const std::string& flash) {
+uint16_t primary_secondary_mix(const std::string& flash) {
     const std::unordered_set<char> primary_colors = {'r', 'g', 'b'};
-    int total_value = 0;
+    uint16_t total_value = 0;
 
-    for (const auto& ch : flash) {
+    std::for_each(flash.begin(), flash.end(), [&](const char& ch) {
         if (primary_colors.count(ch)) {
             total_value += 1;
         } else {
             total_value += 2;
         }
-    }
+    });
 
     return total_value;
 }
@@ -37,9 +38,9 @@ char missing_color(const std::string& flash) {
 
     int total_color_value = 0;
 
-    for (const auto& ch : flash) {
+    std::for_each(flash.begin(), flash.end(), [&](const char& ch) {
         total_color_value += color_to_value_map.find(ch)->second;
-    }
+    });
 
     char answer = '\0';
 

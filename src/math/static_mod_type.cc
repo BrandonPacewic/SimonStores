@@ -18,6 +18,16 @@ template <typename _Tp>
 static_mod_type<_Tp>::static_mod_type(uint16_t _ceil) : value{0}, ceil{_ceil} {}
 
 template <typename _Tp>
+static_mod_type<_Tp>::operator int16_t() const {
+    return value;
+}
+
+template <typename _Tp>
+static_mod_type<_Tp>::operator uint16_t() const {
+    return value;
+}
+
+template <typename _Tp>
 static_mod_type<_Tp>::operator int() const {
     return value;
 }

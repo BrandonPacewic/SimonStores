@@ -22,6 +22,8 @@ public:
 
 	static_mod_type(uint16_t);
 
+	explicit operator int16_t() const;
+	explicit operator uint16_t() const;
 	explicit operator int() const;
 	explicit operator int64_t() const;
 	explicit operator float() const;

@@ -22,6 +22,8 @@ public:
 	mod_type();
 	mod_type(_Tp _value);
 
+	explicit operator int16_t() const;
+	explicit operator uint16_t() const;
 	explicit operator int() const;
 	explicit operator int64_t() const;
 	explicit operator float() const;
