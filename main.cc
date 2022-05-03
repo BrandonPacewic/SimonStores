@@ -10,19 +10,19 @@
 #include <iostream>
 #include <vector>
 
-#include "scr/math/balanced_ternary_converter.h"
-#include "scr/math/base_36_type.h"
-#include "scr/math/mod_type.h"
-#include "scr/ruleset/color_sequence.h"
-#include "scr/ruleset/inital_calculations.h"
-#include "scr/stages/stage_one.h"
-#include "scr/stages/stage_three.h"
-#include "scr/stages/stage_two.h"
-#include "scr/user_handling/user_input.h"
+#include "src/math/balanced_ternary_converter.h"
+#include "src/math/base_36_type.h"
+#include "src/math/mod_type.h"
+#include "src/ruleset/color_sequence.h"
+#include "src/ruleset/inital_calculations.h"
+#include "src/stages/stage_one.h"
+#include "src/stages/stage_three.h"
+#include "src/stages/stage_two.h"
+#include "src/user_handling/user_input.h"
 
-constexpr int stage_one_flashes = 3;
-constexpr int stage_two_flashes = 4;
-constexpr int total_flashes = 5;
+constexpr uint16_t stage_one_flashes = 3;
+constexpr uint16_t stage_two_flashes = 4;
+constexpr uint16_t total_flashes = 5;
 
 int main() {
     do {
@@ -37,46 +37,63 @@ int main() {
 
         std::array<std::string, total_flashes> stage_flashes;
 
-        for (int i = 0; i < stage_one_flashes; ++i) {
+        for (uint16_t i = 0; i < stage_one_flashes; ++i) {
             std::cout << "Enter flash #" << i + 1 << "(EX: rmy): ";
             stage_flashes[i] = user_input::input_check(-1, 1, 3);
         }
 
-        std::vector<mod_types::mod_type<int> > alpha(5, 0), bravo(6, 0),
+        std::vector<mod_types::mod_type<int16_t>> alpha(5, 0), bravo(6, 0),
             charlie(7, 0);
 
         alpha.front() = inital_calculations::alpha(serial_base);
         bravo.front() = inital_calculations::bravo(serial_base);
         charlie.front() = inital_calculations::charlie(serial_base);
-        const int delta = inital_calculations::delta(serial_base);
+        const int16_t delta = inital_calculations::delta(serial_base);
 
-        // Stage One
-        for (int step = 1; step <= stage_one_flashes; ++step) {
+        uint16_t current_stage = 1;
+
+        for (uint16_t step = 1; step <= stage_one_flashes; ++step) {
             alpha[step] = stages::one_calculations(stage_flashes[step - 1],
                                                    alpha, step, delta);
         }
 
-        color_sequence::print_stage_color_sequence(1);  // stage#
-        auto stage_ternary = ternary::balanced_convert(int(alpha[3]));
+        std::cout << color_sequence::determine_stage_color_sequence(
+                         current_stage)
+                  << '\n';
+        auto stage_ternary = ternary::balanced_convert(int16_t(alpha[3]));
+        std::cout << stage_ternary << std::endl;
+        ++current_stage;
 
-        // Stage Two
-        for (int step = 1; step <= stage_two_flashes; ++step) {
+        std::cout << "Enter flash #" << stage_two_flashes << "(EX: rmy): ";
+        stage_flashes[stage_two_flashes - 1] =
+            user_input::input_check(-1, 1, 3);
+
+        for (uint16_t step = 1; step <= stage_two_flashes; ++step) {
             alpha[step] = stages::two_calculations(stage_flashes[step - 1],
                                                    alpha, bravo, step, delta);
         }
 
-        color_sequence::print_stage_color_sequence(2);  // stage#
-        stage_ternary = ternary::balanced_convert(int(bravo[4]));
+        std::cout << color_sequence::determine_stage_color_sequence(
+                         current_stage)
+                  << '\n';
+        stage_ternary = ternary::balanced_convert(int16_t(bravo[4]));
+        std::cout << stage_ternary << std::endl;
+        ++current_stage;
 
-        // Stage Three
-        for (int step = 1; step <= total_flashes; ++step) {
+        std::cout << "Enter flash #" << total_flashes << "(EX: rmy): ";
+        stage_flashes[total_flashes - 1] = user_input::input_check(-1, 1, 3);
+
+        for (uint16_t step = 1; step <= total_flashes; ++step) {
             charlie[step] = stages::three_calculations(
                 stage_flashes[step - 1], alpha, bravo, charlie, step, delta);
         }
 
-        color_sequence::print_stage_color_sequence(3);  // stage#
-        stage_ternary = ternary::balanced_convert(int(charlie[5]));
-
+        std::cout << color_sequence::determine_stage_color_sequence(
+                         current_stage)
+                  << '\n';
+        stage_ternary = ternary::balanced_convert(int16_t(charlie[5]));
+        std::cout << stage_ternary << std::endl;
+        ++current_stage;
     } while ([]() -> bool {
         char input;
         std::cout << "Enter 0 to quit or 1 to continue: ";
