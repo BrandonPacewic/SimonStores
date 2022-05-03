@@ -10,6 +10,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <cstdint>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -17,10 +18,10 @@
 namespace ternary {
 namespace {
 
-std::vector<int> initalize_values(const int& value) {
-    std::vector<int> values;
+std::vector<int16_t> initalize_values(const int16_t& value) {
+    std::vector<int16_t> values;
 
-    for (int i = 0; pow(3, i) <= value; ++i) {
+    for (int16_t i = 0; pow(3, i) <= value; ++i) {
         values.push_back(pow(3, i));
     }
 
@@ -29,8 +30,9 @@ std::vector<int> initalize_values(const int& value) {
     return values;
 }
 
-std::vector<int> make_ternary(const std::vector<int>& values, int value) {
-    std::vector<int> ternary(values.size(), 0);
+std::vector<int16_t> make_ternary(const std::vector<int16_t>& values,
+                                  int16_t value) {
+    std::vector<int16_t> ternary(values.size(), 0);
 
     for (int i = 0; i < values.size(); ++i) {
         for (int step = 0; step < 2; ++step) {
@@ -44,25 +46,25 @@ std::vector<int> make_ternary(const std::vector<int>& values, int value) {
     return ternary;
 }
 
-std::vector<int> convert_to_balanced(std::vector<int>& ternary) {
-    for (int i = ternary.size() - 1; i >= 0; --i) {
-        if (ternary[i] == 3) {
-            ternary[i] = 0;
-            ++ternary[i - 1];
-        } else if (ternary[i] == 2) {
-            ternary[i] = -1;
-            ++ternary[i - 1];
+std::vector<int16_t> convert_to_balanced(std::vector<int16_t>& ternary) {
+    for (auto it = ternary.rbegin(); it != ternary.rend(); ++it) {
+        if (*it == 3) {
+            *it = 0;
+            ++*(it + 1);
+        } else if (*it == 2) {
+            *it = -1;
+            ++*(it + 1);
         }
     }
 
     return ternary;
 }
 
-std::string convert_to_symbols(const std::vector<int>& balanced_ternary,
+std::string convert_to_symbols(const std::vector<int16_t>& balanced_ternary,
                                const bool& invert_signs) {
     std::string symbols(balanced_ternary.size(), '0');
 
-    for (int i = 0; i < int(balanced_ternary.size()); ++i) {
+    for (std::size_t i = 0; i < balanced_ternary.size(); ++i) {
         if (balanced_ternary[i] == 1) {
             symbols[i] = (invert_signs) ? '-' : '+';
         } else if (balanced_ternary[i] == -1) {
@@ -73,12 +75,12 @@ std::string convert_to_symbols(const std::vector<int>& balanced_ternary,
     return symbols;
 }
 
-constexpr int max_expected_value = 364;
-std::unordered_map<int, std::vector<int>> value_to_values_map;
+constexpr int16_t max_expected_value = 364;
+std::unordered_map<int, std::vector<int16_t>> value_to_values_map;
 
 }  // namespace
 
-std::string balanced_convert(int value) {
+std::string balanced_convert(int16_t value) {
     bool invert_signs = false;
 
     if (value < 0) {
@@ -95,7 +97,7 @@ std::string balanced_convert(int value) {
         value_to_values_map.find(max_expected_value)->second, value);
 
     ternary = convert_to_balanced(ternary);
-    auto symbols = convert_to_symbols(ternary, invert_signs);
+    std::string symbols = convert_to_symbols(ternary, invert_signs);
 
     return symbols;
 }
