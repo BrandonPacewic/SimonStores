@@ -21,7 +21,7 @@ namespace stages {
 int16_t two_calculations(const std::string& flash,
                          const std::vector<mod_type<int16_t>>& alpha,
                          const std::vector<mod_type<int16_t>>& bravo,
-                         const int16_t& step, const int16_t& delta);
+                         const uint16_t& step, const int16_t& delta);
 
 }  // namespace stages
 
