@@ -26,59 +26,54 @@ using color_determine::primary_secondary_mix;
 using mod_types::mod_type;
 using mod_types::static_mod_type;
 
+using nato_type = std::vector<mod_type<int16_t>>;
+
 namespace stages {
 namespace {
 
 constexpr uint16_t mod_limit = 365;
 
-const std::unordered_map<char,
-                         std::function<int16_t(std::vector<mod_type<int16_t>>,
-                                               std::vector<mod_type<int16_t>>,
-                                               int16_t, uint16_t, int16_t)>>
+const std::unordered_map<
+    char,
+    std::function<int16_t(nato_type, nato_type, int16_t, uint16_t, int16_t)>>
     color_to_function_map = {
         {'r',
-         [](const std::vector<mod_type<int16_t>>& a,
-            const std::vector<mod_type<int16_t>>& b, const int16_t& x,
+         [](const nato_type& a, const nato_type& b, const int16_t& x,
             const uint16_t& s, const int16_t& d) -> int16_t {
              static_mod_type<int16_t> answer(mod_limit);
              answer += x + int16_t(b[s - 1]) - int16_t(a[s - 1]);
              return int16_t(answer);
          }},
         {'g',
-         [](const std::vector<mod_type<int16_t>>& a,
-            const std::vector<mod_type<int16_t>>& b, const int16_t& x,
+         [](const nato_type& a, const nato_type& b, const int16_t& x,
             const uint16_t& s, const int16_t& d) -> int16_t {
              static_mod_type<int16_t> answer(mod_limit);
              answer += x - (int16_t(b[s - 1]) * 2);
              return int16_t(answer);
          }},
         {'b',
-         [](const std::vector<mod_type<int16_t>>& a,
-            const std::vector<mod_type<int16_t>>& b, const int16_t& x,
+         [](const nato_type& a, const nato_type& b, const int16_t& x,
             const uint16_t& s, const int16_t& d) -> int16_t {
              static_mod_type<int16_t> answer(mod_limit);
              answer += x + int16_t(b[0]) - int16_t(a[3]);
              return int16_t(answer);
          }},
         {'c',
-         [](const std::vector<mod_type<int16_t>>& a,
-            const std::vector<mod_type<int16_t>>& b, const int16_t& x,
+         [](const nato_type& a, const nato_type& b, const int16_t& x,
             const uint16_t& s, const int16_t& d) -> int16_t {
              static_mod_type<int16_t> answer(mod_limit);
              answer += x - int16_t(b[s - 1]) + int16_t(a[s - 1]);
              return int16_t(answer);
          }},
         {'m',
-         [](const std::vector<mod_type<int16_t>>& a,
-            const std::vector<mod_type<int16_t>>& b, const int16_t& x,
+         [](const nato_type& a, const nato_type& b, const int16_t& x,
             const uint16_t& s, const int16_t& d) -> int16_t {
              static_mod_type<int16_t> answer(mod_limit);
              answer += x - (int16_t(a[s - 1]) * 2);
              return int16_t(answer);
          }},
         {'y',
-         [](const std::vector<mod_type<int16_t>>& a,
-            const std::vector<mod_type<int16_t>>& b, const int16_t& x,
+         [](const nato_type& a, const nato_type& b, const int16_t& x,
             const uint16_t& s, const int16_t& d) -> int16_t {
              static_mod_type<int16_t> answer(mod_limit);
              answer += x + int16_t(b[4]) - int16_t(a[0]);
@@ -86,10 +81,8 @@ const std::unordered_map<char,
          }},
 };
 
-int16_t one_color_flash(const std::string& flash,
-                        const std::vector<mod_type<int16_t>>& alpha,
-                        const std::vector<mod_type<int16_t>>& bravo,
-                        const std::vector<mod_type<int16_t>>& charlie,
+int16_t one_color_flash(const std::string& flash, const nato_type& alpha,
+                        const nato_type& bravo, const nato_type& charlie,
                         const uint16_t& step, const int16_t& delta) {
     assert(flash.length() == 1);
 
@@ -99,10 +92,8 @@ int16_t one_color_flash(const std::string& flash,
     return answer;
 }
 
-int16_t two_color_flash(const std::string& flash,
-                        const std::vector<mod_type<int16_t>>& alpha,
-                        const std::vector<mod_type<int16_t>>& bravo,
-                        const std::vector<mod_type<int16_t>>& charlie,
+int16_t two_color_flash(const std::string& flash, const nato_type& alpha,
+                        const nato_type& bravo, const nato_type& charlie,
                         const uint16_t& step, const int16_t& delta) {
     assert(flash.length() == 2);
 
@@ -142,10 +133,8 @@ int16_t two_color_flash(const std::string& flash,
     return int16_t(answer);
 }
 
-int16_t three_color_flash(const std::string& flash,
-                          const std::vector<mod_type<int16_t>>& alpha,
-                          const std::vector<mod_type<int16_t>>& bravo,
-                          const std::vector<mod_type<int16_t>>& charlie,
+int16_t three_color_flash(const std::string& flash, const nato_type& alpha,
+                          const nato_type& bravo, const nato_type& charlie,
                           const uint16_t& step, const int16_t& delta) {
     assert(flash.length() == 3);
 
@@ -201,10 +190,8 @@ int16_t three_color_flash(const std::string& flash,
 
 }  // namespace
 
-int16_t three_calculations(const std::string& flash,
-                           const std::vector<mod_type<int16_t>>& alpha,
-                           const std::vector<mod_type<int16_t>>& bravo,
-                           const std::vector<mod_type<int16_t>>& charlie,
+int16_t three_calculations(const std::string& flash, const nato_type& alpha,
+                           const nato_type& bravo, const nato_type& charlie,
                            const uint16_t& step, const int16_t& delta) {
     assert(flash.length() <= 3);
 
