@@ -7,8 +7,8 @@
  */
 
 #pragma once
-#ifndef _STAGE_ONE_H
-#define _STAGE_ONE_H 1
+#ifndef SIMON_STORES_STAGES_STAGE_ONE_H_
+#define SIMON_STORES_STAGES_STAGE_ONE_H_
 
 #include <string>
 #include <vector>
@@ -18,10 +18,10 @@ using mod_types::mod_type;
 
 namespace stages {
 
-int one_calculations(const std::string& flash,
-                     const std::vector<mod_type<int>>& alpha, const int& step,
-                     const int& delta);
+int16_t one_calculations(const std::string& flash,
+                         const std::vector<mod_type<int16_t>>& alpha,
+                         const uint16_t& step, const int16_t& delta);
 
 }  // namespace stages
 
-#endif  // _STAGE_ONE_H
+#endif  // SIMON_STORES_STAGES_STAGE_ONE_H_
