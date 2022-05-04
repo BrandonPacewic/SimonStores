@@ -1,13 +1,24 @@
-/*
+/* MIT License
+ *
  * Copyright (c) 2022 Brandon Pacewic
  *
- * Developed and tested by Brandon Pacewic
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * stage_one.cc
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 
-#ifndef _STAGE_ONE_C
-#define _STAGE_ONE_C 1
+#include "stage_one.h"
 
 #include <algorithm>
 #include <array>
@@ -17,119 +28,120 @@
 #include <unordered_map>
 #include <vector>
 
+#include "../math/mod_type.h"
 #include "../math/static_mod_type.h"
+#include "../ruleset/color_determine.h"
+
+using color_determine::primary_secondary_mix;
+using mod_types::mod_type;
 using mod_types::static_mod_type;
 
-#include "../math/mod_type.h"
-using mod_types::mod_type;
-
-#include "../ruleset/color_determine.h"
-using color_determine::primary_secondary_mix;
-
-#include "stage_one.h"
-
 namespace stages {
-
 namespace {
 
-constexpr int mod_limit = 365;
+constexpr uint16_t mod_limit = 365;
 
-const std::unordered_map<char, std::function<int(int, int, int)>>
+const std::unordered_map<char,
+                         std::function<int16_t(int16_t, uint16_t, int16_t)>>
     color_to_function_map = {
         {'r',
-         [](const int& x, const int&, const int& d) -> int {
-             static_mod_type<int> answer(mod_limit);
+         [](const int16_t& x, const uint16_t&, const int16_t& d) -> int16_t {
+             static_mod_type<int16_t> answer(mod_limit);
              answer += x + d;
-             return int(answer);
+             return int16_t(answer);
          }},
         {'g',
-         [](const int& x, const int&, const int& d) -> int {
-             static_mod_type<int> answer(mod_limit);
+         [](const int16_t& x, const uint16_t&, const int16_t& d) -> int16_t {
+             static_mod_type<int16_t> answer(mod_limit);
              answer += x - d;
-             return int(answer);
+             return int16_t(answer);
          }},
         {'b',
-         [](const int& x, const int&, const int& d) -> int {
-             static_mod_type<int> answer(mod_limit);
+         [](const int16_t& x, const uint16_t&, const int16_t& d) -> int16_t {
+             static_mod_type<int16_t> answer(mod_limit);
              answer += (2 * x) - d;
-             return int(answer);
+             return int16_t(answer);
          }},
         {'c',
-         [](const int& x, const int& s, const int& d) -> int {
-             static_mod_type<int> answer(mod_limit);
+         [](const int16_t& x, const uint16_t& s, const int16_t& d) -> int16_t {
+             static_mod_type<int16_t> answer(mod_limit);
              answer += d - x - (s * 8);
-             return int(answer);
+             return int16_t(answer);
          }},
         {'m',
-         [](const int& x, const int& s, const int&) -> int {
-             static_mod_type<int> answer(mod_limit);
+         [](const int16_t& x, const uint16_t& s, const int16_t&) -> int16_t {
+             static_mod_type<int16_t> answer(mod_limit);
              answer += (3 * pow(s, 3)) - (2 * x);
-             return int(answer);
+             return int16_t(answer);
          }},
         {'y',
-         [](const int& x, const int& s, const int& d) -> int {
-             static_mod_type<int> answer(mod_limit);
+         [](const int16_t& x, const uint16_t& s, const int16_t& d) -> int16_t {
+             static_mod_type<int16_t> answer(mod_limit);
              answer += (x + d) - (s * 6);
-             return int(answer);
+             return int16_t(answer);
          }},
 };
 
-int one_color_flash(const std::string& flash,
-                    const std::vector<mod_type<int>>& alpha, const int& step,
-                    const int& delta) {
+int16_t one_color_flash(const std::string& flash,
+                        const std::vector<mod_type<int16_t>>& alpha,
+                        const uint16_t& step, const int16_t& delta) {
     assert(flash.length() == 1);
 
-    return color_to_function_map.find(flash[0])->second(int(alpha[step - 1]),
-                                                        step, delta);
+    int16_t answer = color_to_function_map.at(flash[0])(
+        int16_t(alpha[step - 1]), step, delta);
+
+    return answer;
 }
 
-int two_color_flash(const std::string& flash,
-                    const std::vector<mod_type<int>>& alpha, const int& step,
-                    const int& delta) {
+int16_t two_color_flash(const std::string& flash,
+                        const std::vector<mod_type<int16_t>>& alpha,
+                        const uint16_t& step, const int16_t& delta) {
     assert(flash.length() == 2);
 
-    const int color_mix_value = primary_secondary_mix(flash);
+    const uint16_t color_mix_value = primary_secondary_mix(flash);
+    std::vector<int16_t> answers;
 
-    const int first = color_to_function_map.find(flash[0])->second(
-        int(alpha[step - 1]), step, delta);
-    const int second = color_to_function_map.find(flash[1])->second(
-        int(alpha[step - 1]), step, delta);
+    std::for_each(flash.begin(), flash.end(), [&](const char& ch) {
+        answers.push_back(color_to_function_map.at(ch)(int16_t(alpha[step - 1]),
+                                                       step, delta));
+    });
 
-    static_mod_type<int> answer(mod_limit);
+    static_mod_type<int16_t> answer(mod_limit);
 
     switch (color_mix_value) {
         case 2:
-            answer += std::max(first, second);
+            answer += std::max(answers.front(), answers.back());
             break;
         case 3:
-            answer += first + second - (delta * 2);
+            answer += answers.front() + answers.back() - (delta * 2);
             break;
         case 4:
-            answer += std::min(first, second);
+            answer += std::min(answers.front(), answers.back());
             break;
+        default:
+            assert(false);
     }
 
-    return int(answer);
+    return int16_t(answer);
 }
 
-int three_color_flash(const std::string& flash,
-                      const std::vector<mod_type<int>>& alpha, const int& step,
-                      const int& delta) {
+int16_t three_color_flash(const std::string& flash,
+                          const std::vector<mod_type<int16_t>>& alpha,
+                          const uint16_t& step, const int16_t& delta) {
     assert(flash.length() == 3);
 
-    int color_mix_value = primary_secondary_mix(flash);
-    static_mod_type<int> answer(mod_limit);
+    uint16_t color_mix_value = primary_secondary_mix(flash);
+    static_mod_type<int16_t> answer(mod_limit);
 
     if (color_mix_value == 3) {
-        answer += int(alpha[step - 1]) + int(alpha[0]);
+        answer += int16_t(alpha[step - 1]) + int16_t(alpha[0]);
     } else if (color_mix_value == 4 || color_mix_value == 5) {
-        std::array<int, 3> color_calculations;
+        std::vector<int16_t> color_calculations;
 
-        for (int i = 0; i < 3; ++i) {
-            color_calculations[i] =
-                (color_to_function_map.find(flash[i])->second(
-                    int(alpha[step - 1]), step, delta));
-        }
+        std::for_each(flash.begin(), flash.end(), [&](const char& ch) {
+            color_calculations.push_back(color_to_function_map.at(ch)(
+                int16_t(alpha[step - 1]), step, delta));
+        });
 
         switch (color_mix_value) {
             case 4:
@@ -142,22 +154,22 @@ int three_color_flash(const std::string& flash,
                 break;
         }
     } else {
-        answer += int(alpha[step - 1]) - int(alpha[0]);
+        answer += int16_t(alpha[step - 1]) - int16_t(alpha[0]);
     }
 
-    return int(answer);
+    return int16_t(answer);
 }
 
 }  // namespace
 
-int one_calculations(const std::string& flash,
-                     const std::vector<mod_type<int>>& alpha, const int& step,
-                     const int& delta) {
+int16_t one_calculations(const std::string& flash,
+                         const std::vector<mod_type<int16_t>>& alpha,
+                         const uint16_t& step, const int16_t& delta) {
     assert(flash.length() <= 3);
 
-    int answer = -999;
+    int16_t answer;
 
-    switch (flash.length()) {
+    switch (uint16_t(flash.length())) {
         case 1:
             answer = one_color_flash(flash, alpha, step, delta);
             break;
@@ -167,11 +179,11 @@ int one_calculations(const std::string& flash,
         case 3:
             answer = three_color_flash(flash, alpha, step, delta);
             break;
+        default:
+            assert(false);
     }
 
     return answer;
 }
 
 }  // namespace stages
-
-#endif  // _STAGE_ONE_C

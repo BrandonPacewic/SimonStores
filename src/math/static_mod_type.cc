@@ -1,27 +1,43 @@
-/*
+/* MIT License
+ *
  * Copyright (c) 2022 Brandon Pacewic
  *
- * Developed and tested by Brandon Pacewic
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * static_mod_type.cc
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
-
-#ifndef _BRANDON_STATIC_MOD_TYPE_C
-#define _BRANDON_STATIC_MOD_TYPE_C 1
 
 #include "static_mod_type.h"
 
 #include <cstdint>
 #include <iostream>
 #include <istream>
-using mod_types::ceil_num;
+
 using mod_types::static_mod_type;
 
 template <typename _Tp>
-static_mod_type<_Tp>::static_mod_type(ceil_num _ceil) : value{0}, ceil{_ceil} {}
+static_mod_type<_Tp>::static_mod_type(uint16_t _ceil) : value{0}, ceil{_ceil} {}
 
 template <typename _Tp>
-static_mod_type<_Tp>::~static_mod_type() = default;
+static_mod_type<_Tp>::operator int16_t() const {
+    return value;
+}
+
+template <typename _Tp>
+static_mod_type<_Tp>::operator uint16_t() const {
+    return value;
+}
 
 template <typename _Tp>
 static_mod_type<_Tp>::operator int() const {
@@ -52,9 +68,6 @@ template <typename _Tp>
 static_mod_type<_Tp>& static_mod_type<_Tp>::operator%=(
     const static_mod_type<_Tp>& other) {
     value %= other.value;
-    if (value < 0) {
-        value += other.value;
-    }
     return *this;
 }
 
@@ -169,5 +182,3 @@ template <typename _Tp>
 std::istream& operator>>(std::istream& is, static_mod_type<_Tp>& a) {
     return is >> a.value;
 }
-
-#endif  // _BRANDON_STATIC_MOD_TYPE_C

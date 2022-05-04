@@ -1,26 +1,45 @@
-/*
+/* MIT License
+ *
  * Copyright (c) 2022 Brandon Pacewic
  *
- * Developed and tested by Brandon Pacewic
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * mod_type.cc
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
-
-#ifndef _BRANDON_MOD_TYPE_C
-#define _BRANDON_MOD_TYPE_C 1
 
 #include "mod_type.h"
 
 #include <cstdint>
 #include <iostream>
-#include <istream>
+
 using mod_types::mod_type;
+
+template <typename _Tp>
+mod_type<_Tp>::mod_type() : value{0} {}
 
 template <typename _Tp>
 mod_type<_Tp>::mod_type(_Tp _value) : value{_value} {}
 
 template <typename _Tp>
-mod_type<_Tp>::mod_type() : value{0} {}
+mod_type<_Tp>::operator int16_t() const {
+    return value;
+}
+
+template <typename _Tp>
+mod_type<_Tp>::operator uint16_t() const {
+    return value;
+}
 
 template <typename _Tp>
 mod_type<_Tp>::operator int() const {
@@ -161,5 +180,3 @@ template <typename _Tp>
 std::istream& operator>>(std::istream& is, mod_type<_Tp>& a) {
     return is >> a.value;
 }
-
-#endif  // _BRANDON_MOD_TYPE_C

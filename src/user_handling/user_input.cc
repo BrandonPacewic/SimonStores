@@ -1,13 +1,22 @@
-/*
+/* MIT License
+ *
  * Copyright (c) 2022 Brandon Pacewic
  *
- * Developed and tested by Brandon Pacewic
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * user_input.cc
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
-
-#ifndef _USER_INPUT_C
-#define _USER_INPUT_C
 
 #include "user_input.h"
 
@@ -15,34 +24,40 @@
 #include <string>
 
 namespace user_input {
-
 namespace {
 
-void required_size_check(std::string& str, const int& required_size) {
+std::string required_size_check(std::string& str,
+                                const int16_t& required_size) {
     while (str.length() != required_size) {
         std::cout << "\n\nYou did not meet the required size of "
                   << required_size << ".\nPlease try again: ";
         getline(std::cin, str);
     }
+
+    return str;
 }
 
-void max_size_check(std::string& str, const int& max_size) {
+std::string max_size_check(std::string& str, const int16_t& max_size) {
     while (str.length() > max_size) {
         std::cout << "\n\nYou exceeded the max size of " << max_size
                   << ".\nPlease try again: ";
         getline(std::cin, str);
     }
+
+    return str;
 }
 
-void min_size_check(std::string& str, const int& min_size) {
+std::string min_size_check(std::string& str, const int16_t& min_size) {
     while (str.length() < min_size) {
         std::cout << "\n\nYou did not meet the min size of " << min_size
                   << ".\nPlease try again: ";
         getline(std::cin, str);
     }
+
+    return str;
 }
 
-std::string string_to_lower(std::string str) {
+std::string string_to_lower(std::string& str) {
     for (auto& ch : str) {
         ch = tolower(ch);
     }
@@ -71,16 +86,14 @@ std::string input_check(const int& required_size, const int& min_size,
     lizard_check(str);
 
     if (required_size != -1) {
-        required_size_check(str, required_size);
+        str = required_size_check(str, required_size);
     } else if (max_size != -1) {
-        max_size_check(str, max_size);
+        str = max_size_check(str, max_size);
     } else if (min_size != -1) {
-        min_size_check(str, min_size);
+        str = min_size_check(str, min_size);
     }
 
     return str;
 }
 
 }  // namespace user_input
-
-#endif  // _USER_INPUT_C

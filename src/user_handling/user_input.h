@@ -1,23 +1,35 @@
-/*
+/* MIT License
+ *
  * Copyright (c) 2022 Brandon Pacewic
  *
- * Developed and tested by Brandon Pacewic
- * 
- * user_input.h
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 
 #pragma once
-#ifndef _USER_INPUT_H
-#define _USER_INPUT_H
+#ifndef SIMON_STORES_USER_HANDLING_USER_INPUT_H_
+#define SIMON_STORES_USER_HANDLING_USER_INPUT_H_
 
 #include <string>
 
 namespace user_input {
 
-std::string input_check(const int& required_size = -1, 
-    const int& min_size = -1,
-    const int& max_size = -1);
+std::string input_check(const int16_t& required_size = -1,
+                        const int16_t& min_size = -1,
+                        const int16_t& max_size = -1);
 
-} // namespace user_input
+}  // namespace user_input
 
-#endif // _USER_INPUT_H
+#endif  // SIMON_STORES_USER_HANDLING_USER_INPUT_H_

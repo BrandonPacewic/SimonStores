@@ -1,35 +1,42 @@
-/*
+/* MIT License
+ *
  * Copyright (c) 2022 Brandon Pacewic
  *
- * Developed and tested by Brandon Pacewic
- * 
- * base_36_type.h
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 
-// TODO: more info comment
-// Once this class has been initalized it cannot be modfyed in any way
-// The idea is just to hold information in a more convinient way without the
-// need for changing the data
-
 #pragma once
-#ifndef _BASE_36_TYPE_H
-#define _BASE_36_TYPE_H 1
+#ifndef SIMON_STORES_MATH_BASE_36_TYPE_H_
+#define SIMON_STORES_MATH_BASE_36_TYPE_H_
 
+#include <cstdint>
 #include <string>
 #include <vector>
 
 namespace base_36 {
 
 class base_36_type {
-private:
+   private:
     std::string char_base;
     std::vector<int> num_base;
     std::vector<bool> is_num;
     std::size_t sz;
 
-public:
+   public:
     base_36_type(std::string _char_base);
-    ~base_36_type() = default;
 
     const char& operator[](int index) const;
 
@@ -38,6 +45,6 @@ public:
     const std::vector<bool>& is_number() const;
 };
 
-} // namespace base_36
+}  // namespace base_36
 
-#endif // _BASE_36_TYPE_H
+#endif  // SIMON_STORES_MATH_BASE_36_TYPE_H_

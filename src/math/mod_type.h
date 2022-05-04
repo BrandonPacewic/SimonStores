@@ -1,61 +1,69 @@
-/*
+/* MIT License
+ *
  * Copyright (c) 2022 Brandon Pacewic
  *
- * Developed and tested by Brandon Pacewic
- * 
- * mod_type.h
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 
 #pragma once
-#ifndef _BRANDON_MOD_TYPE_H
-#define _BRANDON_MOD_TYPE_H 1
+#ifndef SIMON_STORES_MATH_MOD_TYPE_H_
+#define SIMON_STORES_MATH_MOD_TYPE_H_
 
 #include <cstdint>
 
 namespace mod_types {
 
-template<typename _Tp>
+template <typename _Tp>
 class mod_type {
-public:
-	_Tp value;
+   public:
+    _Tp value;
 
-	mod_type(_Tp _value);
-	mod_type();
+    mod_type();
+    mod_type(_Tp _value);
 
-	explicit operator int() const;
-	explicit operator int64_t() const;
-	explicit operator float() const;
-	explicit operator double() const;
-	explicit operator long double() const;
+    explicit operator int16_t() const;
+    explicit operator uint16_t() const;
+    explicit operator int() const;
+    explicit operator int64_t() const;
+    explicit operator float() const;
+    explicit operator double() const;
+    explicit operator long double() const;
 
-    // Main feature of mod_type<> class, modular arithmetic in C++ works
-    // different than it otherwise should. In C and C++ the % operator creates
-    // a value between -b and b when in most other cases the expected return 
-    // value should be between 0 and b. This is a simple fix.
-	mod_type& operator%=(const mod_type&);
-	mod_type operator%(const mod_type&) const;
+    mod_type& operator%=(const mod_type&);
+    mod_type operator%(const mod_type&) const;
 
-    // Other basic math operators, nothing changes
-    // besides modular arithmetic
-	mod_type& operator++();
-	mod_type& operator--();
-	mod_type& operator+=(const mod_type&);
-	mod_type& operator-=(const mod_type&);
-	mod_type& operator*=(const mod_type&);
-	mod_type& operator/=(const mod_type&);
-	mod_type operator+(const mod_type&) const;
-	mod_type operator-(const mod_type&) const;
-	mod_type operator*(const mod_type&) const;
-	mod_type operator/(const mod_type&) const;
+    mod_type& operator++();
+    mod_type& operator--();
+    mod_type& operator+=(const mod_type&);
+    mod_type& operator-=(const mod_type&);
+    mod_type& operator*=(const mod_type&);
+    mod_type& operator/=(const mod_type&);
+    mod_type operator+(const mod_type&) const;
+    mod_type operator-(const mod_type&) const;
+    mod_type operator*(const mod_type&) const;
+    mod_type operator/(const mod_type&) const;
 
-	bool operator==(const mod_type&) const;
-	bool operator!=(const mod_type&) const;
-	bool operator<(const mod_type&) const;
-	bool operator>(const mod_type&) const;
-	bool operator<=(const mod_type&) const;
-	bool operator>=(const mod_type&) const;
+    bool operator==(const mod_type&) const;
+    bool operator!=(const mod_type&) const;
+    bool operator<(const mod_type&) const;
+    bool operator>(const mod_type&) const;
+    bool operator<=(const mod_type&) const;
+    bool operator>=(const mod_type&) const;
 };
 
-} // namespace mod_types
+}  // namespace mod_types
 
-#endif // _BRANDON_MOD_TYPE_H
+#endif  // SIMON_STORES_MATH_MOD_TYPE_H_

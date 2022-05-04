@@ -1,18 +1,28 @@
-/*
+/* MIT License
+ *
  * Copyright (c) 2022 Brandon Pacewic
  *
- * Developed and tested by Brandon Pacewic
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * base_36_type.cc
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
-
-#ifndef _BASE_36_TYPE_C
-#define _BASE_36_TYPE_C 1
 
 #include "base_36_type.h"
 
 #include <string>
 #include <vector>
+
 using base_36::base_36_type;
 
 base_36_type::base_36_type(std::string _char_base)
@@ -36,5 +46,3 @@ const char& base_36_type::operator[](int index) const {
 const std::string& base_36_type::string() const { return char_base; }
 const std::vector<int>& base_36_type::number_base() const { return num_base; }
 const std::vector<bool>& base_36_type::is_number() const { return is_num; }
-
-#endif  // _BASE_36_TYPE_C

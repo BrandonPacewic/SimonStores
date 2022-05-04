@@ -1,25 +1,36 @@
-/*
+/* MIT License
+ *
  * Copyright (c) 2022 Brandon Pacewic
  *
- * Developed and tested by Brandon Pacewic
- * 
- * inital_calculations.h
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 
 #pragma once
-#ifndef _INITAL_CALCULATIONS_H
-#define _INITAL_CALCULATIONS_H 1
+#ifndef SIMON_STORES_RULESET_INITAL_CALCULATIONS_H
+#define SIMON_STORES_RULESET_INITAL_CALCULATIONS_H
 
 #include "../math/base_36_type.h"
-using base_36::base_36_type;
 
 namespace inital_calculations {
 
-int alpha(const base_36_type& serial_base);
-int bravo(const base_36_type& serial_base);
-int charlie(const base_36_type& serial_base);
-int delta(const base_36_type& serial_base);
+int16_t alpha(const base_36::base_36_type& serial_base);
+int16_t bravo(const base_36::base_36_type& serial_base);
+int16_t charlie(const base_36::base_36_type& serial_base);
+int16_t delta(const base_36::base_36_type& serial_base);
 
-} // namespace inital_calculations
+}  // namespace inital_calculations
 
-#endif // _INITAL_CALCULATIONS_H
+#endif  // SIMON_STORES_RULESET_INITAL_CALCULATIONS_H
