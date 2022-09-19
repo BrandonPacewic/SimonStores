@@ -117,7 +117,7 @@ mod_type<_Tp>& mod_type<_Tp>::operator*=(const mod_type<_Tp>& other) {
 
 template <typename _Tp>
 mod_type<_Tp>& mod_type<_Tp>::operator/=(const mod_type<_Tp>& other) {
-    value /= other.vaule;
+    value /= other.value;
     return *this;
 }
 
